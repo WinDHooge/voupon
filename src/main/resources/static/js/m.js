@@ -37,5 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     var instances = M.Sidenav.init(elemsAccountNav, optionsAccountNav);
 
+    // Home
+    //
+    var cEl = document.querySelectorAll('.carousel');
+    var cOptions = {
+        dist: 0,
+        fullWidth: false,
+        indicators: true
+    }
+    var instances = M.Carousel.init(cEl, cOptions);
 
 });

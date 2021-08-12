@@ -1,5 +1,10 @@
 body{
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Source Sans Pro', sans-serif;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Bebas Neue', cursive;
+    /* font-family: 'Oxygen', sans-serif; */
 }
 
 /* Helper classes */
@@ -12,6 +17,21 @@ body{
 
 .helper-text.invalid{
     color: #F44336;
+}
+
+.display-block{
+    display: block;
+}
+
+.text-shadow{
+    text-shadow: 2px 4px 3px rgb(0 0 0 / 50%);
+}
+
+.no-margin-bottom{
+    margin-bottom: 0;
+}
+.no-padding-bottom{
+    margin-bottom: 0;
 }
 
 
@@ -56,6 +76,58 @@ nav .sidenav-trigger:hover{
         display: block;
     }
 }
+
+/* Home */
+#home-slide-1,
+#home-slide-2,
+#home-slide-3,
+#home-slide-4{
+    padding: 2em 0;
+}
+
+#home-slide-1{
+    height: 100vh;
+    margin-top: -56px;
+}
+
+#home-slide-5{
+    background: url("../images/home-qr-scan.jpg");
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+}
+
+#home-slide-3 h4{
+    margin-bottom: 0;
+}
+.carousel.companies{
+    height: 250px;
+    background: #333;
+    -webkit-box-shadow: inset 2px 2px 19px -1px #000000;
+    box-shadow: inset 2px 2px 19px -1px #000000;
+}
+.carousel.companies .carousel-item{
+    display: flex;
+    align-items: center;
+    padding: 0 1em;
+}
+
+.carousel.how-voupon-works{
+    height: 500px;
+}
+
+.carousel.how-voupon-works .indicators .indicator-item{
+    background-color: #002069;
+}
+.carousel.how-voupon-works .indicators .indicator-item.active{
+    background-color: #FBAB20;
+}
+
+.carousel.how-voupon-works .carousel-item h2{
+    font-family: 'Oxygen', sans-serif;
+    font-size: 2.25em;
+}
+
 
 /* Temp */
 .welcome{
