@@ -13,8 +13,8 @@
             <div class="col s12 m5">
                 <h2 th:inline="text">Digital gift vouchers solution</h2>
                 <p th:inline="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget laoreet nunc. Maecenas porttitor lectus in sem tempus vestibulum. Aliquam feugiat ipsum lectus, nec suscipit lacus cursus in.</p>
-                <a class="waves-effect waves-light btn"><i class="material-icons left">create</i>Sign up</a>
-                <a class="waves-effect waves-light btn btn2"><i class="material-icons left">mail</i>Get in touch</a>
+                <a class="waves-effect waves-light btn" th:href="@{/signup}"><i class="material-icons left">create</i>Sign up</a>
+                <a class="waves-effect waves-light btn btn2" th:href="@{/contact}"><i class="material-icons left">mail</i>Get in touch</a>
             </div>
             <div class="col s12 m7">
                 <div th:replace="~{fragments/svggraphics :: homeslide1}">SVG graph slide 1</div>
@@ -123,7 +123,7 @@
         <div class="row">
             <div class="col s12 m8 offset-m2">
                 <h2 th:inline="text" class="white-text text-shadow">Contact us for support or an online demo</h2>
-                <a class="waves-effect waves-light btn"><i class="material-icons left">mail</i>Get in touch</a>
+                <a class="waves-effect waves-light btn" th:href="@{/contact}"><i class="material-icons left">mail</i>Get in touch</a>
             </div>
         </div>
     </div>

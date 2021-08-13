@@ -157,7 +157,36 @@ nav .sidenav-trigger:hover{
 }
 
 
-/* Temp */
-.welcome{
-    margin-top: 2em;
+/* Contact */
+@media only screen and (min-width: 601px) {
+    h1 + p{
+        max-width: 80%;
+    }
+}
+
+.contactform-container{
+    position: relative;
+    background: #FFF;
+    padding: 1.5em;
+    margin-top: 8em;
+    margin-bottom: 4em;
+}
+
+@media only screen and (min-width: 601px) {
+    .contactform-container{
+        margin-top: 4em;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .contactform-container{
+        max-width: 80%;
+        margin: 4em auto;
+    }
+}
+
+.contactgirl{
+    position: absolute;
+    top: -135px;
+    right: -50px;
 }

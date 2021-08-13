@@ -12,6 +12,37 @@
     <div class="col s12">
       <h1>Contact us</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula turpis vitae sollicitudin accumsan. Praesent eu erat arcu. Vivamus vel ante mauris. Aenean congue lorem non dui scelerisque, vitae finibus massa tincidunt. Integer ex dolor, posuere id mollis in, accumsan quis libero. Suspendisse felis dui, gravida at sem a, rhoncus efficitur mauris. Nam sed mauris lorem. Phasellus convallis, massa eget ultrices eleifend, magna erat faucibus enim, eu elementum risus nunc nec leo. Maecenas luctus ut purus id congue. In turpis neque, lobortis et elementum nec, lobortis ut nibh. Aliquam tortor mi, vestibulum in lectus sit amet, molestie sodales massa.</p>
+      <div class="contactform-container z-depth-4">
+        <div class="contactgirl">
+          <div th:replace="~{fragments/svggraphics :: contactgirl}">Contact graphic</div>
+        </div>
+        <form id="contactform" name="contactform"  th:action="@{/contact}" method="post">
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="name" type="text" data-length="50" class="validate charcounter">
+              <label for="name">Name</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input placeholder="email@domain.com" id="email" type="email" class="validate">
+              <label for="email">Email</label>
+              <span class="helper-text" data-error="Invalid format" data-success="Valid"></span>
+            </div>
+            <div class="input-field col s12">
+              <input id="company" type="text" data-length="50" class="validate">
+              <label for="company">Company</label>
+            </div>
+            <div class="input-field col s12">
+              <textarea id="message" data-length="255" class="materialize-textarea validate charcounter"></textarea>
+              <label for="message">Message</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <button class="btn right">Send<i class="material-icons right">send</i></button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
