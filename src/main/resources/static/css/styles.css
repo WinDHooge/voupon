@@ -6,6 +6,21 @@ h1,h2,h3,h4,h5,h6{
     font-family: 'Bebas Neue', cursive;
     /* font-family: 'Oxygen', sans-serif; */
 }
+.btn{
+    background-color: #FBAB20;
+}
+.btn:hover{
+    background-color: #FFF;
+    color: #FF9800;
+}
+.btn2{
+    background-color: #DDD;
+    color:#333;
+}
+.btn2:hover{
+    background-color: #EFEFEF;
+    color: #000;
+}
 
 /* Helper classes */
 .vcenter{
@@ -49,7 +64,7 @@ h1,h2,h3,h4,h5,h6{
     font-family: 'Monoton', cursive;
     font-size: 3rem;
     margin-top: 5px;
-    color: #000;
+    color: #FFF;
     margin: 0;
 }
 
@@ -57,17 +72,19 @@ h1,h2,h3,h4,h5,h6{
 
 /* Nav */
 nav{
-    background-color: #FFF;
-    color: #000;
+    background: #002069;
+    color: #FFF;
 }
 
 nav ul li a,
 nav .sidenav-trigger{
-    color: rgba(0,0,0,0.87);
+    /* color: rgba(0,0,0,0.87); */
+    color: #FFF;
 }
 nav ul li a:hover,
 nav .sidenav-trigger:hover{
-    color: rgba(0,0,0,0.75);
+    /* color: rgba(0,0,0,0.75); */
+    color:#DDD;
     background: transparent;
 }
 
@@ -88,6 +105,9 @@ nav .sidenav-trigger:hover{
 #home-slide-1{
     height: 100vh;
     margin-top: -56px;
+}
+#home-slide-1 .btn{
+    margin: 0 1em 1em 0;
 }
 
 #home-slide-5{
@@ -113,7 +133,12 @@ nav .sidenav-trigger:hover{
 }
 
 .carousel.how-voupon-works{
-    height: 500px;
+    height: 650px;
+}
+@media only screen and (min-width: 601px) {
+    .carousel.how-voupon-works{
+        height: 500px;
+    }
 }
 
 .carousel.how-voupon-works .indicators .indicator-item{
@@ -126,6 +151,9 @@ nav .sidenav-trigger:hover{
 .carousel.how-voupon-works .carousel-item h2{
     font-family: 'Oxygen', sans-serif;
     font-size: 2.25em;
+}
+.carousel.how-voupon-works .carousel-item p{
+    text-align: left;
 }
 
 
