@@ -1,5 +1,25 @@
 body{
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Source Sans Pro', sans-serif;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Bebas Neue', cursive;
+    /* font-family: 'Oxygen', sans-serif; */
+}
+.btn{
+    background-color: #FBAB20;
+}
+.btn:hover{
+    background-color: #FFF;
+    color: #FF9800;
+}
+.btn2{
+    background-color: #DDD;
+    color:#333;
+}
+.btn2:hover{
+    background-color: #EFEFEF;
+    color: #000;
 }
 
 /* Helper classes */
@@ -12,6 +32,21 @@ body{
 
 .helper-text.invalid{
     color: #F44336;
+}
+
+.display-block{
+    display: block;
+}
+
+.text-shadow{
+    text-shadow: 2px 4px 3px rgb(0 0 0 / 50%);
+}
+
+.no-margin-bottom{
+    margin-bottom: 0;
+}
+.no-padding-bottom{
+    margin-bottom: 0;
 }
 
 
@@ -29,7 +64,7 @@ body{
     font-family: 'Monoton', cursive;
     font-size: 3rem;
     margin-top: 5px;
-    color: #000;
+    color: #FFF;
     margin: 0;
 }
 
@@ -37,17 +72,19 @@ body{
 
 /* Nav */
 nav{
-    background-color: #FFF;
-    color: #000;
+    background: #002069;
+    color: #FFF;
 }
 
 nav ul li a,
 nav .sidenav-trigger{
-    color: rgba(0,0,0,0.87);
+    /* color: rgba(0,0,0,0.87); */
+    color: #FFF;
 }
 nav ul li a:hover,
 nav .sidenav-trigger:hover{
-    color: rgba(0,0,0,0.75);
+    /* color: rgba(0,0,0,0.75); */
+    color:#DDD;
     background: transparent;
 }
 
@@ -56,6 +93,69 @@ nav .sidenav-trigger:hover{
         display: block;
     }
 }
+
+/* Home */
+#home-slide-1,
+#home-slide-2,
+#home-slide-3,
+#home-slide-4{
+    padding: 2em 0;
+}
+
+#home-slide-1{
+    height: 100vh;
+    margin-top: -56px;
+}
+#home-slide-1 .btn{
+    margin: 0 1em 1em 0;
+}
+
+#home-slide-5{
+    background: url("../images/home-qr-scan.jpg");
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+}
+
+#home-slide-3 h4{
+    margin-bottom: 0;
+}
+.carousel.companies{
+    height: 250px;
+    background: #333;
+    -webkit-box-shadow: inset 2px 2px 19px -1px #000000;
+    box-shadow: inset 2px 2px 19px -1px #000000;
+}
+.carousel.companies .carousel-item{
+    display: flex;
+    align-items: center;
+    padding: 0 1em;
+}
+
+.carousel.how-voupon-works{
+    height: 650px;
+}
+@media only screen and (min-width: 601px) {
+    .carousel.how-voupon-works{
+        height: 500px;
+    }
+}
+
+.carousel.how-voupon-works .indicators .indicator-item{
+    background-color: #002069;
+}
+.carousel.how-voupon-works .indicators .indicator-item.active{
+    background-color: #FBAB20;
+}
+
+.carousel.how-voupon-works .carousel-item h2{
+    font-family: 'Oxygen', sans-serif;
+    font-size: 2.25em;
+}
+.carousel.how-voupon-works .carousel-item p{
+    text-align: left;
+}
+
 
 /* Temp */
 .welcome{
