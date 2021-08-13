@@ -2,23 +2,8 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Digital Voucher service - Voupon</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?&family=Bebas+Neue&family=Oxygen:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&family=Monoton&family=Arvo:wght@700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <link rel="stylesheet" href="/css/styles.css">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favico/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favico/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favico/favicon-16x16.png">
+    <th:block th:include="~{fragments/head :: body.head}"></th:block>
 </head>
 <body class="grey lighten-4">
 <div th:replace="~{fragments/header :: header}">Header</div>
@@ -28,8 +13,8 @@
             <div class="col s12 m5">
                 <h2 th:inline="text">Digital gift vouchers solution</h2>
                 <p th:inline="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget laoreet nunc. Maecenas porttitor lectus in sem tempus vestibulum. Aliquam feugiat ipsum lectus, nec suscipit lacus cursus in.</p>
-                <a class="waves-effect waves-light btn"><i class="material-icons left">create</i>Sign up</a>
-                <a class="waves-effect waves-light btn btn2"><i class="material-icons left">mail</i>Get in touch</a>
+                <a class="waves-effect waves-light btn" th:href="@{/signup}"><i class="material-icons left">create</i>Sign up</a>
+                <a class="waves-effect waves-light btn btn2" th:href="@{/contact}"><i class="material-icons left">mail</i>Get in touch</a>
             </div>
             <div class="col s12 m7">
                 <div th:replace="~{fragments/svggraphics :: homeslide1}">SVG graph slide 1</div>
@@ -138,7 +123,7 @@
         <div class="row">
             <div class="col s12 m8 offset-m2">
                 <h2 th:inline="text" class="white-text text-shadow">Contact us for support or an online demo</h2>
-                <a class="waves-effect waves-light btn"><i class="material-icons left">mail</i>Get in touch</a>
+                <a class="waves-effect waves-light btn" th:href="@{/contact}"><i class="material-icons left">mail</i>Get in touch</a>
             </div>
         </div>
     </div>
