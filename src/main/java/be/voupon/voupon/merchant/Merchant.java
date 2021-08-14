@@ -18,7 +18,7 @@ public class Merchant {
     private String companyName;
 
     @NotBlank(message = "{merchant.pageHandle}")
-    @Size(min = 3, message = "{merchant.pageHandle}")
+    @Size(min = 5, message = "{merchant.pageHandle}")
     @Pattern(regexp  = "^[A-Za-z0-9]*$")
     private String pageHandle;
 
