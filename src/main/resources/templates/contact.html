@@ -16,24 +16,28 @@
         <div class="contactgirl">
           <div th:replace="~{fragments/svggraphics :: contactgirl}">Contact graphic</div>
         </div>
-        <form id="contactform" name="contactform"  th:action="@{/contact}" method="post">
+        <form id="contactform" name="contactform"  th:action="@{/contact}" th:object="${contactForm}" method="post">
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="name" type="text" data-length="50" class="validate charcounter">
+              <input id="name" type="text" data-length="50" class="validate charcounter" th:field="*{name}">
               <label for="name">Name</label>
+              <span class="helper-text invalid" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
             </div>
             <div class="input-field col s12 m6">
-              <input placeholder="email@domain.com" id="email" type="email" class="validate">
+              <input placeholder="email@domain.com" id="email" type="email" class="validate" th:field="*{email}">
               <label for="email">Email</label>
               <span class="helper-text" data-error="Invalid format" data-success="Valid"></span>
+              <span class="helper-text invalid" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
             </div>
             <div class="input-field col s12">
-              <input id="company" type="text" data-length="50" class="validate">
+              <input id="company" type="text" data-length="50" class="validate" th:field="*{company}">
               <label for="company">Company</label>
+              <span class="helper-text invalid" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></span>
             </div>
             <div class="input-field col s12">
-              <textarea id="message" data-length="255" class="materialize-textarea validate charcounter"></textarea>
+              <textarea id="message" data-length="255" class="materialize-textarea validate charcounter" th:field="*{message}"></textarea>
               <label for="message">Message</label>
+              <span class="helper-text invalid" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
             </div>
           </div>
           <div class="row">
