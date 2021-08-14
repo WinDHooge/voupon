@@ -63,7 +63,6 @@ h1,h2,h3,h4,h5,h6{
 .brand-logo h1{
     font-family: 'Monoton', cursive;
     font-size: 3rem;
-    margin-top: 5px;
     color: #FFF;
     margin: 0;
 }
@@ -72,7 +71,7 @@ h1,h2,h3,h4,h5,h6{
 
 /* Nav */
 nav{
-    background: #002069;
+    background: #0353AE; /*#002069;*/
     color: #FFF;
 }
 
