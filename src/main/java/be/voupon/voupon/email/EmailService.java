@@ -1,4 +1,9 @@
 package be.voupon.voupon.email;
 
-public class EmailService {
+import be.voupon.voupon.contact.ContactForm;
+
+public interface EmailService {
+
+    void sendContactForm(ContactForm contactForm);
+
 }
