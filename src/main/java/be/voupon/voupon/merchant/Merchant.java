@@ -1,11 +1,18 @@
 package be.voupon.voupon.merchant;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Entity
+@Getter
+@Setter
+@Table(name = "merchants")
 public class Merchant {
 
     @Id
