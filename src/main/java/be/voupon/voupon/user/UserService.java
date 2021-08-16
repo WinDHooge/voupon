@@ -21,17 +21,10 @@ public interface UserService {
     }
 
     @PreAuthorize("isAuthenticated()")
-    User getUserByHandle(String handle);
+    User getUserByEmail(String email);
 
     @PreAuthorize("isAuthenticated()")
-    User getUserComplete(String handle);
-
-    void follow(String userHandle,String toFollowHandle);
-
-    void unFollow(String userHandle,String unFollowHandle);
-
-    Set<User > getUsersIFollow(String handle);
-    List<User> getUsersToFollow(String handle, Set<User> usersIFollow);
+    User getUserComplete(String email);
 
     void save(User user) throws UserServiceImpl.PasswordException, PasswordMisMatchException;
 
