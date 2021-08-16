@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class ContactController {
@@ -28,12 +31,24 @@ public class ContactController {
     }
 
     @PostMapping("/contact")
-    public String postContact(@Valid @ModelAttribute ContactForm contactForm, BindingResult bindingResult){
-        System.out.println(contactForm.getName());
-        System.out.println(contactForm.getEmail());
-        System.out.println(contactForm.getCompany());
-        System.out.println(contactForm.getMessage());
-        emailService.sendContactForm(contactForm);
+    public String postContact(@Valid @ModelAttribute ContactForm contactForm, BindingResult bindingResult) throws MessagingException {
+        // Send simple email message (no html)
+        //
+        //emailService.sendContactForm(contactForm);
+
+        // Send html email message with Voupon logo
+        //
+        Map<String, Object> templateModel = new HashMap<>();
+        templateModel.put("name", contactForm.getName());
+        templateModel.put("text", contactForm.getMessage());
+        templateModel.put("email", contactForm.getEmail());
+        templateModel.put("company", contactForm.getCompany());
+        templateModel.put("vouponlogo", "vouponlogo");
+        emailService.sendMessageUsingThymeleafTemplate(
+                contactForm.getEmail(),
+                "Contactform message Voupon",
+                templateModel);
+
         return "contact";
     }
 
