@@ -17,7 +17,6 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
-
     @Autowired
     public void setUserRepository(UserRepository userRepository)
     {
@@ -27,23 +26,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByEmail(String email) {
-        return null;
+        return userRepository.findUserByEmail(email);
     }
 
-    @Override
-    public User getUserComplete(String email) {
-        return null;
-    }
 
     @Override
     public void save(User user) throws PasswordException, PasswordMisMatchException {
-        if (user.getPassWord() != null && user.getPassWord().length() < 5) {
+        if (user.getPassWord() != null && user.getPassWord().length() < 8) {
             throw new PasswordException("password malformed");
         }
         if (user.getPassWord() == null && user.getId() == 0) {
             throw new PasswordException("password malformed");
         }
-        if (user.getPassWord().length() > 4 && !user.getPassWord().equals(user.getCheckPassWord()) ) {
+        if (user.getPassWord().length() >= 8 && !user.getPassWord().equals(user.getCheckPassWord()) ) {
             throw new PasswordMisMatchException("password mismatch");
         }
 
