@@ -1,0 +1,51 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Signup - Voupon</title>
+  <th:block th:include="~{fragments/head :: body.head}"></th:block>
+</head>
+<body class="grey lighten-4">
+<div th:replace="~{fragments/header :: header}">Header</div>
+<main class="form-signin">
+  <form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+    <h1 class="h3 mb-3 fw-normal">Create account</h1>
+
+    <input type="hidden"  th:field="*{id}">
+
+    <div class="mb-3">
+      <label>First Name</label>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+      <input type="text" class="form-control" th:field="*{firstName}">
+    </div>
+
+    <div class="mb-3">
+      <label>Last Name</label>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+      <input type="text" class="form-control" th:field="*{lastName}">
+    </div>
+
+    <div class="mb-3">
+      <label>E-mail</label>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+      <input type="text" class="form-control" th:field="*{email}">
+    </div>
+
+    <div class="mb-3">
+      <label>Password</label>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('passWord')}" th:errors="*{passWord}"></div>
+      <input type="password" class="form-control" th:field="*{passWord}">
+    </div>
+
+    <div class="mb-3">
+      <label>Retype password</label>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('passWord')}" th:errors="*{passWord}"></div>
+      <input type="password" class="form-control" th:field="*{checkPassWord}">
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Create account</button>
+  </form>
+</main>
+<script src="/js/m.js"></script>
+</body>
+</html>
