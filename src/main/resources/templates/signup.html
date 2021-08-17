@@ -37,6 +37,12 @@
       <input type="password" class="form-control" th:field="*{passWord}">
     </div>
 
+    <div class="mb-3">
+      <label>Retype password</label>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('passWord')}" th:errors="*{passWord}"></div>
+      <input type="password" class="form-control" th:field="*{checkPassWord}">
+    </div>
+
     <button class="w-100 btn btn-lg btn-primary" type="submit">Create account</button>
   </form>
 </main>
