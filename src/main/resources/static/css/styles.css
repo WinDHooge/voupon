@@ -93,6 +93,30 @@ nav .sidenav-trigger:hover{
     }
 }
 
+/*
+// SideNavs
+*/
+/* Nav Account sidenav */
+#nav-account .sidenav-section{
+    margin: 1rem;
+}
+#nav-account li .input-field{
+    margin-top: 0;
+}
+#nav-account h3{
+    font-size: 2em;
+    text-align: left;
+    margin-bottom: 0;
+}
+#nav-account li > a.btn{
+    margin: 10px 0;
+}
+#nav-account p.description-text{
+    text-align: left;
+    margin: 0 0 1em;
+    line-height: 125%;
+}
+
 /* Home */
 #home-slide-1,
 #home-slide-2,

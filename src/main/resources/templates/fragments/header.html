@@ -28,12 +28,43 @@
     <li><a th:href="@{/contact}">Contact</a></li>
   </ul>
   <ul class="sidenav" id="nav-account">
-    <li class="center">
-      <div class="logindetails" sec:authorize="isAuthenticated()">
-
+    <li class="sidenav-section center" sec:authorize="isAuthenticated()">
+      <div class="logindetails">
+        <strong th:text="${#authentication.getPrincipal().getFirstName()}"></strong>
+        <span th:text="${#authentication.getPrincipal().getEmail()}"></span>
       </div>
     </li>
-    <li class="center">
+    <li class="sidenav-section center" sec:authorize="isAnonymous()">
+
+      <form th:action="@{/login}" method="post" name="loginForm">
+        <div class="row">
+          <div class="col s12">
+            <h3>Login</h3>
+          </div>
+          <div class="input-field col s12">
+            <input id="username" name="username" type="text" class="validate">
+            <label for="username">Email</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="password" name="password" type="password" class="validate">
+            <label for="password">Password</label>
+          </div>
+          <div class="input-field col s12">
+            <button class="col s12 btn waves-effect waves-light" type="submit">Log In</button>
+          </div>
+        </div>
+      </form>
+    </li>
+    <li class="sidenav-section center" sec:authorize="isAnonymous()">
+      <div class="row">
+        <div class="col s12">
+          <h3>New to Voupon?</h3>
+          <p class="description-text">Creating an account takes only 1 minute</p>
+          <a class="waves-effect waves-light btn display-block" th:href="@{/signup}">Sign up</a>
+        </div>
+      </div>
+    </li>
+    <li class="sidenav-section center" sec:authorize="isAuthenticated()">
       <a id="logoutLink" href="/">Logout</a>
       <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
         <input type="submit" value="Logout" />

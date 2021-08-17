@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p>
+  <img src="sample.png" th:src="|cid:${vouponlogo}|" />
+</p>
+<p><span th:text="${name}"></span> sent a message via the Voupon contact form:</p>
+<p th:text="${text}"></p>
+<p><br /><br /><strong>Contact details:</strong></p>
+<span>Name: </span><span th:text="${name}"></span><br/>
+<span>Email: </span><span th:text="${email}"></span><br/>
+<span>Company: </span><span th:text="${company}"></span><br/>
+</body>
+</html>
