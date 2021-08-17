@@ -32,12 +32,14 @@ public class User {
     @Email(message = "{user.email")
     private String email;
 
+    @Column(name = "password")
     @Size(message= "{user.password}")
     private String passWord;
 
     @Transient
     private String CheckPassWord;
 
+    @Column(name = "active")
     private boolean active;
 
 
