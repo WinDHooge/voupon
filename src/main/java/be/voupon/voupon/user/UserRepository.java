@@ -9,9 +9,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findUserByEmail(String email);
 
-    @Query("from User u " +
-            "left join fetch u.followers " +
-            "left join fetch u.following " +
-            "where u.handle = :handle")
-    User getUserComplete(String handle);
 }
