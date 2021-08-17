@@ -33,7 +33,7 @@ public class User {
     private String email;
 
     @Column(name = "password")
-    @Size(message= "{user.password}")
+    @Size(min = 8, message= "{user.password}")
     private String passWord;
 
     @Transient
