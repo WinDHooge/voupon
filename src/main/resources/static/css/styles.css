@@ -213,3 +213,67 @@ nav .sidenav-trigger:hover{
     top: -135px;
     right: -50px;
 }
+
+
+/*
+    ADMIN
+*/
+
+
+/* Admin Menu */
+#admin-menu .sidenav{
+    top: 56px;
+    z-index: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    width: 60px;
+    padding-top: 1em;
+}
+@media only screen and (min-width: 601px) {
+    #admin-menu .sidenav{
+        top: 64px;
+        width: 200px;
+    }
+}
+@media only screen and (min-width: 992px) {
+    #admin-menu .sidenav{
+        width: 300px;
+    }
+}
+
+#admin-menu .sidenav li > a{
+    padding: 0;
+}
+#admin-menu .sidenav li > a i{
+    margin: 0 18px;
+}
+#admin-menu .sidenav li > a span{
+    display: none;
+}
+@media only screen and (min-width: 601px) {
+    #admin-menu .sidenav li > a{
+        padding: 0 32px;
+    }
+    #admin-menu .sidenav li > a i{
+        margin: 0 32px 0 0;
+    }
+    #admin-menu .sidenav li > a span{
+        display: inline-block;
+    }
+}
+
+
+/* Admin general styling */
+.admin-body{
+    padding: 1em 1em 1em 85px;
+}
+@media only screen and (min-width: 601px) {
+    .admin-body{
+        padding: 1em 1em 1em 225px;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .admin-body{
+        padding: 1em 1em 1em 325px;
+    }
+}
