@@ -47,6 +47,14 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/login")
+    public String init(Model model) {
+        model.addAttribute("msg", "Please Enter Your Login Details");
+        return "login";
+    }
+
+
+
     @GetMapping("/account/dashboard")
     public String showDashboard(Model model) {
         return "account/dashboard";
