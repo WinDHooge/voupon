@@ -10,7 +10,7 @@
 <body class="text-center">
 
 <main class="form-signin">
-  <form th:action="@{/}" method="post">
+  <form th:action="@{/login}" method="post">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
 
@@ -18,11 +18,11 @@
       Sorry, could not log you in with these credentials
     </div>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" name ="username" placeholder="name@example.com">
+      <input type="text" class="form-control" id="floatingInput" name="username" placeholder="name@example.com">
       <label for="floatingInput">E-mail address</label>
     </div>
     <div class="form-floating mb-3">
-      <input type="password" class="form-control" id="floatingPassword" name ="password" placeholder="Password">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
 

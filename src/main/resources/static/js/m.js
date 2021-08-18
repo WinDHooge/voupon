@@ -5,6 +5,16 @@ document.addEventListener('DOMContentLoaded', function () {
     var charCount = document.querySelectorAll('.charcounter');
     M.CharacterCounter.init(charCount);
 
+    // Logout methods
+    //
+    var logoutLink = document.querySelector('#logoutLink');
+    if(logoutLink != null) {
+        logoutLink.addEventListener('click', evt => {
+            evt.preventDefault();
+            document.logoutForm.submit();
+        });
+    }
+
     // Main Nav
     //
     var elemsMainNav = document.querySelectorAll('#nav-main');

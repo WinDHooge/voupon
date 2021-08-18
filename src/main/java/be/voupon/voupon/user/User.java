@@ -39,8 +39,11 @@ public class User {
     @Transient
     private String CheckPassWord;
 
+    @Column(name = "role")
+    private String role = "USER";
+
     @Column(name = "active")
-    private boolean active;
+    private boolean active = true;
 
 
 }

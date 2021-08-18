@@ -36,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/faq").permitAll()
                 .antMatchers("/contact").permitAll()
                 .antMatchers("/signup").permitAll()
-                .antMatchers("/account/dashboard").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -53,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select email,password from users where email = ?")
+                .usersByUsernameQuery("select email,password,active from users where email = ?")
                 .authoritiesByUsernameQuery("select email,role from users where email = ?");
     }
 
