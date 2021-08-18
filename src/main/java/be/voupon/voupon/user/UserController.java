@@ -53,7 +53,6 @@ public class UserController {
         return "login";
     }
 
-
     @GetMapping("/account/dashboard")
     public String showDashboard(Model model) {
         return "account/dashboard";
