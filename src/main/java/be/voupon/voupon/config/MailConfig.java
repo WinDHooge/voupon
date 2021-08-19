@@ -8,11 +8,15 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 @Configuration
 public class MailConfig {
@@ -48,6 +52,11 @@ public class MailConfig {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
         templateEngine.setTemplateEngineMessageSource(emailMessageSource());
+
+        Set<IDialect> dialects = new HashSet<IDialect>();
+        dialects.add(new SpringSecurityDialect());
+        templateEngine.setAdditionalDialects(dialects);
+
         return templateEngine;
     }
 
