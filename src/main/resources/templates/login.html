@@ -14,11 +14,11 @@
           <div class="input-field col s12">
             <h1 class="no-margin-bottom">Log in</h1>
           </div>
-          <div th:if="${param.error}" class="card-panel red darken-4 white-text">
-            Invalid username or password.
+          <div th:if="${param.error}" class="col s12 card-panel red darken-4 white-text">
+            <p>Invalid username or password.</p>
           </div>
-          <div th:if="${param.logout}" class="card-panel yellow darken-4 white-text">
-            You have been logged out.
+          <div th:if="${param.logout}" class="col s12 card-panel yellow darken-4 white-text">
+            <p>You have been logged out.</p>
           </div>
 
           <div class="input-field col s12">
