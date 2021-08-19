@@ -70,7 +70,7 @@ public class Merchant {
     private String VAT;
 
     @NotBlank(message = "{merchant.companyDescription}")
-    @Size(min = 50, message = "{merchant.companyDescription}")
+    @Size(min = 20, message = "{merchant.companyDescription}")
     @Column(name = "companyDescription")
     private String companyDescription;
 
@@ -78,6 +78,7 @@ public class Merchant {
     @Size(min = 5, message = "{merchant.checkoutDescription}")
     @Column(name = "checkoutDescription")
     private String checkoutDescription;
+
 
     @NotBlank(message = "{merchant.paypalEmail}")
     @Email(message = "{merchant.paypalEmail}")
