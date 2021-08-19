@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.security.Principal;
 
-public class merchantController {
+public class MerchantController {
 
     @GetMapping("/account/merchant/overview")
     public String showOverview(Model model) {
