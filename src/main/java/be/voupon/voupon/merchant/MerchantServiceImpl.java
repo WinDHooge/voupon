@@ -1,11 +1,10 @@
 package be.voupon.voupon.merchant;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MerchantServiceImpl {
+public class MerchantServiceImpl implements MerchantService {
 
     private MerchantRepository merchantRepository;
 
