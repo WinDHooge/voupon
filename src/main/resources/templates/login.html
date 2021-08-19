@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Signup - Voupon</title>
+  <th:block th:include="~{fragments/head :: body.head}"></th:block>
+</head>
+<body class="grey lighten-4">
+<div th:replace="~{fragments/header :: header}">Header</div>
+<main>
+  <div class="container">
+    <div class="row vcenter">
+      <form class="col s12 m6 offset-m3" name="loginform" th:action="@{/login}" method="post">
+        <div class="row">
+          <div class="input-field col s12">
+            <h1 class="no-margin-bottom">Log in</h1>
+          </div>
+          <div th:if="${param.error}" class="col s12 card-panel red darken-4 white-text">
+            <p>Invalid username or password.</p>
+          </div>
+          <div th:if="${param.logout}" class="col s12 card-panel yellow darken-4 white-text">
+            <p>You have been logged out.</p>
+          </div>
+
+          <div class="input-field col s12">
+            <input id="email" type="text" class="validate" name="username" placeholder="name@example.com">
+            <label for="email">E-mail address</label>
+          </div>
+          <div class="input-field col s12">
+            <input type="password" class="validate" id="password" name="password">
+            <label for="password">Password</label>
+          </div>
+
+          <div class="input-field col s12">
+            <p>
+              <label>
+                <input type="checkbox" checked="checked" value="remember-me">
+                <span>Remember me</span>
+              </label>
+            </p>
+          </div>
+
+          <div class="input-field col s12">
+            <button class="col s12 btn waves-effect waves-light" type="submit">Log in</button>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <p class="center-align">
+              <strong>New to Voupon?</strong><br>
+              <a th:href="@{/signup}" href="#">Create your account</a>
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+<script src="/js/m.js"></script>
+</body>
+</html>
