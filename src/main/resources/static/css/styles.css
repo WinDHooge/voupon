@@ -116,6 +116,12 @@ nav .sidenav-trigger:hover{
     margin: 0 0 1em;
     line-height: 125%;
 }
+#nav-account .logindetails p{
+    line-height: 150%;
+}
+#nav-account .logindetails .name{
+
+}
 
 /* Home */
 #home-slide-1,

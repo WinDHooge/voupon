@@ -30,7 +30,8 @@
   <ul class="sidenav" id="nav-account">
     <li class="sidenav-section center" sec:authorize="isAuthenticated()">
       <div class="logindetails">
-        <p>Login details here</p>
+        <p><span th:text="${user.getFirstName()}"></span> <span th:text="${user.getLastName()}"></span><br/>
+          <span th:text="${user.getEmail()}"></span></p>
       </div>
     </li>
     <li class="sidenav-section center" sec:authorize="isAnonymous()">
