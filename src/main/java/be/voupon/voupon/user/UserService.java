@@ -19,8 +19,14 @@ public interface UserService {
         }
     }
 
+    class UniqueUserException extends Exception {
+        public UniqueUserException(String message) {
+            super(message);
+        }
+    }
+
     User getUserByEmail(String email);
 
-    void save(User user) throws UserServiceImpl.PasswordException, PasswordMisMatchException;
+    void save(User user) throws UserServiceImpl.PasswordException, PasswordMisMatchException, UniqueUserException;
 
 }
