@@ -125,6 +125,17 @@ nav .sidenav-trigger:hover{
 #nav-account .logindetails .name{
     font-size: 1.1em;
 }
+#nav-account #logoutLink{
+    background-color: #DDD;
+    color:#333;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+}
+#nav-account #logoutLink:hover{
+    background-color: #EFEFEF;
+    color: #000;
+}
 
 /* Home */
 #home-slide-1,

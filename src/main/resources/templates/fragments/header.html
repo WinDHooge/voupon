@@ -65,7 +65,7 @@
       </div>
     </li>
     <li class="sidenav-section center" sec:authorize="isAuthenticated()">
-      <a id="logoutLink" href="/">Logout</a>
+      <a id="logoutLink" class="waves-effect waves-light btn btn2" href="/">Logout</a>
       <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
         <input type="submit" value="Logout" />
       </form>
