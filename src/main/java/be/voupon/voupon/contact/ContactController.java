@@ -83,7 +83,7 @@ public class ContactController {
         templateModel.put("email", contactForm.getEmail());
         templateModel.put("company", contactForm.getCompany());
         templateModel.put("vouponlogo", "vouponlogo");
-        templateModel.put("emailtemplate", "contactFormMail.html");
+        templateModel.put("emailtemplate", "email/contact.html");
 
         // Example on how to add additional images if needed
         /*
