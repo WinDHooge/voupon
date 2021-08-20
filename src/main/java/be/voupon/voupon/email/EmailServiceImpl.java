@@ -27,19 +27,8 @@ public class EmailServiceImpl implements EmailService{
     private SpringTemplateEngine thymeleafTemplateEngine;
 
     @Value("classpath:/static/images/email/email-logo.png")
-    private Resource resourceFile;
+    private Resource emailLogoFile;
 
-    @Override
-    public void sendContactForm(ContactForm contactForm) {
-        String simpleMailContent = contactForm.getName() + " sent you the following message:\n\n";
-        simpleMailContent += contactForm.getMessage() + "\n\n";
-        simpleMailContent += "My contact data => \n";
-        simpleMailContent += "Name: " + contactForm.getName() + "\n";
-        simpleMailContent += "E-mail: " + contactForm.getEmail() + "\n";
-        simpleMailContent += "Company: " + contactForm.getCompany() + "\n";
-
-        sendSimpleMessage(contactForm.getEmail(), "Message from Voupon contactform",simpleMailContent);
-    }
 
     private void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -57,12 +46,14 @@ public class EmailServiceImpl implements EmailService{
         Context thymeleafContext = new Context();
         thymeleafContext.setVariables(templateModel);
 
-        String htmlBody = thymeleafTemplateEngine.process("contactFormMail.html", thymeleafContext);
+        String htmlBody = thymeleafTemplateEngine.process((String) templateModel.get("emailtemplate"), thymeleafContext);
 
-        sendHtmlMessage(to, subject, htmlBody);
+        Map<String, Resource> images = (Map<String, Resource>) templateModel.get("images");
+
+        sendHtmlMessage(to, subject, htmlBody, images);
     }
 
-    private void sendHtmlMessage(String to, String subject, String htmlBody) throws MessagingException {
+    private void sendHtmlMessage(String to, String subject, String htmlBody, Map<String, Resource> images) throws MessagingException {
 
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
@@ -70,7 +61,14 @@ public class EmailServiceImpl implements EmailService{
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(htmlBody, true);
-        helper.addInline("vouponlogo", resourceFile);
+        helper.addInline("vouponlogo", emailLogoFile);
+
+        if(images != null){
+            for (Map.Entry<String, Resource> entry : images.entrySet()) {
+                helper.addInline(entry.getKey(),entry.getValue());
+            }
+        }
+
         emailSender.send(message);
     }
 

@@ -7,8 +7,7 @@ import java.util.Map;
 
 public interface EmailService {
 
-    void sendContactForm(ContactForm contactForm);
-
     void sendMessageUsingThymeleafTemplate(
             String to, String subject, Map<String, Object> templateModel) throws MessagingException;
+
 }

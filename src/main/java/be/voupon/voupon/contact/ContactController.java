@@ -4,6 +4,8 @@ import be.voupon.voupon.email.EmailService;
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +25,19 @@ public class ContactController {
 
     private UserService userService;
     private EmailService emailService;
+
+    // Example on how to add additional images if needed
+    /*
+        @Value("classpath:/static/images/company_logos/1.png")
+        private Resource testImageFile1;
+
+        @Value("classpath:/static/images/company_logos/3.png")
+        private Resource testImageFile2;
+
+        @Value("classpath:/static/images/company_logos/4.png")
+        private Resource testImageFile3;
+
+     */
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -56,11 +71,11 @@ public class ContactController {
         }
 
 
-        // Send simple email message (no html)
+        // Send a html email message with Voupon logo & optional additional inline images
         //
-        //emailService.sendContactForm(contactForm);
 
-        // Send html email message with Voupon logo
+        // Create the templateModel info
+        // (emailtemplate is mandatory)
         //
         Map<String, Object> templateModel = new HashMap<>();
         templateModel.put("name", contactForm.getName());
@@ -68,6 +83,21 @@ public class ContactController {
         templateModel.put("email", contactForm.getEmail());
         templateModel.put("company", contactForm.getCompany());
         templateModel.put("vouponlogo", "vouponlogo");
+        templateModel.put("emailtemplate", "contactFormMail.html");
+
+        // Example on how to add additional images if needed
+        /*
+            Map<String, Resource> images = new HashMap<>();
+            images.put("image1",testImageFile1);
+            images.put("image2",testImageFile2);
+            images.put("image3",testImageFile3);
+
+            templateModel.put("images", images);
+            for (Map.Entry<String, Resource> entry : images.entrySet()) {
+                templateModel.put(entry.getKey(),entry.getKey());
+            }
+        */
+
         emailService.sendMessageUsingThymeleafTemplate(
                 contactForm.getEmail(),
                 "Contactform message Voupon",
