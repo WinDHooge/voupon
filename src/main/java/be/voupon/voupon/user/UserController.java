@@ -42,6 +42,9 @@ public class UserController {
         } catch (UserService.PasswordMisMatchException e) {
             bindingResult.rejectValue("passWord","password-mismatch",e.getMessage());
             return "signup";
+        } catch (UserService.UniqueUserException e) {
+            bindingResult.rejectValue("email","user.unique",e.getMessage());
+            return "signup";
         }
 
         return "redirect:/";
