@@ -24,7 +24,7 @@ public class MerchantController {
     @GetMapping("/account/merchant/add")
     public String showAdd(Model model) {
 
-        return "/account/merchant/add";
+        return "/account/merchant/edit";
     }
 
     @GetMapping("/account/merchant/edit")

@@ -9,7 +9,29 @@
 <div th:replace="~{fragments/header :: header}">Header</div>
 <div th:replace="~{fragments/admin-menu :: admin-menu}">Admin Menu</div>
 <div class="admin-body">
-    <p>Here you can edit the page</p>
+
+    <div class="container">
+        <div class="row">
+            <form class="col s12 m6 offset-m3" method="post">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <h1 class="no-margin-bottom">Create merchant</h1>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="companyname" type="text" class="validate">
+                        <label for="companyname">Company Name</label>
+                        <span class="helper-text invalid"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <button class="col s12 btn waves-effect waves-light" type="submit" name="action">Create merchant</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>
 <script src="/js/m.js"></script>
 </body>
