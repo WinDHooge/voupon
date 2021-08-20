@@ -24,8 +24,8 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String add(Model model) {
-        User user = new User();
+    public String add(Model model, Principal principal, HttpServletRequest httpServletRequest) {
+        User user = principal != null ? userService.getUserByEmail(principal.getName()) : new User();
         model.addAttribute("user", user);
         return "signup";
     }

@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
   <title>Signup - Voupon</title>
   <th:block th:include="~{fragments/head :: body.head}"></th:block>
@@ -8,7 +9,13 @@
 <div th:replace="~{fragments/header :: header}">Header</div>
 <main>
   <div class="container">
-    <div class="row">
+    <div class="row" sec:authorize="isAuthenticated()">
+      <div class="col s12 m6 offset-m3 card-panel orange white-text margin-top-2">
+        <p>You already have an account and are logged in.</p>
+        <p>To create another user on Voupon, please logout via the my account sidenav to the top right.</p>
+      </div>
+    </div>
+    <div class="row" sec:authorize="isAnonymous()">
       <form id="signupform" class="col s12 m6 offset-m3" th:action="@{/signup}" th:object="${user}" method="post">
         <div class="row">
           <div class="input-field col s12">
