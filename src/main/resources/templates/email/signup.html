@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p>
+  <img src="sample.png" th:src="|cid:${vouponlogo}|" />
+</p>
+<p>Welcome to Voupon <span th:text="${firstname + ' ' + lastname}"></span></p>
+</body>
+</html>
