@@ -21,7 +21,7 @@ public class User {
 
     @Column(name = "firstName")
     @NotBlank(message= "{user.firstName}")
-    @Size(max = 50, message= "{user.firstName.size")
+    @Size(max = 50, message= "{user.firstName.size}")
     private String firstName;
 
     @Column(name = "lastName")
@@ -31,7 +31,7 @@ public class User {
 
     @Column(name = "email")
     @NotEmpty(message="{user.emailempty}")
-    @Email(message = "{user.email")
+    @Email(message = "{user.email}")
     private String email;
 
     @Column(name = "password")

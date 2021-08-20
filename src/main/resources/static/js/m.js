@@ -57,4 +57,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     var instances = M.Carousel.init(cEl, cOptions);
 
+    // Signup form methods
+    //
+    var pass = document.querySelector('#signupform #password');
+    var cpass = document.querySelector('#signupform #confirmpassword');
+    if(cpass != null) {
+        cpass.addEventListener('focusout', (event) => {
+            if(cpass.value != null && cpass.value != pass.value){
+                cpass.classList.remove("valid");
+                cpass.classList.add("invalid");
+            }
+        });
+    }
+
 });
