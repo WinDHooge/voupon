@@ -116,11 +116,14 @@ nav .sidenav-trigger:hover{
     margin: 0 0 1em;
     line-height: 125%;
 }
+#nav-account .logindetails{
+    padding: 0.5em 0;
+}
 #nav-account .logindetails p{
     line-height: 150%;
 }
 #nav-account .logindetails .name{
-
+    font-size: 1.1em;
 }
 
 /* Home */
