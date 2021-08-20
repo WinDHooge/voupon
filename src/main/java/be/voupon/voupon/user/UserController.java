@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -23,6 +24,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    public void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {
+        try {
+            request.login(username, password);
+        } catch (ServletException e) {
+            System.out.println(e);
+        }
+    }
+
     @GetMapping("/signup")
     public String add(Model model, Principal principal, HttpServletRequest httpServletRequest) {
         User user = principal != null ? userService.getUserByEmail(principal.getName()) : new User();
@@ -31,13 +40,14 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String processForm(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    public String processForm(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "signup";
         }
 
         try {
             userService.save(user);
+            authWithHttpServletRequest(request, user.getEmail(), user.getCheckPassWord());
         } catch (UserService.PasswordException e) {
             bindingResult.rejectValue("passWord","user.password",e.getMessage());
             return "signup";
@@ -49,7 +59,7 @@ public class UserController {
             return "signup";
         }
 
-        return "redirect:/";
+        return "redirect:/account/dashboard";
     }
 
     @GetMapping("/login")
