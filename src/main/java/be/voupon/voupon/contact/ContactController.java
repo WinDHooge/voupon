@@ -1,6 +1,8 @@
 package be.voupon.voupon.contact;
 
 import be.voupon.voupon.email.EmailService;
+import be.voupon.voupon.user.User;
+import be.voupon.voupon.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,14 +12,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class ContactController {
 
+    private UserService userService;
     private EmailService emailService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Autowired
     public void setEmailService(EmailService emailService) {
@@ -25,13 +35,27 @@ public class ContactController {
     }
 
     @GetMapping("/contact")
-    public String showContact(Model model){
+    public String showContact(Model model, Principal principal, HttpServletRequest httpServletRequest){
+        if(principal != null){
+            User user = userService.getUserByEmail(principal.getName());
+            model.addAttribute("user", user);
+        }
+
         model.addAttribute("contactForm",new ContactForm());
         return "contact";
     }
 
     @PostMapping("/contact")
-    public String postContact(@Valid @ModelAttribute ContactForm contactForm, BindingResult bindingResult) throws MessagingException {
+    public String postContact(@Valid @ModelAttribute ContactForm contactForm, BindingResult bindingResult,
+                              Model model, Principal principal, HttpServletRequest httpServletRequest)
+            throws MessagingException {
+
+        if(principal != null){
+            User user = userService.getUserByEmail(principal.getName());
+            model.addAttribute("user", user);
+        }
+
+
         // Send simple email message (no html)
         //
         //emailService.sendContactForm(contactForm);
