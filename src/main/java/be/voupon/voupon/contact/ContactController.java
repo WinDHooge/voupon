@@ -107,6 +107,8 @@ public class ContactController {
                 "Contactform message Voupon",
                 templateModel);
 
+        model.addAttribute("success", "Thank you for your message. We'll get back to you as soon as possible.");
+
         return "contact";
     }
 

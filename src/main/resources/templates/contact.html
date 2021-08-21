@@ -18,6 +18,9 @@
         </div>
         <form id="contactform" name="contactform"  th:action="@{/contact}" th:object="${contactForm}" method="post">
           <div class="row">
+            <div class="col s12 card-panel green darken-4 white-text" th:if="${success}">
+              <p th:text="${success}"></p>
+            </div>
             <div class="input-field col s12 m6">
               <input id="name" type="text" data-length="50" class="validate charcounter" th:field="*{name}">
               <label for="name">Name</label>
