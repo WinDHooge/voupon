@@ -30,7 +30,7 @@
               <span class="helper-text invalid" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
             </div>
             <div class="input-field col s12">
-              <input id="company" type="text" data-length="50" class="validate" th:field="*{company}">
+              <input id="company" type="text" data-length="50" class="validate charcounter" th:field="*{company}">
               <label for="company">Company</label>
               <span class="helper-text invalid" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></span>
             </div>

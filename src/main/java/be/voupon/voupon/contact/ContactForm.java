@@ -11,20 +11,20 @@ import javax.validation.constraints.Size;
 @Setter
 public class ContactForm {
 
-    @NotEmpty(message="Name cannot be empty")
-    @Size(max = 50, message="Name cannot exceed 50 characters")
+    @NotEmpty(message="{contactform.name.empty}")
+    @Size(max = 50, message="{contactform.name.size}")
     private String name;
 
-    @NotEmpty(message="Email cannot be empty")
-    @Email(message="Email has invalid format")
+    @NotEmpty(message="{contactform.email.empty}")
+    @Email(message="{contactform.email.format}")
     private String email;
 
-    @NotEmpty(message="Company cannot be empty")
-    @Size(max = 50, message="Company cannot exceed 50 characters")
+    @NotEmpty(message="{contactform.company.empty}")
+    @Size(max = 50, message="{contactform.company.size}")
     private String company;
 
-    @NotEmpty(message="Message cannot be empty")
-    @Size(max = 255, message="Message cannot exceed 255 characters")
+    @NotEmpty(message="{contactform.message.empty}")
+    @Size(max = 255, message="{contactform.message.size}")
     private String message;
 
 }

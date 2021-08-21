@@ -70,6 +70,10 @@ public class ContactController {
             model.addAttribute("user", user);
         }
 
+        if (bindingResult.hasErrors()) {
+            return "contact";
+        }
+
 
         // Send a html email message with Voupon logo & optional additional inline images
         //
