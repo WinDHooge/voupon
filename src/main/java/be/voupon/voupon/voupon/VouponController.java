@@ -29,4 +29,15 @@ public class VouponController {
         return "account/voupons/overview";
     }
 
+    @GetMapping("/account/voupons/add")
+    public String addVoupon(Model model, Principal principal){
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user",user);
+
+        Voupon voupon = new Voupon();
+        model.addAttribute("voupon",voupon);
+
+        return "account/voupons/edit";
+    }
+
 }
