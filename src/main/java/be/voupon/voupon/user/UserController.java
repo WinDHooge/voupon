@@ -75,4 +75,33 @@ public class UserController {
 
         return "account/dashboard";
     }
+
+    @GetMapping("/account/overview")
+    public String showAccount(Model model, Principal principal) {
+
+        String acc = principal.getName();
+
+        model.addAttribute("user", userService.getUserByEmail(acc));
+
+        return "account/overview";
+    }
+
+    @GetMapping("/account/edit")
+    public String editAccount(Model model, Principal principal) {
+        String acc = principal.getName();
+
+        model.addAttribute("user", userService.getUserByEmail(acc));
+
+        return "account/edit";
+    }
+
+    @PostMapping("/account/edit")
+    public String processEditForm(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) throws UserService.PasswordException, UserService.UniqueUserException, UserService.PasswordMisMatchException {
+        if (bindingResult.hasErrors()) {
+            return "account/edit";
+        } else {
+            userService.save(user);
+            authWithHttpServletRequest(request, user.getEmail(), user.getFirstName());
+            return "redirect:account/overview";        }
+    }
 }
