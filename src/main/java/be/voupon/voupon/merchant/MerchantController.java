@@ -23,6 +23,7 @@ public class MerchantController {
 
     @GetMapping("/account/merchant/add")
     public String showAdd(Model model) {
+        model.addAttribute("merchant", new Merchant());
 
         return "/account/merchant/edit";
     }

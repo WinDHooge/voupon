@@ -21,13 +21,13 @@
                     <input type="hidden"  th:field="*{id}">
 
                     <div class="input-field col s12">
-                        <input id="companyname" type="text" class="validate">
+                        <input id="companyname" type="text" class="validate" th:field="*{companyName}">
                         <label for="companyname">Company Name</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="telephone" type="text" class="validate">
+                        <input id="telephone" type="text" class="validate"  th:field="*{telephone}">
                         <label for="telephone">Telephone</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
                     </div>
@@ -40,55 +40,55 @@
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="street" type="text" class="validate">
+                        <input id="street" type="text" class="validate" th:field="*{street}">
                         <label for="street">Street</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="number" type="text" class="validate">
+                        <input id="number" type="text" class="validate" th:field="*{number}">
                         <label for="number">Number</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="postalcode" type="text" class="validate">
+                        <input id="postalcode" type="text" class="validate" th:field="*{postalCode}">
                         <label for="postalcode">Postalcode</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="city" type="text" class="validate">
+                        <input id="city" type="text" class="validate" th:field="*{city}">
                         <label for="city">City</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="country" type="text" class="validate">
+                        <input id="country" type="text" class="validate" th:field="*{country}">
                         <label for="country">Country</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="vat" type="text" class="validate">
+                        <input id="vat" type="text" class="validate" th:field="*{VAT}">
                         <label for="vat">VAT</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('VAT')}" th:errors="*{VAT}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="companydescricption" type="text" class="validate">
+                        <input id="companydescricption" type="text" class="validate" th:field="*{companyDescription}">
                         <label for="companydescricption">Company Description</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('companyDescription')}" th:errors="*{companyDescription}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="checkoutdescription" type="text" class="validate">
+                        <input id="checkoutdescription" type="text" class="validate" th:field="*{checkoutDescription}">
                         <label for="checkoutdescription">Checkout Description</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('checkoutDescription')}" th:errors="*{checkoutDescription}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="paypalemail" type="text" class="validate">
+                        <input id="paypalemail" type="text" class="validate" th:field="*{paypalEmail}">
                         <label for="paypalemail">Paypal E-mail</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('paypalEmail')}" th:errors="*{paypalEmail}"></span>
                     </div>
