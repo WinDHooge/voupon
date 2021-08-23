@@ -25,8 +25,16 @@ public interface UserService {
         }
     }
 
+    class NameLengthException extends Exception {
+        public NameLengthException(String message) {
+            super(message);
+        }
+    }
+
     User getUserByEmail(String email);
 
     void save(User user) throws UserServiceImpl.PasswordException, PasswordMisMatchException, UniqueUserException;
+
+    void saveEdit(User user) throws NameLengthException;
 
 }
