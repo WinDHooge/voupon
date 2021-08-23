@@ -37,9 +37,9 @@ public class MerchantController {
     @PostMapping("/account/merchant/add")
     public String postAdd(@Valid @ModelAttribute Merchant merchant, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/merchant";
+            return "/account/merchant/add";
         }
-        return "redirect:/account";
+        return "redirect:/account/merchant/overview";
     }
 
     @PostMapping("/account/merchant/edit")
