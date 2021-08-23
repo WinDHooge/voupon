@@ -25,18 +25,21 @@ public class Voupon {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @NotBlank(message = "{voupon.value}")
     @Size(min = 1, message = "{voupon.value}")
     @Column(name = "value")
     private int value;
 
-    @CreationTimestamp
+    // Todo: Add date validation annotation
     @Column(name = "expireDate")
     private Date expireDate;
 
     @NotBlank(message = "{voupon.active}")
     @Column(name = "active")
-    private boolean active;
+    private boolean active = true;
 
     /*
     @NotBlank(message = "{voupon.merchant}")
