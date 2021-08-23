@@ -49,13 +49,13 @@ public class UserController {
             userService.save(user);
             authWithHttpServletRequest(request, user.getEmail(), user.getCheckPassWord());
         } catch (UserService.PasswordException e) {
-            bindingResult.rejectValue("passWord","user.password",e.getMessage());
+            bindingResult.rejectValue("passWord", "user.password", e.getMessage());
             return "signup";
         } catch (UserService.PasswordMisMatchException e) {
-            bindingResult.rejectValue("passWord","password-mismatch",e.getMessage());
+            bindingResult.rejectValue("passWord", "password-mismatch", e.getMessage());
             return "signup";
         } catch (UserService.UniqueUserException e) {
-            bindingResult.rejectValue("email","user.unique",e.getMessage());
+            bindingResult.rejectValue("email", "user.unique", e.getMessage());
             return "signup";
         }
 
@@ -96,12 +96,18 @@ public class UserController {
     }
 
     @PostMapping("/account/edit")
-    public String processEditForm(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) throws UserService.PasswordException, UserService.UniqueUserException, UserService.PasswordMisMatchException {
+    public String processEditForm(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "account/edit";
-        } else {
-            userService.save(user);
-            authWithHttpServletRequest(request, user.getEmail(), user.getFirstName());
-            return "redirect:account/overview";        }
+        }
+        try {
+            userService.saveEdit(user);
+            authWithHttpServletRequest(request, user.getFirstName(), user.getLastName());
+        } catch (UserService.NameLengthException e) {
+            bindingResult.rejectValue("firstName", "user.firstName", e.getMessage());
+            bindingResult.rejectValue("lastName", "user.lastName", e.getMessage());
+            return "account/edit";
+        }
+        return "account/overview";
     }
 }
