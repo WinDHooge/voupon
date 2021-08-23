@@ -29,11 +29,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findUserByEmail(email);
     }
 
-    @Override
-    public User getUserByName(String firstName){
-        return userRepository.findUserByName(firstName);
-    }
-
 
     @Override
     public void save(User user) throws PasswordException, PasswordMisMatchException, UniqueUserException {
