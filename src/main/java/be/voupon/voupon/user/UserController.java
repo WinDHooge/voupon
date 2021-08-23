@@ -96,13 +96,12 @@ public class UserController {
     }
 
     @PostMapping("/account/edit")
-    public String processEditForm(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
+    public String processEditForm(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "account/edit";
         }
         try {
             userService.saveEdit(user);
-            authWithHttpServletRequest(request, user.getFirstName(), user.getLastName());
         } catch (UserService.NameLengthException e) {
             bindingResult.rejectValue("firstName", "user.firstName", e.getMessage());
             bindingResult.rejectValue("lastName", "user.lastName", e.getMessage());
