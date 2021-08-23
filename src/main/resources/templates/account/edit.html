@@ -12,25 +12,26 @@
 
     <div class="container">
         <div class="row">
-            <form class="col s12 m6 offset-m3" method="post">
+            <form class="col s12 m6 offset-m3" th:action="@{/account/edit}" th:object="${user} "method="post">
                 <div class="row">
                     <div class="input-field col s12">
                         <h1 class="no-margin-bottom">Edit info</h1>
                     </div>
 
                     <div class="input-field col s12">
-                        <input id="firstName" type="text" class="validate">
+                        <input id="firstName" type="text" class="validate" th:field="*{firstName}">
                         <label for="firstName">First Name</label>
-                        <span class="helper-text invalid"></span>
+                        <span class="helper-text invalid" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
                     </div>
                     <div class="input-field col s12">
-                        <input id="lastName" type="text" class="validate">
+                        <input id="lastName" type="text" class="validate" th:field="*{lastName}">
                         <label for="lastName">Last Name</label>
-                        <span class="helper-text invalid"></span>
+                        <span class="helper-text invalid" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
                     </div>
 
                     <div class="input-field col s12">
-                        <a class="col s12 btn waves-effect waves-light" type="submit" name="action" th:href="@{/account/overview}">Edit</a>                    </div>
+                        <a class="col s12 btn waves-effect waves-light" type="submit" name="action" th:href="@{/account/overview}">Edit</a>
+                    </div>
                 </div>
             </form>
         </div>
