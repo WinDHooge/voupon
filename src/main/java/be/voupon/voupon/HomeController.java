@@ -30,4 +30,13 @@ public class HomeController {
 
         return "home";
     }
+
+    @GetMapping
+    public String showAccount(Model model, Principal principal) {
+        String acc = principal.getName();
+
+        model.addAttribute("user", userService.getUserByEmail(acc));
+
+        return "account";
+    }
 }
