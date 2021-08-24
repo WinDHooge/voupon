@@ -18,38 +18,60 @@ import java.security.Principal;
 public class MerchantController {
 
     private MerchantService merchantService;
+    private UserService userService;
 
     @Autowired
     public void setMerchantService(MerchantService merchantService) {
         this.merchantService = merchantService;
     }
 
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/account/merchant/overview")
-    public String showOverview(Model model) {
+    public String showOverview(Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
 
         return "/account/merchant/overview";
     }
 
     @GetMapping("/account/merchant/add")
-    public String showAdd(Model model) {
+    public String showAdd(Model model, Principal principal) {
+
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+
         model.addAttribute("merchant", new Merchant());
 
         return "/account/merchant/edit";
     }
 
     @GetMapping("/account/merchant/edit/{id}")
-    public String showEdit(@PathVariable int id, Model model) {
+    public String showEdit(@PathVariable int id, Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
 
         return "/account/merchant/edit";
     }
 
     @PostMapping("/account/merchant/edit")
-    public String postAdd(@Valid @ModelAttribute Merchant merchant, BindingResult bindingResult, Principal principal) {
+    public String postAdd(@Valid @ModelAttribute Merchant merchant, BindingResult bindingResult, Model model, Principal principal) {
+
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+
         if (bindingResult.hasErrors()) {
-            return "/account/merchant/edit";
+            return "account/merchant/edit";
         }
 
-        merchantService.save(merchant);
+        try {
+            merchantService.save(merchant);
+        } catch(Exception e){
+            System.out.println(e);
+        }
 
         return "redirect:/account/merchant/overview";
     }
