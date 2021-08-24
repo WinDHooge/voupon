@@ -20,43 +20,39 @@ public class Merchant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "{merchant.companyName}")
-    @Size(min = 2, message = "{merchant.companyName}")
+    @NotBlank(message = "{merchant.companyName.empty}")
     @Column(name = "companyName")
     private String companyName;
 
-    @NotBlank(message = "{merchant.telephone}")
-    @Size(min = 9, message = "{merchant.telephone}")
+    @Size(min = 9, message = "{merchant.telephone.size}")
+    @Pattern(regexp  = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$", message = "{merchant.telephone.format}")
     @Column(name = "telephone")
     private String telephone;
 
-    @NotBlank(message = "{merchant.email}")
-    @Email(message = "{merchant.email}")
+    @NotBlank(message = "{merchant.email.empty}")
+    @Email(message = "{merchant.email.format}")
     @Column(name = "email")
     private String email;
 
-    @NotBlank(message = "{merchant.pageHandle}")
-    @Size(min = 2, message = "{merchant.pageHandle}")
-    @Pattern(regexp  = "^[A-Za-z0-9]*$")
+    @NotBlank(message = "{merchant.pageHandle.empty}")
+    @Size(min = 2, message = "{merchant.pageHandle.size}")
+    @Pattern(regexp  = "^[A-Za-z0-9]*$", message = "{merchant.pageHandle.format}")
     private String pageHandle;
 
     @NotBlank(message = "{merchant.street}")
-    @Size(min = 5, message = "{merchant.street}")
     @Column(name = "street")
     private String street;
 
     @NotBlank(message = "{merchant.number}")
-    @Size(min = 1, message = "{merchant.number}")
     @Column(name = "number")
     private String number;
 
-    @NotBlank(message = "{merchant.postalCode}")
-    @Size(min = 4, message = "{merchant.postalCode}")
+    @NotBlank(message = "{merchant.postalCode.empty}")
+    @Size(min = 4, message = "{merchant.postalCode.size}")
     @Column(name = "postalCode")
     private String postalCode;
 
     @NotBlank(message = "{merchant.city}")
-    @Size(min = 2, message = "{merchant.city}")
     @Column(name = "city")
     private String city;
 
@@ -64,24 +60,19 @@ public class Merchant {
     @Column(name = "country")
     private String country;
 
-    @NotBlank(message = "{merchant.VAT}")
-    @Size(min = 10, message = "{merchant.VAT}")
+    @NotBlank(message = "{merchant.VAT.empty}")
+    @Size(min = 10, message = "{merchant.VAT.size}")
     @Column(name = "VAT")
     private String VAT;
 
-    @NotBlank(message = "{merchant.companyDescription}")
-    @Size(min = 20, message = "{merchant.companyDescription}")
     @Column(name = "companyDescription")
     private String companyDescription;
 
-    @NotBlank(message = "{merchant.checkoutDescription}")
-    @Size(min = 5, message = "{merchant.checkoutDescription}")
     @Column(name = "checkoutDescription")
     private String checkoutDescription;
 
-
-    @NotBlank(message = "{merchant.paypalEmail}")
-    @Email(message = "{merchant.paypalEmail}")
+    @NotBlank(message = "{merchant.paypalEmail.size}")
+    @Email(message = "{merchant.paypalEmail.format}")
     @Column(name = "paypalEmail")
     private String paypalEmail;
 
