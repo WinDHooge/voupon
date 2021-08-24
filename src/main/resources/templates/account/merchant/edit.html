@@ -27,6 +27,12 @@
                     </div>
 
                     <div class="input-field col s12">
+                        <input id="pagehandle" type="text" class="validate" th:field="*{pageHandle}">
+                        <label for="pagehandle">Page Handle</label>
+                        <span class="helper-text invalid" th:if="${#fields.hasErrors('pageHandle')}" th:errors="*{pageHandle}"></span>
+                    </div>
+
+                    <div class="input-field col s12">
                         <input id="telephone" type="text" class="validate"  th:field="*{telephone}">
                         <label for="telephone">Telephone</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
