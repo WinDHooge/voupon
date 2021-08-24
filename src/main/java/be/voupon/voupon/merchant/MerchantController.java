@@ -2,6 +2,7 @@ package be.voupon.voupon.merchant;
 
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,13 @@ import java.security.Principal;
 
 @Controller
 public class MerchantController {
+
+    private MerchantService merchantService;
+
+    @Autowired
+    public void setMerchantService(MerchantService merchantService) {
+        this.merchantService = merchantService;
+    }
 
     @GetMapping("/account/merchant/overview")
     public String showOverview(Model model) {
@@ -40,6 +48,9 @@ public class MerchantController {
         if (bindingResult.hasErrors()) {
             return "/account/merchant/edit";
         }
+
+        merchantService.save(merchant);
+
         return "redirect:/account/merchant/overview";
     }
 
