@@ -57,17 +57,4 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    @Override
-    public void saveEdit(User user) throws NameLengthException {
-        if (user.getFirstName() != null && user.getFirstName().length() < 2) {
-            throw new NameLengthException("First Name must be at least 2 characters");
-        }
-        if (user.getLastName() != null && user.getLastName().length() < 2) {
-            throw new NameLengthException("Last Name must be at least 2 characters");
-        }
-
-        userRepository.save(user);
-    }
-
-
 }

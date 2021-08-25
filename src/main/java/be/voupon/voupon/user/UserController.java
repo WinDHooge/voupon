@@ -96,17 +96,27 @@ public class UserController {
     }
 
     @PostMapping("/account/edit")
-    public String processEditForm(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    public String processEditForm(@Valid @ModelAttribute User user, Model model, BindingResult bindingResult, Principal principal) {
+        user = userService.getUserByEmail(principal.getName());
+
+
         if (bindingResult.hasErrors()) {
-            return "account/edit";
+            return "/account/edit";
         }
+
         try {
-            userService.saveEdit(user);
-        } catch (UserService.NameLengthException e) {
-            bindingResult.rejectValue("firstName", "user.firstName", e.getMessage());
-            bindingResult.rejectValue("lastName", "user.lastName", e.getMessage());
+            userService.save(user);
+        } catch (UserService.PasswordException e) {
+            bindingResult.rejectValue("passWord", "user.password", e.getMessage());
+            return "account/edit";
+        } catch (UserService.PasswordMisMatchException e) {
+            bindingResult.rejectValue("passWord", "password-mismatch", e.getMessage());
+            return "account/edit";
+        } catch (UserService.UniqueUserException e) {
+            bindingResult.rejectValue("email", "user.unique", e.getMessage());
             return "account/edit";
         }
-        return "account/overview";
+
+        return "redirect:/account/overview";
     }
 }
