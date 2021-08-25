@@ -10,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -42,11 +43,11 @@ public class Voupon {
     @Column(name = "active")
     private boolean active = true;
 
-    /*
-    @NotBlank(message = "{voupon.merchant}")
-    @Size(min = 2, message = "{voupon.merchant}")
-    @Column(name = "merchant")
-    private Merchant merchant;
-    */
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "merchant_voupon",
+            joinColumns = @JoinColumn(name = "voupon_id"),
+            inverseJoinColumns = @JoinColumn(name = "voupon_id"))
+    private Set<Voupon> voupons;
 
 }
