@@ -51,6 +51,12 @@
             </div>
 
             <div class="input-field col s12">
+              <input id="pagehandle" type="text" class="validate" th:field="*{pageHandle}">
+              <label for="pagehandle">Page Handle</label>
+              <span class="helper-text invalid" th:if="${#fields.hasErrors('pageHandle')}" th:errors="*{pageHandle}"></span>
+            </div>
+
+            <div class="input-field col s12">
               <button class="col s12 btn waves-effect waves-light" type="submit" name="action">Create voupon</button>
             </div>
            </div>
