@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class MerchantController {
@@ -68,6 +70,11 @@ public class MerchantController {
         }
 
         try {
+            if(merchant.getUsers() == null){
+                merchant.setUsers(new HashSet<User>());
+            }
+            merchant.getUsers().add(user);
+
             merchantService.save(merchant);
         } catch(Exception e){
             System.out.println(e);

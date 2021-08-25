@@ -2,13 +2,14 @@ package be.voupon.voupon.merchant;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.catalina.User;
+import be.voupon.voupon.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -76,11 +77,11 @@ public class Merchant {
     @Column(name = "paypalEmail")
     private String paypalEmail;
 
-    /*
-    @NotBlank(message = "{merchant.user}")
-    @Size(min = 2, message = "{merchant.user}")
-    @Column(name = "user")
-    private User user;
-    */
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_merchant",
+            joinColumns = @JoinColumn(name = "merchant_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> users;
 
 }
