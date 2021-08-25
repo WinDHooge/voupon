@@ -45,17 +45,18 @@ public class Voupon {
     @NotBlank(message = "{voupon.active}")
     @Column(name = "active")
     private boolean active = true;
-
+    /*
     @NotBlank(message = "{voupon.pageHandle.empty}")
     @Size(min = 2, message = "{voupon.pageHandle.size}")
     @Pattern(regexp  = "^[A-Za-z0-9]*$", message = "{voupon.pageHandle.format}")
     private String pageHandle;
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    */
+    /*
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "merchant_voupon",
             joinColumns = @JoinColumn(name = "voupon_id"),
             inverseJoinColumns = @JoinColumn(name = "voupon_id"))
     private Set<Voupon> voupons;
-
+    */
 }
