@@ -1,6 +1,5 @@
 package be.voupon.voupon.voupon;
 
-import be.voupon.voupon.email.EmailService;
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.text.AttributedString;
 
 @Controller
 public class VouponController {
 
     private UserService userService;
+    private AttributedString model;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -43,27 +44,24 @@ public class VouponController {
 
         return "account/voupons/edit";
     }
-
+/*
     @GetMapping("/account/voupon/edit")
     public String showEdit(Model model) {
 
         return "/account/voupon/edit";
     }
-
-    @PostMapping("/account/voupon/add")
-    public String postAdd(@Valid @ModelAttribute Voupon voupon, BindingResult bindingResult, Principal principal) {
-        if (bindingResult.hasErrors()) {
-            return "/account/voupon/add";
-        }
-        return "redirect:/account/voupon/overview";
-    }
+*/
 
     @PostMapping("/account/voupon/edit")
     public String postEdit(@Valid @ModelAttribute Voupon voupon, BindingResult bindingResult, Principal principal) {
+
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+
         if (bindingResult.hasErrors()) {
-            return "redirect:/voupon";
+            return "redirect:/account/voupon/edit";
         }
-        return "redirect:/account";
+        return "redirect:/account/voupon/overview";
     }
 
 }
