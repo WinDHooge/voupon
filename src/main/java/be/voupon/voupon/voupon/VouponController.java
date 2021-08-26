@@ -19,10 +19,16 @@ public class VouponController {
 
     private UserService userService;
     private AttributedString model;
+    private VouponService vouponService;
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setVouponService(VouponService vouponService) {
+        this.vouponService = vouponService;
     }
 
 
@@ -53,7 +59,7 @@ public class VouponController {
 */
 
     @PostMapping("/account/voupon/edit")
-    public String postEdit(@Valid @ModelAttribute Voupon voupon, BindingResult bindingResult, Principal principal) {
+    public String postEdit(@Valid @ModelAttribute Voupon voupon, Model model, BindingResult bindingResult, Principal principal, VouponService vouponService) {
 
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
@@ -61,6 +67,10 @@ public class VouponController {
         if (bindingResult.hasErrors()) {
             return "redirect:/account/voupon/edit";
         }
+
+        vouponService.save(voupon);
+
+
         return "redirect:/account/voupon/overview";
     }
 

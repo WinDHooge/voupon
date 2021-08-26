@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.management.Notification;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -18,7 +19,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "voupons")
-public class Voupon {
+public class Voupon  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

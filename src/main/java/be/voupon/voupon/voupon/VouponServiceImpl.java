@@ -9,7 +9,7 @@ public class VouponServiceImpl implements VouponService{
     private VouponRepository vouponRepository;
 
     @Autowired
-    public void setMerchantRepository(VouponRepository vouponRepository)
+    public void setVouponRepository(VouponRepository vouponRepository)
     {
         this.vouponRepository = vouponRepository;
     }
