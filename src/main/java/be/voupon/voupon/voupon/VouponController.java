@@ -58,7 +58,7 @@ public class VouponController {
     }
 */
 
-    @PostMapping("/account/voupon/edit")
+    @PostMapping("/account/voupons/edit")
     public String postEdit(@Valid @ModelAttribute Voupon voupon, Model model, BindingResult bindingResult, Principal principal, VouponService vouponService) {
 
         User user = userService.getUserByEmail(principal.getName());
