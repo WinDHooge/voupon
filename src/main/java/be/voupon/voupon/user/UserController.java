@@ -74,13 +74,13 @@ public class UserController {
                     templateModel);
 
         } catch (UserService.PasswordException e) {
-            bindingResult.rejectValue("passWord","user.password",e.getMessage());
+            bindingResult.rejectValue("passWord", "user.password", e.getMessage());
             return "signup";
         } catch (UserService.PasswordMisMatchException e) {
-            bindingResult.rejectValue("passWord","password-mismatch",e.getMessage());
+            bindingResult.rejectValue("passWord", "password-mismatch", e.getMessage());
             return "signup";
         } catch (UserService.UniqueUserException e) {
-            bindingResult.rejectValue("email","user.unique",e.getMessage());
+            bindingResult.rejectValue("email", "user.unique", e.getMessage());
             return "signup";
         }
 
@@ -99,5 +99,40 @@ public class UserController {
         model.addAttribute("user", user);
 
         return "account/dashboard";
+    }
+
+    @GetMapping("/account/overview")
+    public String showAccount(Model model, Principal principal) {
+
+        String acc = principal.getName();
+
+        model.addAttribute("user", userService.getUserByEmail(acc));
+
+        return "account/overview";
+    }
+
+    @GetMapping("/account/edit")
+    public String editAccount(Model model, Principal principal) {
+        String acc = principal.getName();
+
+        model.addAttribute("user", userService.getUserByEmail(acc));
+
+        return "account/edit";
+    }
+
+    @PostMapping("/account/edit")
+    public String processEditForm(@ModelAttribute User editedUser, Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+        user.setFirstName(editedUser.getFirstName());
+        user.setLastName(editedUser.getLastName());
+
+        try {
+            userService.save(user);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return "redirect:/account/overview";
     }
 }
