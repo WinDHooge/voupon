@@ -39,7 +39,7 @@
             </div>
 
             <div class="input-field col s12">
-              <input id="expireDate" type="text" class="validate" th:field="*{expireDate}">
+              <input id="expireDate" type="date" class="validate" th:field="*{expireDate}">
               <label for="expireDate">ExpireDate</label>
               <span class="helper-text invalid" th:if="${#fields.hasErrors('expireDate')}" th:errors="*{expireDate}"></span>
             </div>
