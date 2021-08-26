@@ -30,4 +30,5 @@ public interface UserService {
 
     void save(User user) throws UserServiceImpl.PasswordException, PasswordMisMatchException, UniqueUserException;
 
+    void delete(User user);
 }
