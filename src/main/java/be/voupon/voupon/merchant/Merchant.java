@@ -77,7 +77,7 @@ public class Merchant {
     @Column(name = "paypalEmail")
     private String paypalEmail;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "user_merchant",
             joinColumns = @JoinColumn(name = "merchant_id"),

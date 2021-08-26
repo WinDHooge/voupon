@@ -51,7 +51,7 @@ public class User {
     @Column(name = "active")
     private boolean active = true;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
         name = "user_merchant",
         joinColumns = @JoinColumn(name = "user_id"),
