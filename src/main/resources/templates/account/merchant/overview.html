@@ -14,19 +14,25 @@
     <a th:href="@{/account/merchant/add}" class="btn btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a>
   </div>
 
-  <div class="row">
-    <div class="col s12 l6">
+  <div th:if="${!merchants.empty}" class="row">
+    <div th:each="merchant : ${merchants}" class="col s12 l6">
       <div class="card white z-depth-4">
         <div class="card-content black-text">
-          <span class="card-title">Merchant company name</span>
-          <p>Merchant company description</p>
+          <span th:text="${merchant.companyName}" class="card-title">Merchant company name</span>
+          <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${merchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
+          <p th:text="${merchant.street + ' ' + merchant.number + ', ' + merchant.postalCode + ' ' + merchant.city + ', ' + merchant.country}">Merchant address</p>
+          <p>&nbsp;</p>
+          <p th:text="${merchant.companyDescription}">Merchant company description</p>
         </div>
         <div class="card-action">
-          <a href="#"><i class="material-icons">edit</i>Edit link</a>
-          <a href="#"><i class="material-icons">delete</i>Delete link</a>
+          <a class="waves-effect waves-light btn btn-small" href="#"><i class="material-icons left">edit</i>Edit</a>
+          <a class="waves-effect waves-light btn btn2 btn-small btn-delete" href="#"><i class="material-icons left">delete</i>Delete</a>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row" th:if="${merchants.empty}">
+    <h4>None available</h4>
   </div>
 
 </div>
