@@ -96,25 +96,16 @@ public class UserController {
     }
 
     @PostMapping("/account/edit")
-    public String processEditForm(@Valid @ModelAttribute User user, Model model, BindingResult bindingResult, Principal principal) {
-        user = userService.getUserByEmail(principal.getName());
-
-
-        if (bindingResult.hasErrors()) {
-            return "/account/edit";
-        }
+    public String processEditForm(@ModelAttribute User editedUser, Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+        user.setFirstName(editedUser.getFirstName());
+        user.setLastName(editedUser.getLastName());
 
         try {
             userService.save(user);
-        } catch (UserService.PasswordException e) {
-            bindingResult.rejectValue("passWord", "user.password", e.getMessage());
-            return "account/edit";
-        } catch (UserService.PasswordMisMatchException e) {
-            bindingResult.rejectValue("passWord", "password-mismatch", e.getMessage());
-            return "account/edit";
-        } catch (UserService.UniqueUserException e) {
-            bindingResult.rejectValue("email", "user.unique", e.getMessage());
-            return "account/edit";
+        } catch (Exception e) {
+            System.out.println(e);
         }
 
         return "redirect:/account/overview";
