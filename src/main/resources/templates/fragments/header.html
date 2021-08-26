@@ -34,6 +34,10 @@
           <span th:text="${user.getEmail()}"></span></p>
       </div>
     </li>
+    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/dashboard}"><i class="material-icons left">home</i><span>Dashboard</span></a></li>
+    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/overview}"><i class="material-icons left">account_box</i><span>Account</span></a></li>
+    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/merchant/overview}"><i class="material-icons left">business</i><span>Merchant</span></a></li>
+    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/voupons/overview}"><i class="material-icons left">card_giftcard</i><span>Voupons</span></a></li>
     <li class="sidenav-section center" sec:authorize="isAnonymous()">
 
       <form th:action="@{/login}" method="post" name="loginForm">

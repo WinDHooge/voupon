@@ -21,6 +21,12 @@ h1,h2,h3,h4,h5,h6{
     background-color: #EFEFEF;
     color: #000;
 }
+.btn.btn-floating{
+    background-color: #FBAB20;
+}
+.btn.btn-floating:hover{
+    background-color: #fb8c00;
+}
 
 /* Helper classes */
 .vcenter{

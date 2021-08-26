@@ -39,16 +39,16 @@ public class UserServiceImpl implements UserService {
         if (user.getPassWord() == null && user.getId() == 0) {
             throw new PasswordException("password malformed");
         }
-        if (user.getPassWord().length() >= 8 && !user.getPassWord().equals(user.getCheckPassWord()) ) {
+        if (user.getId()== 0 && user.getPassWord().length() >= 8 && !user.getPassWord().equals(user.getCheckPassWord()) ) {
             throw new PasswordMisMatchException("password mismatch");
         }
-        if (getUserByEmail(user.getEmail()) != null &&
+        if (user.getId() == 0 && getUserByEmail(user.getEmail()) != null &&
             getUserByEmail(user.getEmail()).getRole().equals(user.getRole())
         ){
             throw new UniqueUserException("User already exists");
         }
 
-        if (user.getPassWord() == null && user.getId() > 0) {
+        if (user.getPassWord() != null && user.getId() > 0) {
             user.setPassWord(userRepository.findById(user.getId()).get().getPassWord());
         } else {
             user.setPassWord(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(user.getPassWord()));
@@ -56,6 +56,5 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
     }
-
 
 }

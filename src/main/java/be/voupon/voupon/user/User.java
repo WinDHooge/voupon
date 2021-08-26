@@ -1,5 +1,6 @@
 package be.voupon.voupon.user;
 
+import be.voupon.voupon.merchant.Merchant;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -48,5 +51,11 @@ public class User {
     @Column(name = "active")
     private boolean active = true;
 
+    @ManyToMany
+    @JoinTable(
+        name = "user_merchant",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "merchant_id"))
+    private Set<Merchant> merchants;
 
 }

@@ -25,6 +25,7 @@ public interface UserService {
         }
     }
 
+
     User getUserByEmail(String email);
 
     void save(User user) throws UserServiceImpl.PasswordException, PasswordMisMatchException, UniqueUserException;
