@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
             throw new UniqueUserException("User already exists");
         }
 
-        if (user.getPassWord() == null && user.getId() > 0) {
+        if (user.getPassWord() != null && user.getId() > 0) {
             user.setPassWord(userRepository.findById(user.getId()).get().getPassWord());
         } else {
             user.setPassWord(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(user.getPassWord()));
