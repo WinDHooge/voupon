@@ -66,9 +66,11 @@ public class Merchant {
     @Column(name = "VAT")
     private String VAT;
 
+    @Lob
     @Column(name = "companyDescription")
     private String companyDescription;
 
+    @Lob
     @Column(name = "checkoutDescription")
     private String checkoutDescription;
 
