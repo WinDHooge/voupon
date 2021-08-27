@@ -31,9 +31,8 @@ public class MerchantServiceImpl implements MerchantService {
         return merchantRepository.findMerchantsByUsers_Id(userId);
     }
 
-    public Merchant getMerchantByEmail(String email) {
-
-        return merchantRepository.findMerchantByEmail(email);
+    public Merchant getMerchantByPageHandle(String pageHandle) {
+        return merchantRepository.findMerchantByPageHandle(pageHandle);
     }
 
     @Override

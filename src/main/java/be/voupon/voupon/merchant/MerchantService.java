@@ -8,6 +8,8 @@ public interface MerchantService {
 
     Merchant getById(Integer id);
 
+    Merchant getMerchantByPageHandle(String pageHandle);
+
     List<Merchant> getMyMerchants(Integer userId);
 
     void save(Merchant merchant);

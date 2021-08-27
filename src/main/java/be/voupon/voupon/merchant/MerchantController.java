@@ -106,4 +106,11 @@ public class MerchantController {
         return "redirect:/account/merchant/overview";
     }
 
+    @GetMapping("/{pageHandle:^(?!merchant$).*}")
+    public String showMerchantFrontend(@PathVariable String pageHandle, Model model){
+        Merchant merchant = merchantService.getMerchantByPageHandle(pageHandle);
+        model.addAttribute("merchant",merchant);
+        return "merchantfrontend";
+    }
+
 }
