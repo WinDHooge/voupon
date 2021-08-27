@@ -3,6 +3,7 @@ package be.voupon.voupon.merchant;
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -37,7 +39,7 @@ public class MerchantController {
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
 
-        model.addAttribute("merchants",merchantService.getAll());
+        model.addAttribute("merchants",merchantService.getMyMerchants(user.getId()));
 
         return "/account/merchant/overview";
     }
@@ -58,7 +60,26 @@ public class MerchantController {
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
 
+        Merchant merchant = merchantService.getById(id);
+        if(merchant == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
+        model.addAttribute("merchant", merchant);
+
         return "/account/merchant/edit";
+    }
+
+    @GetMapping("/account/merchant/delete/{id}")
+    public String delete(@PathVariable int id, Model model, Principal principal){
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+
+        Merchant merchant = merchantService.getById(id);
+        if(merchant == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
+        merchantService.delete(id);
+        return "redirect:/account/merchant/overview";
     }
 
     @PostMapping("/account/merchant/edit")
@@ -83,6 +104,13 @@ public class MerchantController {
         }
 
         return "redirect:/account/merchant/overview";
+    }
+
+    @GetMapping("/{pageHandle:^(?!merchant$).*}")
+    public String showMerchantFrontend(@PathVariable String pageHandle, Model model){
+        Merchant merchant = merchantService.getMerchantByPageHandle(pageHandle);
+        model.addAttribute("merchant",merchant);
+        return "merchantfrontend";
     }
 
 }

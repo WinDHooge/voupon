@@ -21,12 +21,28 @@ public class MerchantServiceImpl implements MerchantService {
         return merchantRepository.findAll();
     }
 
-    public Merchant getMerchantByEmail(String email) {
-
-        return merchantRepository.findMerchantByEmail(email);
+    @Override
+    public Merchant getById(Integer id) {
+        return merchantRepository.findMerchantById(id);
     }
 
+    @Override
+    public List<Merchant> getMyMerchants(Integer userId) {
+        return merchantRepository.findMerchantsByUsers_Id(userId);
+    }
 
+    public Merchant getMerchantByPageHandle(String pageHandle) {
+        return merchantRepository.findMerchantByPageHandle(pageHandle);
+    }
+
+    @Override
+    public void delete(int id) {
+        try {
+            merchantRepository.deleteById(id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public void save(Merchant merchant)  {
 

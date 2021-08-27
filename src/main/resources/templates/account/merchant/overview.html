@@ -22,11 +22,11 @@
           <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${merchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
           <p th:text="${merchant.street + ' ' + merchant.number + ', ' + merchant.postalCode + ' ' + merchant.city + ', ' + merchant.country}">Merchant address</p>
           <p>&nbsp;</p>
-          <p th:text="${merchant.companyDescription}">Merchant company description</p>
+          <p class="truncate" th:text="${merchant.companyDescription}">Merchant company description</p>
         </div>
         <div class="card-action">
-          <a class="waves-effect waves-light btn btn-small" href="#"><i class="material-icons left">edit</i>Edit</a>
-          <a class="waves-effect waves-light btn btn2 btn-small btn-delete" href="#"><i class="material-icons left">delete</i>Delete</a>
+          <a class="waves-effect waves-light btn btn-small" th:href="@{/account/merchant/edit/} + ${merchant.id}"><i class="material-icons left">edit</i>Edit</a>
+          <a class="waves-effect waves-light btn btn2 btn-small btn-delete" th:href="@{/account/merchant/delete/} + ${merchant.id}"><i class="material-icons left">delete</i>Delete</a>
         </div>
       </div>
     </div>
