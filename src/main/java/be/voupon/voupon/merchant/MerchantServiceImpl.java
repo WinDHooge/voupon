@@ -21,6 +21,11 @@ public class MerchantServiceImpl implements MerchantService {
         return merchantRepository.findAll();
     }
 
+    @Override
+    public List<Merchant> getMyMerchants(Integer userId) {
+        return merchantRepository.findMerchantsByUsers_Id(userId);
+    }
+
     public Merchant getMerchantByEmail(String email) {
 
         return merchantRepository.findMerchantByEmail(email);
