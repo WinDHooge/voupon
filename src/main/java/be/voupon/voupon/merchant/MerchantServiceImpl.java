@@ -36,7 +36,14 @@ public class MerchantServiceImpl implements MerchantService {
         return merchantRepository.findMerchantByEmail(email);
     }
 
-
+    @Override
+    public void delete(int id) {
+        try {
+            merchantRepository.deleteById(id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public void save(Merchant merchant)  {
 

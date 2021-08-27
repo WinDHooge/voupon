@@ -69,6 +69,19 @@ public class MerchantController {
         return "/account/merchant/edit";
     }
 
+    @GetMapping("/account/merchant/delete/{id}")
+    public String delete(@PathVariable int id, Model model, Principal principal){
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+
+        Merchant merchant = merchantService.getById(id);
+        if(merchant == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
+        merchantService.delete(id);
+        return "redirect:/account/merchant/overview";
+    }
+
     @PostMapping("/account/merchant/edit")
     public String postAdd(@Valid @ModelAttribute Merchant merchant, BindingResult bindingResult, Model model, Principal principal) {
 
