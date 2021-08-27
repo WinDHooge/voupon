@@ -8,5 +8,7 @@ import java.util.List;
 public interface MerchantRepository extends JpaRepository<Merchant, Integer> {
     Merchant findMerchantByEmail(String email);
 
+    Merchant findMerchantById(Integer id);
+
     List<Merchant> findMerchantsByUsers_Id(Integer id);
 }
