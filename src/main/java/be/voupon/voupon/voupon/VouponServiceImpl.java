@@ -23,7 +23,12 @@ public class VouponServiceImpl implements VouponService{
         return vouponRepository.findAll();
     }
 
+/*
+    public Voupon getVouponByName(String name) {
 
+        return vouponRepository.findVouponByName(name);
+    }
+*/
     public void save(Voupon voupon)  {
 
         vouponRepository.save(voupon);
