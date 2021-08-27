@@ -36,7 +36,7 @@ public class MerchantController {
     public String showOverview(Model model, Principal principal) {
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
-
+        //ophalen van merchants (om eraan te kunnen)
         model.addAttribute("merchants",merchantService.getAll());
 
         return "/account/merchant/overview";

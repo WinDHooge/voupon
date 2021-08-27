@@ -1,5 +1,6 @@
 package be.voupon.voupon.voupon;
 
+import be.voupon.voupon.merchant.Merchant;
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class VouponController {
     private AttributedString model;
     private VouponService vouponService;
 
+
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -33,33 +36,36 @@ public class VouponController {
 
 
     @GetMapping("/account/voupons/overview")
-    public String showVoupons(Model model, Principal principal){
+    public String showOverview(Model model, Principal principal){
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user",user);
+        //ophalen van voupons (om eraan te kunnen)
+        model.addAttribute("voupons",vouponService.getAll());
 
         return "account/voupons/overview";
     }
 
     @GetMapping("/account/voupons/add")
-    public String addVoupon(Model model, Principal principal){
+    public String showAdd(Model model, Principal principal){
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user",user);
 
-        Voupon voupon = new Voupon();
-        model.addAttribute("voupon",voupon);
+        model.addAttribute("voupon", new Voupon());
+        //Voupon voupon = new Voupon();
+        //model.addAttribute("voupon",voupon);
 
         return "account/voupons/edit";
     }
-/*
+
     @GetMapping("/account/voupon/edit")
     public String showEdit(Model model) {
 
         return "/account/voupon/edit";
     }
-*/
+
 
     @PostMapping("/account/voupons/edit")
-    public String postEdit(@Valid @ModelAttribute Voupon voupon, Model model, BindingResult bindingResult, Principal principal) {
+    public String postAdd(@Valid @ModelAttribute Voupon voupon, Model model, BindingResult bindingResult, Principal principal) {
 
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
