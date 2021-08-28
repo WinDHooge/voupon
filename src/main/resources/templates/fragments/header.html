@@ -21,11 +21,11 @@
     </nav>
   </div>
   <ul class="sidenav" id="nav-main">
-    <li><a href="/">Home</a></li>
-    <li><a th:href="@{/about}">About</a></li>
-    <li><a th:href="@{/pricing}">Pricing</a></li>
-    <li><a th:href="@{/faq}">FAQ</a></li>
-    <li><a th:href="@{/contact}">Contact</a></li>
+    <li><a href="/" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">Home</a></li>
+    <li><a th:href="@{/about}" th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active':''}">About</a></li>
+    <li><a th:href="@{/pricing}" th:classappend="${#httpServletRequest.getRequestURI() == '/pricing' ? 'active':''}">Pricing</a></li>
+    <li><a th:href="@{/faq}" th:classappend="${#httpServletRequest.getRequestURI() == '/faq' ? 'active':''}">FAQ</a></li>
+    <li><a th:href="@{/contact}" th:classappend="${#httpServletRequest.getRequestURI() == '/contact' ? 'active':''}">Contact</a></li>
   </ul>
   <ul class="sidenav" id="nav-account">
     <li class="sidenav-section center" sec:authorize="isAuthenticated()">
@@ -34,10 +34,10 @@
           <span th:text="${user.getEmail()}"></span></p>
       </div>
     </li>
-    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/dashboard}"><i class="material-icons left">home</i><span>Dashboard</span></a></li>
-    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/overview}"><i class="material-icons left">account_box</i><span>Account</span></a></li>
-    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/merchant/overview}"><i class="material-icons left">business</i><span>Merchant</span></a></li>
-    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/voupons/overview}"><i class="material-icons left">card_giftcard</i><span>Voupons</span></a></li>
+    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/dashboard}" th:classappend="${#httpServletRequest.getRequestURI() == '/account/dashboard' ? 'active':''}"><i class="material-icons left">home</i><span>Dashboard</span></a></li>
+    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/overview}" th:classappend="${#httpServletRequest.getRequestURI() == '/account/overview' || #httpServletRequest.getRequestURI() == '/account/edit' ? 'active':''}"><i class="material-icons left">account_box</i><span>Account</span></a></li>
+    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/merchant/overview}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/account/merchant') ? 'active':''}"><i class="material-icons left">business</i><span>Merchant</span></a></li>
+    <li sec:authorize="isAuthenticated()"><a th:href="@{/account/voupons/overview}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/account/voupons') ? 'active':''}"><i class="material-icons left">card_giftcard</i><span>Voupons</span></a></li>
     <li class="sidenav-section center" sec:authorize="isAnonymous()">
 
       <form th:action="@{/login}" method="post" name="loginForm">
