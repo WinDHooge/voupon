@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -71,7 +72,7 @@ public class MerchantController {
     }
 
     @GetMapping("/account/merchant/delete/{id}")
-    public String delete(@PathVariable int id, Model model, Principal principal){
+    public String delete(@PathVariable int id, Model model, Principal principal, RedirectAttributes redirectAttributes){
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
 
@@ -80,11 +81,12 @@ public class MerchantController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         merchantService.delete(id);
+        redirectAttributes.addFlashAttribute("success", "Merchant successfully deleted.");
         return "redirect:/account/merchant/overview";
     }
 
     @PostMapping("/account/merchant/edit")
-    public String postAdd(@Valid @ModelAttribute Merchant merchant, BindingResult bindingResult, Model model, Principal principal) {
+    public String postAdd(@Valid @ModelAttribute Merchant merchant, BindingResult bindingResult, Model model, Principal principal, RedirectAttributes redirectAttributes) {
 
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
@@ -97,14 +99,17 @@ public class MerchantController {
             if(merchant.getUsers() == null){
                 merchant.setUsers(new HashSet<User>());
             }
+
             // Add new merchant
             if(merchant.getId() == 0){
                 merchant.getUsers().add(user);
                 merchantService.save(merchant);
+                redirectAttributes.addFlashAttribute("success", "Merchant successfully added.");
             }
             // Edit existing Merchant & check if allowed
             else if(merchant.getId() > 0 && user.getMerchants().contains(merchant)){
                 merchantService.save(merchant);
+                redirectAttributes.addFlashAttribute("success", "Merchant successfully updated.");
             }
         } catch(Exception e){
             System.out.println(e);
