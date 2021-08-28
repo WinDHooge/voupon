@@ -97,9 +97,15 @@ public class MerchantController {
             if(merchant.getUsers() == null){
                 merchant.setUsers(new HashSet<User>());
             }
-            merchant.getUsers().add(user);
-
-            merchantService.save(merchant);
+            // Add new merchant
+            if(merchant.getId() == 0){
+                merchant.getUsers().add(user);
+                merchantService.save(merchant);
+            }
+            // Edit existing Merchant & check if allowed
+            else if(merchant.getId() > 0 && user.getMerchants().contains(merchant)){
+                merchantService.save(merchant);
+            }
         } catch(Exception e){
             System.out.println(e);
         }
