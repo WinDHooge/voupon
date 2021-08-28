@@ -25,8 +25,8 @@
           <p th:text="${voupon.description}">Voupon description</p>
         </div>
         <div class="card-action">
-          <a class="waves-effect waves-light btn btn-small" href="#"><i class="material-icons left">edit</i>Edit</a>
-          <a class="waves-effect waves-light btn btn2 btn-small btn-delete" href="#"><i class="material-icons left">delete</i>Delete</a>
+          <a class="waves-effect waves-light btn btn-small" th:href="@{/account/voupon/edit/} + ${voupon.id}"><i class="material-icons left">edit</i>Edit</a>
+          <a class="waves-effect waves-light btn btn2 btn-small btn-delete" th:href="@{/account/voupon/delete/} + ${voupon.id}"><i class="material-icons left">delete</i>Delete</a>
         </div>
       </div>
     </div>
