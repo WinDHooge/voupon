@@ -9,7 +9,7 @@ public interface VouponService {
 
     Voupon getById(Integer id);
 
-    List<Voupon> getMyVoupons(Integer userId);
+    //List<Voupon> getMyVoupons(Integer userId);
 
     void save(Voupon voupon);
 
