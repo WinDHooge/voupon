@@ -1,7 +1,5 @@
 package be.voupon.voupon.voupon;
 
-import be.voupon.voupon.merchant.Merchant;
-
 import java.util.List;
 
 public interface VouponService {
@@ -14,5 +12,7 @@ public interface VouponService {
     void save(Voupon voupon);
 
     void delete(int id);
+
+    void edit(int id);
 
 }

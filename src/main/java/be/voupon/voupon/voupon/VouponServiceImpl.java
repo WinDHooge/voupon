@@ -1,6 +1,5 @@
 package be.voupon.voupon.voupon;
 
-import be.voupon.voupon.merchant.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +41,17 @@ public class VouponServiceImpl implements VouponService{
             System.out.println(e);
         }
     }
+
+    @Override
+    public void edit(int id) {
+        try {
+            vouponRepository.editById(id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
 
     public void save(Voupon voupon)  {
 

@@ -61,13 +61,13 @@ public class VouponController {
 
         return "account/voupons/edit";
     }
-
+/*
     @GetMapping("/account/voupons/edit")
     public String showEdit(Model model) {
 
         return "/account/voupons/edit";
     }
-
+*/
     @GetMapping("/account/voupon/delete/{id}")
     public String delete(@PathVariable int id, Model model, Principal principal){
         User user = userService.getUserByEmail(principal.getName());
@@ -79,6 +79,20 @@ public class VouponController {
         }
         vouponService.delete(id);
         return "redirect:/account/voupons/overview";
+    }
+
+    @GetMapping("/account/voupon/edit/{id}")
+    public String showEdit(@PathVariable int id, Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+
+        Voupon voupon = vouponService.getById(id);
+        if(voupon == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
+        model.addAttribute("voupon", voupon);
+
+        return "/account/voupons/edit";
     }
 
     @PostMapping("/account/voupons/edit")
