@@ -7,10 +7,10 @@
 <body>
 <div id="admin-menu" th:fragment="admin-menu">
   <ul class="sidenav sidenav-fixed">
-      <li><a th:href="@{/account/dashboard}"><i class="material-icons left">home</i><span>Dashboard</span></a></li>
-      <li><a th:href="@{/account/overview}"><i class="material-icons left">account_box</i><span>Account</span></a></li>
-      <li><a th:href="@{/account/merchant/overview}"><i class="material-icons left">business</i><span>Merchant</span></a></li>
-      <li><a th:href="@{/account/voupons/overview}"><i class="material-icons left">card_giftcard</i><span>Voupons</span></a></li>
+      <li><a th:classappend="${#httpServletRequest.getRequestURI() == '/account/dashboard' ? 'active':''}" th:href="@{/account/dashboard}"><i class="material-icons left">home</i><span>Dashboard</span></a></li>
+      <li><a th:classappend="${#httpServletRequest.getRequestURI() == '/account/overview' ? 'active':''}" th:href="@{/account/overview}"><i class="material-icons left">account_box</i><span>Account</span></a></li>
+      <li><a th:classappend="${#httpServletRequest.getRequestURI() == '/account/merchant/overview' ? 'active':''}" th:href="@{/account/merchant/overview}"><i class="material-icons left">business</i><span>Merchant</span></a></li>
+      <li><a th:classappend="${#httpServletRequest.getRequestURI() == '/account/voupons/overview' ? 'active':''}" th:href="@{/account/voupons/overview}"><i class="material-icons left">card_giftcard</i><span>Voupons</span></a></li>
   </ul>
 </div>
 </body>

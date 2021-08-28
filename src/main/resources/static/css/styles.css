@@ -109,6 +109,9 @@ nav .sidenav-trigger:hover{
 /*
 // SideNavs
 */
+.sidenav li>a.active{
+    background-color: rgba(0,0,0,0.05);
+}
 /* Nav Account sidenav */
 #nav-account .sidenav-section{
     margin: 1rem;
