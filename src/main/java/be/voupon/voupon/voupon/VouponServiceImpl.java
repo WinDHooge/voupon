@@ -23,12 +23,27 @@ public class VouponServiceImpl implements VouponService{
         return vouponRepository.findAll();
     }
 
-/*
-    public Voupon getVouponByName(String name) {
-
-        return vouponRepository.findVouponByName(name);
+    @Override
+    public Voupon getById(Integer id) {
+        return vouponRepository.findVouponById(id);
     }
-*/
+
+    @Override
+    public List<Voupon> getMyVoupons(Integer id) {
+
+        return vouponRepository.findVouponsBy_Id(id);
+    }
+
+
+    @Override
+    public void delete(int id) {
+        try {
+            vouponRepository.deleteById(id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void save(Voupon voupon)  {
 
         vouponRepository.save(voupon);
