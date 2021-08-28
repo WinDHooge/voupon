@@ -33,6 +33,7 @@
   </div>
   <div class="row" th:if="${merchants.empty}">
     <h4>None available</h4>
+    <a class="waves-effect waves-light btn btn-small" th:href="@{/account/merchant/add}"><i class="material-icons left">business</i>Add merchant</a>
   </div>
 
 </div>
