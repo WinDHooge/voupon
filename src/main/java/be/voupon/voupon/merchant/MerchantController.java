@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class MerchantController {
@@ -107,7 +108,8 @@ public class MerchantController {
                 redirectAttributes.addFlashAttribute("success", "Merchant successfully added.");
             }
             // Edit existing Merchant & check if allowed
-            else if(merchant.getId() > 0 && user.getMerchants().contains(merchant)){
+            else if(merchant.getId() > 0 && user.getMerchants().contains(merchantService.getById(merchant.getId()))){
+                merchant.getUsers().add(user);
                 merchantService.save(merchant);
                 redirectAttributes.addFlashAttribute("success", "Merchant successfully updated.");
             }
