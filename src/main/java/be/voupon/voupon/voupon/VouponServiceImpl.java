@@ -14,6 +14,7 @@ public class VouponServiceImpl implements VouponService{
     @Autowired
     public void setVouponRepository(VouponRepository vouponRepository)
     {
+
         this.vouponRepository = vouponRepository;
     }
 
@@ -32,7 +33,6 @@ public class VouponServiceImpl implements VouponService{
     public List<Voupon> getMyVoupons(Integer userId) {
         return vouponRepository.findVouponsByUsers_Id(userId);
     }
-
 
     @Override
     public void delete(int id) {
