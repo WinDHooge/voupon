@@ -61,7 +61,8 @@ public class MerchantController {
         model.addAttribute("user", user);
 
         Merchant merchant = merchantService.getById(id);
-        if(merchant == null){
+
+        if(merchant == null || !user.getMerchants().contains(merchant)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         model.addAttribute("merchant", merchant);
@@ -75,7 +76,7 @@ public class MerchantController {
         model.addAttribute("user", user);
 
         Merchant merchant = merchantService.getById(id);
-        if(merchant == null){
+        if(merchant == null || !user.getMerchants().contains(merchant)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
         }
         merchantService.delete(id);
@@ -109,6 +110,9 @@ public class MerchantController {
     @GetMapping("/{pageHandle:^(?!merchant$).*}")
     public String showMerchantFrontend(@PathVariable String pageHandle, Model model){
         Merchant merchant = merchantService.getMerchantByPageHandle(pageHandle);
+        if(merchant == null){
+            return "redirect:/";
+        }
         model.addAttribute("merchant",merchant);
         return "merchantfrontend";
     }
