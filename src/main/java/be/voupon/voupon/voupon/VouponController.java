@@ -26,6 +26,7 @@ public class VouponController {
     private AttributedString model;
     private MerchantService merchantService;
     private VouponService vouponService;
+    private VouponServiceImpl vouponServiceImpl;
 
 
 
