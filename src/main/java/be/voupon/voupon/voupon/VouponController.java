@@ -57,10 +57,10 @@ public class VouponController {
         return "account/voupons/edit";
     }
 
-    @GetMapping("/account/voupon/edit")
+    @GetMapping("/account/voupons/edit")
     public String showEdit(Model model) {
 
-        return "/account/voupon/edit";
+        return "/account/voupons/edit";
     }
 
 
@@ -71,13 +71,13 @@ public class VouponController {
         model.addAttribute("user", user);
 
         if (bindingResult.hasErrors()) {
-            return "redirect:/account/voupon/edit";
+            return "redirect:/account/voupons/edit";
         }
 
         vouponService.save(voupon);
 
 
-        return "redirect:/account/voupon/overview";
+        return "redirect:/account/voupons/overview";
     }
 
 }
