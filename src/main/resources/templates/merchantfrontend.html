@@ -2,11 +2,30 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Merchants overview - Voupon</title>
+    <title th:text="${merchant.companyName}"></title>
     <th:block th:include="~{fragments/head :: body.head}"></th:block>
 </head>
 <body class="grey lighten-4">
-<h1 th:text="${merchant.companyName}">I am the merchant frontend</h1>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h1 class="center" th:text="${merchant.companyName}"></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="company-info-container white z-depth-3">
+                <h2>Buy a Gift Card</h2>
+                <p th:text="${merchant.companyDescription}"></p>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            <div class="checkout-container white z-depth-3">
+                <p>List of voupons here</p>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/js/m.js"></script>
 </body>
 </html>

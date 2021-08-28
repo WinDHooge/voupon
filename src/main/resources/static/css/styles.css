@@ -322,3 +322,13 @@ nav .sidenav-trigger:hover{
 }
 .card .card-action a{ margin-right: 0.5em;}
 .card .card-action a:last-child{ margin-right: 0;}
+
+
+/* Merchant frontend */
+.company-info-container,
+.checkout-container{
+    padding: 1em;
+}
+.company-info-container h2{
+    margin-top: 0;
+}
