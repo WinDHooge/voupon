@@ -11,7 +11,7 @@
 <div class="admin-body">
   <h1>My voupons</h1>
   <div class="fixed-action-btn">
-    <a th:href="@{/account/voupons}" class="btn btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a>
+    <a th:href="@{/account/voupons/add}" class="btn btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a>
   </div>
 
   <div th:if="${!voupons.empty}" class="row">
@@ -19,7 +19,6 @@
       <div class="card white z-depth-4">
         <div class="card-content black-text">
           <span th:text="${voupon.Name}" class="card-title">Voupon name</span>
-          <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${voupon.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
           <p th:text="${voupon.description + ' ' + voupon.value + ', ' + voupon.expireDate}">Value</p>
           <p>&nbsp;</p>
           <p th:text="${voupon.expireDate}">Voupon expireDate</p>
