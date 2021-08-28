@@ -1,6 +1,7 @@
 package be.voupon.voupon.user;
 
 import be.voupon.voupon.email.EmailService;
+import be.voupon.voupon.merchant.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class UserController {
 
     private UserService userService;
     private EmailService emailService;
+    private MerchantService merchantService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -32,6 +34,11 @@ public class UserController {
     @Autowired
     public void setEmailService(EmailService emailService) {
         this.emailService = emailService;
+    }
+
+    @Autowired
+    public void setMerchantService(MerchantService merchantService) {
+        this.merchantService = merchantService;
     }
 
     public void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {
@@ -97,6 +104,8 @@ public class UserController {
     public String showDashboard(Model model, Principal principal, HttpServletRequest httpServletRequest) {
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
+
+        model.addAttribute("merchants",merchantService.getMyMerchants(user.getId()));
 
         return "account/dashboard";
     }
