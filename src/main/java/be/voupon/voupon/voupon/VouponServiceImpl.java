@@ -29,9 +29,8 @@ public class VouponServiceImpl implements VouponService{
     }
 
     @Override
-    public List<Voupon> getMyVoupons(Integer id) {
-
-        return vouponRepository.findVouponsBy_Id(id);
+    public List<Voupon> getMyVoupons(Integer userId) {
+        return vouponRepository.findVouponsByUsers_Id(userId);
     }
 
 
