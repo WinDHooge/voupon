@@ -10,7 +10,7 @@ public interface VouponRepository extends JpaRepository<Voupon, Integer> {
 
     Voupon findVouponById(Integer id);
 
-    List<Voupon> findVouponsByUsers_Id(Integer userId);
+    //List<Voupon> findVouponsByUsers_Id(Integer userId);
 
 
 }

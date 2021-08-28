@@ -52,12 +52,12 @@ public class Voupon  {
     @Pattern(regexp  = "^[A-Za-z0-9]*$", message = "{voupon.pageHandle.format}")
     private String pageHandle;
     */
-
+/*
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "merchant_voupon",
             joinColumns = @JoinColumn(name = "voupon_id"),
             inverseJoinColumns = @JoinColumn(name = "voupon_id"))
     private Set<Voupon> voupons;
-
+*/
 }
