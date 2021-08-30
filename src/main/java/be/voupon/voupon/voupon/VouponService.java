@@ -8,12 +8,10 @@ public interface VouponService {
 
     Voupon getById(Integer id);
 
-    //List<Voupon> getMyVoupons(Integer userId);
-
     void save(Voupon voupon);
 
     void delete(int id);
 
-    //void edit(int id);
+
 
 }

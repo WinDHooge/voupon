@@ -28,9 +28,6 @@ public class VouponController {
     private VouponService vouponService;
     private VouponServiceImpl vouponServiceImpl;
 
-
-
-
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -40,7 +37,6 @@ public class VouponController {
     public void setVouponService(VouponService vouponService) {
         this.vouponService = vouponService;
     }
-
 
 
     @GetMapping("/account/voupons/overview")
@@ -63,13 +59,7 @@ public class VouponController {
 
         return "account/voupons/edit";
     }
-/*
-    @GetMapping("/account/voupons/edit")
-    public String showEdit(Model model) {
 
-        return "/account/voupons/edit";
-    }
-*/
     @GetMapping("/account/voupon/delete/{id}")
     public String delete(@PathVariable int id, Model model, Principal principal){
         User user = userService.getUserByEmail(principal.getName());

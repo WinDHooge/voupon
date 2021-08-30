@@ -27,12 +27,7 @@ public class VouponServiceImpl implements VouponService{
     public Voupon getById(Integer id) {
         return vouponRepository.findVouponById(id);
     }
-/*
-    @Override
-    public List<Voupon> getMyVoupons(Integer userId) {
-        return vouponRepository.findVouponsByUsers_Id(userId);
-    }
-*/
+
     @Override
     public void delete(int id) {
         try {
@@ -41,16 +36,6 @@ public class VouponServiceImpl implements VouponService{
             System.out.println(e);
         }
     }
-/*
-    @Override
-    public void edit(int id) {
-        try {
-            vouponRepository.editById(id);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-*/
 
     public void save(Voupon voupon)  {
 
