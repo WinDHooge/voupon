@@ -136,7 +136,7 @@ public class UserController {
         return "redirect:/account/overview";
     }
 
-    @GetMapping("/account/edit/delete/")
+    @GetMapping("/account/edit/delete")
     public String delete(@PathVariable Model model, Principal principal) {
         User user = userService.getUserByEmail(principal.getName());
         if (user == null) {
