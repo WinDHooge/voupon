@@ -57,8 +57,7 @@ public class VouponController {
         model.addAttribute("user",user);
 
         model.addAttribute("voupon", new Voupon());
-        //Voupon voupon = new Voupon();
-        //model.addAttribute("voupon",voupon);
+
 
         return "account/voupons/edit";
     }
