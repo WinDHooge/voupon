@@ -14,6 +14,6 @@ public interface VouponService {
 
     void delete(int id);
 
-    void edit(int id);
+    //void edit(int id);
 
 }

@@ -41,7 +41,7 @@ public class VouponServiceImpl implements VouponService{
             System.out.println(e);
         }
     }
-
+/*
     @Override
     public void edit(int id) {
         try {
@@ -50,8 +50,7 @@ public class VouponServiceImpl implements VouponService{
             System.out.println(e);
         }
     }
-
-
+*/
 
     public void save(Voupon voupon)  {
 

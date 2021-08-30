@@ -12,7 +12,7 @@ public interface VouponRepository extends JpaRepository<Voupon, Integer> {
     Voupon findVouponById(Integer id);
 
 
-    void editById(int id);
+   // void editById(int id);
 
 
 
