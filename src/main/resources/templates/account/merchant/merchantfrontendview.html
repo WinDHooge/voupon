@@ -2,39 +2,36 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Merchants overview - Voupon</title>
+    <title th:text="${merchant.companyName}"></title>
     <th:block th:include="~{fragments/head :: body.head}"></th:block>
 </head>
 <body class="grey lighten-4">
-<div th:replace="~{fragments/header :: header}">Header</div>
-<div th:replace="~{fragments/admin-menu :: admin-menu}">Admin Menu</div>
-<div class="admin-body">
-    <h1>Merchant</h1>
-    <div class="fixed-action-btn">
-        <a th:href="@{/account/merchant}" class="btn btn-floating btn-large waves-effect waves-light pulse"><i class="material-icons">Merchant</i></a>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h1 class="center" th:text="${merchant.companyName}"></h1>
+        </div>
     </div>
-
-    <div class="col s12 card-panel green darken-4 white-text" th:if="${success}">
-        <p th:text="${success}"></p>
-    </div>
-
-    <div th:if="${!merchants.empty}" class="row">
-        <div th:each="merchant : ${merchants}" class="col s12 l6">
-            <div class="card white z-depth-4">
-                <div class="card-content black-text">
-                    <span th:text="${merchant.companyName}" class="card-title">Merchant company name</span>
-                    <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${merchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
-                    <p th:text="${merchant.street + ' ' + merchant.number + ', ' + merchant.postalCode + ' ' + merchant.city + ', ' + merchant.country}">Merchant address</p>
-                    <p class="truncate" th:text="${merchant.telephone}">Merchant telephone</p>
-                    <p class="truncate" th:text="${merchant.email}">Merchant e-mail</p>
-                    <p class="truncate" th:text="${merchant.companyDescription}">Merchant company description</p>
-                </div>
-
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="company-info-container white z-depth-3">
+                <h2>View merchant</h2>
+                <p th:text="${merchant.companyDescription}"></p>
+                <p th:text="${merchant.street}"></p>
+                <p th:text="${merchant.number}"></p>
+                <p th:text="${merchant.postalcode}"></p>
+                <p th:text="${merchant.city}"></p>
+                <p th:text="${merchant.country}"></p>
+                <p th:text="${merchant.telephone}"></p>
+                <p th:text="${merchant.email}"></p>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            <div class="checkout-container white z-depth-3">
+                <p>Contact details merchant</p>
             </div>
         </div>
     </div>
-
-
 </div>
 <script src="/js/m.js"></script>
 </body>
