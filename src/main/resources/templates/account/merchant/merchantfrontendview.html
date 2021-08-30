@@ -2,81 +2,39 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Merchants edit - Voupon</title>
+    <title>Merchants overview - Voupon</title>
     <th:block th:include="~{fragments/head :: body.head}"></th:block>
 </head>
 <body class="grey lighten-4">
 <div th:replace="~{fragments/header :: header}">Header</div>
 <div th:replace="~{fragments/admin-menu :: admin-menu}">Admin Menu</div>
 <div class="admin-body">
-    <main>
-        <div class="container">
-            <div class="row">
-                <form class="col s12 l8 offset-l2" th:action="@{/account/merchant/frontendview}" th:object="${merchant}" method="post">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <h1 class="no-margin-bottom" th:text="${merchant.id} != 0 ? 'view merchant' : 'View merchant'"></h1>
-                        </div>
+    <h1>Merchant</h1>
+    <div class="fixed-action-btn">
+        <a th:href="@{/account/merchant}" class="btn btn-floating btn-large waves-effect waves-light pulse"><i class="material-icons">Merchant</i></a>
+    </div>
 
-                        <div class="input-field col s12">
-                            <input id="companyname" type="text" class="validate" th:field="*{companyName}">
-                            <label for="companyname">Company Name</label>
-                            <span class="helper-text invalid" th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></span>
-                        </div>
+    <div class="col s12 card-panel green darken-4 white-text" th:if="${success}">
+        <p th:text="${success}"></p>
+    </div>
 
-                        <div class="input-field col s12">
-                        <textarea class="materialize-textarea validate" id="companydescription" th:field="*{companyDescription}"></textarea>
-                        <label for="companydescription">Company Description</label>
-                        <span class="helper-text invalid" th:if="${#fields.hasErrors('companyDescription')}" th:errors="*{companyDescription}"></span>
-                        </div>
+    <div th:if="${!merchants.empty}" class="row">
+        <div th:each="merchant : ${merchants}" class="col s12 l6">
+            <div class="card white z-depth-4">
+                <div class="card-content black-text">
+                    <span th:text="${merchant.companyName}" class="card-title">Merchant company name</span>
+                    <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${merchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
+                    <p th:text="${merchant.street + ' ' + merchant.number + ', ' + merchant.postalCode + ' ' + merchant.city + ', ' + merchant.country}">Merchant address</p>
+                    <p class="truncate" th:text="${merchant.telephone}">Merchant telephone</p>
+                    <p class="truncate" th:text="${merchant.email}">Merchant e-mail</p>
+                    <p class="truncate" th:text="${merchant.companyDescription}">Merchant company description</p>
+                </div>
 
-                        <div class="input-field col s12">
-                            <input id="telephone" type="text" class="validate"  th:field="*{telephone}">
-                            <label for="telephone">Telephone</label>
-                            <span class="helper-text invalid" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input placeholder="email@domain.com" id="email" type="email" class="validate" th:field="*{email}">
-                            <label for="email">E-mail</label>
-                            <span class="helper-text" data-error="Invalid format" data-success="Valid"></span>
-                            <span class="helper-text invalid" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input id="street" type="text" class="validate" th:field="*{street}">
-                            <label for="street">Street</label>
-                            <span class="helper-text invalid" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input id="number" type="text" class="validate" th:field="*{number}">
-                            <label for="number">Number</label>
-                            <span class="helper-text invalid" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></span>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input id="postalcode" type="text" class="validate" th:field="*{postalCode}">
-                            <label for="postalcode">Postalcode</label>
-                            <span class="helper-text invalid" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input id="city" type="text" class="validate" th:field="*{city}">
-                            <label for="city">City</label>
-                            <span class="helper-text invalid" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input id="country" type="text" class="validate" th:field="*{country}">
-                            <label for="country">Country</label>
-                            <span class="helper-text invalid" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
-    </main>
+    </div>
+
+
 </div>
 <script src="/js/m.js"></script>
 </body>
