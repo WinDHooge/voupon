@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface VouponRepository extends JpaRepository<Voupon, Integer> {
 
+
     Voupon findVouponById(Integer id);
 
 
