@@ -254,6 +254,9 @@ nav .sidenav-trigger:hover{
 /*
     ADMIN
 */
+.admin-body strong{
+    font-weight: 600;
+}
 
 
 /* Admin Menu */

@@ -2,8 +2,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // General methods
     //
+
+    // Charcounter elements
     var charCount = document.querySelectorAll('.charcounter');
     M.CharacterCounter.init(charCount);
+
+    // Fix for thymeleaf switcher checkbox fields
+    var checkboxField = document.querySelectorAll('input[type="checkbox"]');
+    var hiddenCheckboxField = document.querySelectorAll('input[type="checkbox"] + input[type="hidden"]');
+    if(checkboxField.length > 0 && hiddenCheckboxField.length > 0){
+        for(var i=0;i < checkboxField.length;i++){
+           checkboxField[i].parentNode.insertBefore(hiddenCheckboxField[i], checkboxField[i]);
+        }
+    }
+
+    // Datepicker fields
+    var dateElems = document.querySelectorAll('.datepicker');
+    var dateOptions = {format:"yyyy-mm-dd"};
+    M.Datepicker.init(dateElems, dateOptions);
+
 
     // Logout methods
     //

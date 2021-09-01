@@ -18,15 +18,14 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.text.AttributedString;
+import java.util.List;
 
 @Controller
 public class VouponController {
 
     private UserService userService;
-    private AttributedString model;
     private MerchantService merchantService;
     private VouponService vouponService;
-    private VouponServiceImpl vouponServiceImpl;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -38,12 +37,19 @@ public class VouponController {
         this.vouponService = vouponService;
     }
 
+    @Autowired
+    public void setMerchantService(MerchantService merchantService) {
+        this.merchantService = merchantService;
+    }
 
     @GetMapping("/account/voupons/overview")
     public String showOverview(Model model, Principal principal){
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user",user);
-        //ophalen van voupons (om eraan te kunnen)
+
+        List<Merchant> merchants = merchantService.getMyMerchants(user.getId());
+        model.addAttribute("merchants",merchants);
+
         model.addAttribute("voupons",vouponService.getAll());
 
         return "account/voupons/overview";
@@ -95,6 +101,54 @@ public class VouponController {
 
         if (bindingResult.hasErrors()) {
             return "redirect:/account/voupons/edit";
+        }
+
+        vouponService.save(voupon);
+
+
+        return "redirect:/account/voupons/overview";
+    }
+
+    @GetMapping("/account/voupons/merchant/{id}/overview")
+    public String showMerchantVouponsOverview(@PathVariable int id, Model model, Principal principal){
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user",user);
+
+        Merchant merchant = merchantService.getById(id);
+        model.addAttribute("merchant",merchant);
+
+        model.addAttribute("voupons",vouponService.getAll());
+
+        return "account/voupons/merchantvoupons";
+    }
+
+    @GetMapping("/account/voupons/merchant/{id}/add")
+    public String showAddVouponToMerchant(@PathVariable int id, Model model, Principal principal){
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user",user);
+
+        Merchant merchant = merchantService.getById(id);
+        model.addAttribute("merchant",merchant);
+
+        Voupon voupon = new Voupon();
+        voupon.setMerchant(merchant);
+        model.addAttribute("voupon", voupon);
+
+
+        return "account/voupons/editmerchantvoupon";
+    }
+
+    @PostMapping("/account/voupons/editmerchantvoupon")
+    public String postAddMerchantVoupon(@Valid @ModelAttribute Voupon voupon, Model model, BindingResult bindingResult, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+
+        Merchant merchant = merchantService.getById(voupon.merchant.getId());
+        voupon.setMerchant(merchant);
+        //System.out.println(voupon.merchant.toString());
+
+        if (bindingResult.hasErrors()) {
+            return "redirect:/account/voupons/editmerchantvoupon";
         }
 
         vouponService.save(voupon);

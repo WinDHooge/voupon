@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,38 +27,45 @@ public class Voupon  {
     private int id;
 
     @NotBlank(message = "{voupon.name}")
-    @Size(min = 5, message = "{voupon.name}")
     @Column(name = "name")
     private String name;
 
-    @Size(min = 5, message = "{voupon.description}")
     @Column(name = "description")
     private String description;
 
+    @Column(name = "theme")
+    private String theme;
+
     //@NotBlank(message = "{voupon.value}")
     //@Size(min = 1, message = "{voupon.value}")
-    @Column(name = "value")
-    private int value;
+    //@Column(name = "value")
+    //private int value;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "expireDate")
     private Date expireDate;
 
-    //@NotBlank(message = "{voupon.active}")
     @Column(name = "active")
-    private boolean active = true;
-    /*
-    @NotBlank(message = "{voupon.pageHandle.empty}")
-    @Size(min = 2, message = "{voupon.pageHandle.size}")
-    @Pattern(regexp  = "^[A-Za-z0-9]*$", message = "{voupon.pageHandle.format}")
-    private String pageHandle;
-    */
-    /*
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "merchant_voupon",
-            joinColumns = @JoinColumn(name = "voupon_id"),
-            inverseJoinColumns = @JoinColumn(name = "voupon_id"))
-    private Set<Voupon> voupons;
-    */
+    private boolean active;
+
+    @ManyToOne
+    @JoinColumn(name="merchant_id")
+    Merchant merchant;
+
+    @OneToMany(mappedBy = "voupon")
+    private List<VouponValue> vouponValues;
+
+    @Override
+    public String toString() {
+        return "Voupon{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", theme='" + theme + '\'' +
+                ", expireDate=" + expireDate +
+                ", active=" + active +
+                ", merchant=" + merchant +
+                ", vouponValues=" + vouponValues +
+                '}';
+    }
 }

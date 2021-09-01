@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>Add voupon to merchant - Voupon</title>
+  <th:block th:include="~{fragments/head :: body.head}"></th:block>
+</head>
+<body class="grey lighten-4">
+<div th:replace="~{fragments/header :: header}">Header</div>
+<div th:replace="~{fragments/admin-menu :: admin-menu}">Admin Menu</div>
+<div class="admin-body">
+  <main>
+    <div class="container">
+      <div class="row">
+        <form class="col s12 m6 offset-m3" th:action="@{/account/voupons/editmerchantvoupon}" th:object="${voupon}" method="post">
+          <div class="row">
+            <div class="input-field col s12">
+              <h1 class="no-margin-bottom">Create voupon</h1>
+            </div>
+
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{merchant.id}">
+
+            <div class="input-field col s12">
+            <input id="name" type="text" class="validate" th:field="*{name}">
+            <label for="name">Voupon Name</label>
+            <span class="helper-text invalid" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+          </div>
+
+            <div class="input-field col s12">
+              <input id="description" type="text" class="validate" th:field="*{description}">
+              <label for="description">Description</label>
+              <span class="helper-text invalid" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+            </div>
+
+            <div class="input-field col s12">
+              <input id="theme" type="text" class="validate" th:field="*{theme}">
+              <label for="theme">Theme</label>
+              <span class="helper-text invalid" th:if="${#fields.hasErrors('theme')}" th:errors="*{theme}"></span>
+            </div>
+
+            <!-- <div class="input-field col s12">
+              <input id="value" type="text" class="validate" th:field="*{value}">
+              <label for="value">Value</label>
+              <span class="helper-text invalid" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></span>
+            </div> -->
+
+            <div class="input-field col s12">
+              <input id="expireDate" type="text" class="validate datepicker" th:field="*{expireDate}">
+              <label for="expireDate">ExpireDate</label>
+              <span class="helper-text invalid" th:if="${#fields.hasErrors('expireDate')}" th:errors="*{expireDate}"></span>
+            </div>
+
+            <div class="switch col s12">
+              <label>
+                Off
+                <input type="checkbox" th:field="*{active}">
+                <span class="lever"></span>
+                On
+              </label>
+            </div>
+
+            <div class="input-field col s12">
+              <button class="col s12 btn waves-effect waves-light" type="submit" name="action">Create voupon</button>
+            </div>
+           </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="/js/m.js"></script>
+</body>
+</html>

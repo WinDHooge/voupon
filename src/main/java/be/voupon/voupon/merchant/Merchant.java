@@ -1,5 +1,6 @@
 package be.voupon.voupon.merchant;
 
+import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
 import be.voupon.voupon.user.User;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -86,4 +88,28 @@ public class Merchant {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users;
 
+    @OneToMany(mappedBy = "merchant")
+    private List<Voupon> voupons;
+
+    @Override
+    public String toString() {
+        return "Merchant{" +
+                "id=" + id +
+                ", companyName='" + companyName + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
+                ", pageHandle='" + pageHandle + '\'' +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", VAT='" + VAT + '\'' +
+                ", companyDescription='" + companyDescription + '\'' +
+                ", checkoutDescription='" + checkoutDescription + '\'' +
+                ", paypalEmail='" + paypalEmail + '\'' +
+                ", users=" + users +
+                ", voupons=" + voupons +
+                '}';
+    }
 }
