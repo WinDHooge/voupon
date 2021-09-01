@@ -3,12 +3,12 @@ package be.voupon.voupon.user;
 import be.voupon.voupon.email.EmailService;
 import be.voupon.voupon.merchant.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 
 import javax.mail.MessagingException;
@@ -143,5 +143,17 @@ public class UserController {
         }
 
         return "redirect:/account/overview";
+    }
+
+    @GetMapping("/account/edit/delete")
+    public String delete(Principal principal, HttpServletRequest httpServletRequest) throws ServletException {
+        User user = userService.getUserByEmail(principal.getName());
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+        }
+        userService.delete(user);
+        httpServletRequest.logout();
+
+        return "redirect:/";
     }
 }
