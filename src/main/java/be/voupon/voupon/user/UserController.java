@@ -137,12 +137,14 @@ public class UserController {
     }
 
     @GetMapping("/account/edit/delete")
-    public String delete(@PathVariable Model model, Principal principal) {
+    public String delete(Principal principal, HttpServletRequest httpServletRequest) throws ServletException {
         User user = userService.getUserByEmail(principal.getName());
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
         }
         userService.delete(user);
+        httpServletRequest.logout();
+
         return "redirect:/";
     }
 }
