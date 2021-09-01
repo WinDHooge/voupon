@@ -1,10 +1,17 @@
 package be.voupon.voupon.voupon;
 
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-       public interface VouponRepository extends JpaRepository<Voupon, Integer> {
+import java.util.List;
 
-           //Voupon findVouponByName(String name);
-    }
+public interface VouponRepository extends JpaRepository<Voupon, Integer> {
+
+    Voupon findVouponById(Integer id);
+
+
+
+
+}
 
