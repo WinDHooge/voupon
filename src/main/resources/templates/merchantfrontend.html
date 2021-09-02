@@ -36,9 +36,10 @@
                         <span th:text="${voupon.name}" class="card-title">Voupon Name</span>
                         <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${merchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
                         <h2>Choose your voupon</h2>
-                        <p th:text="${voupon.name + ' ' + voupon.description + ', ' + voupon.theme + ' ' + voupon.expireDate + ', ' + voupon.vouponValue}">Merchant address</p>
-                        <p>&nbsp;</p>
-                        <p class="truncate" th:text="${merchant.companyDescription}">Merchant company description</p>
+                        <p th:text="${voupon.name + ' ' + voupon.description + ', ' + voupon.theme + ' ' + voupon.expireDate}">Merchant address</p>
+                        <div th:if="${!voupon.vouponValues.empty}">
+                            <p th:text="${voupon.vouponValues[0].value}"></p>
+                        </div>
                     </div>
                 <p th:text="${merchant.checkoutDescription}"></p>
             </div>
