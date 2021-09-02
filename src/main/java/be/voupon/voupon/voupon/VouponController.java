@@ -118,6 +118,10 @@ public class VouponController {
         Merchant merchant = merchantService.getById(id);
         model.addAttribute("merchant",merchant);
 
+        if(merchant == null || !user.getMerchants().contains(merchant)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
+
         model.addAttribute("voupons",vouponService.getMerchantVoupons(merchant));
 
         return "account/voupons/merchantvoupons";
@@ -130,6 +134,10 @@ public class VouponController {
 
         Merchant merchant = merchantService.getById(id);
         model.addAttribute("merchant",merchant);
+
+        if(merchant == null || !user.getMerchants().contains(merchant)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
 
         Voupon voupon = new Voupon();
         VouponValue vouponValue = new VouponValue();
@@ -150,6 +158,10 @@ public class VouponController {
 
         Merchant merchant = merchantService.getById(voupon.merchant.getId());
         voupon.setMerchant(merchant);
+
+        if(merchant == null || !user.getMerchants().contains(merchant)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
 
         for(VouponValue vouponValue : voupon.getVouponValues()){
             if(vouponValue.getId() == 0){
@@ -180,6 +192,10 @@ public class VouponController {
 
         Merchant merchant = merchantService.getById(mid);
         model.addAttribute("merchant",merchant);
+
+        if(merchant == null || !user.getMerchants().contains(merchant)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
 
         Voupon voupon = vouponService.getById(vid);
         if(voupon == null){
