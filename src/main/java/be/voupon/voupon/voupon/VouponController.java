@@ -131,6 +131,9 @@ public class VouponController {
         model.addAttribute("merchant",merchant);
 
         Voupon voupon = new Voupon();
+        //VouponValue vouponValue = new VouponValue();
+        //List<VouponValue> vouponValues = new List<VouponValue>();
+        //voupon.setVouponValues();
         voupon.setMerchant(merchant);
         model.addAttribute("voupon", voupon);
 
