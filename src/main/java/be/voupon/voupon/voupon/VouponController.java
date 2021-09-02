@@ -80,7 +80,7 @@ public class VouponController {
         return "redirect:/account/voupons/overview";
     }
 
-    @GetMapping("/account/voupon/edit/{id}")
+    /* @GetMapping("/account/voupon/edit/{id}")
     public String showEdit(@PathVariable int id, Model model, Principal principal) {
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
@@ -108,7 +108,7 @@ public class VouponController {
 
 
         return "redirect:/account/voupons/overview";
-    }
+    }*/
 
     @GetMapping("/account/voupons/merchant/{id}/overview")
     public String showMerchantVouponsOverview(@PathVariable int id, Model model, Principal principal){
@@ -189,6 +189,25 @@ public class VouponController {
         model.addAttribute("voupon", voupon);
 
         return "/account/voupons/editmerchantvoupon";
+    }
+
+    @GetMapping("/account/voupons/delete/{mid}/{id}")
+    public String deleteMerchantVoupon(@PathVariable int id, @PathVariable int mid, Model model, Principal principal){
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+
+        Merchant merchant = merchantService.getById(mid);
+        if(merchant == null || !user.getMerchants().contains(merchant)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
+
+        Voupon voupon = vouponService.getById(id);
+        if(voupon == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
+
+        vouponService.delete(id);
+        return "redirect:/account/voupons/merchant/" + mid + "/overview";
     }
 
 

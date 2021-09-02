@@ -52,7 +52,7 @@ public class Voupon  {
     @JoinColumn(name="merchant_id")
     Merchant merchant;
 
-    @OneToMany(mappedBy = "voupon")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "voupon")
     private List<VouponValue> vouponValues;
 
     @Override
