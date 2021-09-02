@@ -154,7 +154,25 @@ public class VouponController {
         vouponService.save(voupon);
 
 
-        return "redirect:/account/voupons/overview";
+        return "redirect:/account/voupons/merchant/" + voupon.merchant.getId() + "/overview";
+    }
+
+    @GetMapping("/account/voupons/merchant/{mid}/edit/{vid}")
+    public String showEditMerchantVoupon(@PathVariable int mid, @PathVariable int vid, Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+
+        Merchant merchant = merchantService.getById(mid);
+        model.addAttribute("merchant",merchant);
+
+        Voupon voupon = vouponService.getById(vid);
+        if(voupon == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
+        voupon.setMerchant(merchant);
+        model.addAttribute("voupon", voupon);
+
+        return "/account/voupons/editmerchantvoupon";
     }
 
 
