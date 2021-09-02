@@ -27,15 +27,12 @@
             </div>
         </div>
         <div class="col s12 m6">
-            <div class="checkout-container white z-depth-3">
-                <p>List of voupons here</p>
-
+            <h2>Choose your voupon</h2>
             <div th:each="voupon : ${voupons}" class="col s12 l6">
                 <div class="card white z-depth-4">
                     <div class="card-content black-text">
                         <span th:text="${voupon.name}" class="card-title">Voupon Name</span>
                         <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${merchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
-                        <h2>Choose your voupon</h2>
                         <p th:text="${voupon.name + ' ' + voupon.description + ', ' + voupon.theme + ' ' + voupon.expireDate}">Merchant address</p>
                         <div th:if="${!voupon.vouponValues.empty}">
                             <p th:text="${voupon.vouponValues[0].value}"></p>
