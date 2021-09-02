@@ -27,8 +27,19 @@ public class VouponValue {
     @Column(name = "maxval")
     private int maxValue;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="voupon_id")
     Voupon voupon;
 
+    @Override
+    public String toString() {
+        return "VouponValue{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", value=" + value +
+                ", minValue=" + minValue +
+                ", maxValue=" + maxValue +
+                ", voupon=" + voupon +
+                '}';
+    }
 }

@@ -14,6 +14,8 @@ public interface VouponService {
 
     void save(Voupon voupon);
 
+    void save(VouponValue vouponValue);
+
     void delete(int id);
 
 

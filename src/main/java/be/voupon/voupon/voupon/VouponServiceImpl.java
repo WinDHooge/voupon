@@ -10,11 +10,17 @@ import java.util.List;
 public class VouponServiceImpl implements VouponService{
 
     private VouponRepository vouponRepository;
+    private VouponValueRepository vouponValueRepository;
 
     @Autowired
     public void setVouponRepository(VouponRepository vouponRepository)
     {
         this.vouponRepository = vouponRepository;
+    }
+
+    @Autowired
+    public void setVouponValueRepository(VouponValueRepository vouponValueRepository) {
+        this.vouponValueRepository = vouponValueRepository;
     }
 
     @Override
@@ -42,7 +48,10 @@ public class VouponServiceImpl implements VouponService{
     }
 
     public void save(Voupon voupon)  {
-
         vouponRepository.save(voupon);
+    }
+
+    public void save(VouponValue vouponValue)  {
+        vouponValueRepository.save(vouponValue);
     }
 }

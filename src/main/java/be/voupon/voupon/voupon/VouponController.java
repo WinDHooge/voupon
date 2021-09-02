@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.text.AttributedString;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -131,9 +132,10 @@ public class VouponController {
         model.addAttribute("merchant",merchant);
 
         Voupon voupon = new Voupon();
-        //VouponValue vouponValue = new VouponValue();
-        //List<VouponValue> vouponValues = new List<VouponValue>();
-        //voupon.setVouponValues();
+        VouponValue vouponValue = new VouponValue();
+        List<VouponValue> vouponValues = new ArrayList<VouponValue>();
+        vouponValues.add(vouponValue);
+        voupon.setVouponValues(vouponValues);
         voupon.setMerchant(merchant);
         model.addAttribute("voupon", voupon);
 
@@ -148,7 +150,18 @@ public class VouponController {
 
         Merchant merchant = merchantService.getById(voupon.merchant.getId());
         voupon.setMerchant(merchant);
-        //System.out.println(voupon.merchant.toString());
+
+        for(VouponValue vouponValue : voupon.getVouponValues()){
+            if(vouponValue.getId() == 0){
+                vouponValue.setVoupon(voupon);
+                vouponService.save(vouponValue);
+            }else if(vouponValue.getId() > 0){
+                vouponValue.setId(vouponValue.getId());
+                vouponValue.setVoupon(voupon);
+                vouponService.save(vouponValue);
+            }
+
+        }
 
         if (bindingResult.hasErrors()) {
             return "redirect:/account/voupons/editmerchantvoupon";
