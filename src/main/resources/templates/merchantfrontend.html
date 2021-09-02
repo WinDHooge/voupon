@@ -29,6 +29,21 @@
         <div class="col s12 m6">
             <div class="checkout-container white z-depth-3">
                 <p>List of voupons here</p>
+                <div th:each="voupon : ${voupons}" class="col s12 l6">
+                    <div class="card white z-depth-4">
+                        <div class="card-content black-text">
+                            <span th:text="${voupon.name}" class="card-title">Voupon Name</span>
+                            <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${merchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
+                            <p th:text="${voupon.name + ' ' + voupon.description + ', ' + voupon.theme + ' ' + voupon.expireDate + ', ' + voupon.vouponValue}">Voupon Value</p>
+                            <p>&nbsp;</p>
+                            <p class="truncate" th:text="${merchant.companyDescription}">Merchant company description</p>
+                        </div>
+                        <div class="card-action">
+                            <a class="waves-effect waves-light btn btn-small" th:href="@{/account/merchant/edit/} + ${merchant.id}"><i class="material-icons left">edit</i>Edit</a>
+                            <a class="waves-effect waves-light btn btn2 btn-small btn-delete" th:href="@{/account/merchant/delete/} + ${merchant.id}"><i class="material-icons left">delete</i>Delete</a>
+                        </div>
+                    </div>
+                </div>
                 <p th:text="${merchant.checkoutDescription}"></p>
             </div>
         </div>
