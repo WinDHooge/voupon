@@ -29,12 +29,7 @@
         <div class="col s12 m6">
             <div class="checkout-container white z-depth-3">
                 <p>List of voupons here</p>
-                <div class="card-action">
-                            <a class="waves-effect waves-light btn btn-small" th:href="@{/account/merchant/edit/} + ${merchant.id}"><i class="material-icons left">edit</i>Edit</a>
-                            <a class="waves-effect waves-light btn btn2 btn-small btn-delete" th:href="@{/account/merchant/delete/} + ${merchant.id}"><i class="material-icons left">delete</i>Delete</a>
-                        </div>
-                    </div>
-                </div>
+
             <div th:each="voupon : ${voupons}" class="col s12 l6">
                 <div class="card white z-depth-4">
                     <div class="card-content black-text">
