@@ -117,7 +117,7 @@ public class VouponController {
         Merchant merchant = merchantService.getById(id);
         model.addAttribute("merchant",merchant);
 
-        model.addAttribute("voupons",vouponService.getAll());
+        model.addAttribute("voupons",vouponService.getMerchantVoupons(merchant));
 
         return "account/voupons/merchantvoupons";
     }

@@ -1,5 +1,6 @@
 package be.voupon.voupon.voupon;
 
+import be.voupon.voupon.merchant.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +14,17 @@ public class VouponServiceImpl implements VouponService{
     @Autowired
     public void setVouponRepository(VouponRepository vouponRepository)
     {
-
         this.vouponRepository = vouponRepository;
     }
 
     @Override
     public List<Voupon> getAll() {
-
         return vouponRepository.findAll();
+    }
+
+    @Override
+    public List<Voupon> getMerchantVoupons(Merchant merchant) {
+        return vouponRepository.findVouponsByMerchant(merchant);
     }
 
     @Override
