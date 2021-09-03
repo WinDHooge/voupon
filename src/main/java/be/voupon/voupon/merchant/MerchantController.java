@@ -1,5 +1,6 @@
 package be.voupon.voupon.merchant;
 
+import be.voupon.voupon.checkout.CheckoutDto;
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.user.UserService;
 import be.voupon.voupon.voupon.Voupon;
@@ -139,6 +140,10 @@ public class MerchantController {
             return "redirect:/";
         }
         model.addAttribute("merchant",merchant);
+
+        CheckoutDto checkoutDto = new CheckoutDto();
+        //checkoutDto.setMerchant(merchant);
+        model.addAttribute("checkoutDto", checkoutDto);
 
         return "merchantfrontend";
 

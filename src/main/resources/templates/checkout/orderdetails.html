@@ -32,21 +32,8 @@
         </div>
         <div class="col s12 m6">
             <div class="checkout-container white z-depth-3">
-                <div class="voupons-container" th:if="${!voupons.empty}">
-                    <div class="voupon-item" th:each="voupon : ${voupons}">
-                        <form th:object="${checkoutDto}" th:action="@{${merchant.pageHandle} + '/checkout'}" method="post" name="selectvoupon">
-                            <input type="hidden" id="vid" name="vid" th:value="${voupon.id}">
-                            <input type="hidden" id="mid" name="mid" th:value="${merchant.id}">
-                            <div class="voupon-details">
-                                <strong class="name" th:text="${voupon.name}">Voupon Name</strong>
-                                <div class="value" th:if="${!voupon.vouponValues.empty}">
-                                    <span th:text="'&euro;' + ${voupon.vouponValues[0].value}"></span>
-                                </div>
-                                <button type="submit" class="buybtn btn right">Buy</button>
-                            </div>
-                            <p class="description" th:text="${voupon.description}">Voupon description</p>
-                        </form>
-                    </div>
+                <div class="voupons-container">
+
                 </div>
                 <div><p th:text="${merchant.checkoutDescription}"></p></div>
             </div>
