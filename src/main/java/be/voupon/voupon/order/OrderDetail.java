@@ -38,10 +38,10 @@ public class OrderDetail {
     @Column(name = "quantity")
     private int quantity;
 
-    @NotBlank(message = "{orderDetail.sendDate}")
+    @NotBlank(message = "{orderDetail.shipmentDate}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "sendDate")
-    private Date sendDate;
+    @Column(name = "shipmentDate")
+    private Date shipmentDate;
 
 
     @Override
@@ -53,7 +53,7 @@ public class OrderDetail {
                 ", vouponCode='" + vouponCode + '\'' +
                 ", unitPrice=" + unitPrice + '\'' +
                 ", quantity='" + quantity + '\'' +
-                ", sendDate='" + sendDate +
+                ", sendDate='" + shipmentDate +
                 '}';
     }
 
