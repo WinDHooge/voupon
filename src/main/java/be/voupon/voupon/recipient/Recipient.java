@@ -32,6 +32,16 @@ public class Recipient {
     @Email(message = "{recipient.email.format}")
     @Column(name = "email")
     private String email;
+
+    @Override
+    public String toString() {
+        return "Recipient{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email +
+                '}';
+    }
 }
 
 

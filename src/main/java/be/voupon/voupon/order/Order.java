@@ -34,4 +34,15 @@ public class Order {
     @NotBlank(message = "{order.recipient}")
     @Column(name = "recipient")
     private String recipient;
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", orderNumber='" + orderNumber + '\'' +
+                ", date='" + date + '\'' +
+                ", customer='" + customer + '\'' +
+                ", recipient=" + recipient +
+                '}';
+    }
 }

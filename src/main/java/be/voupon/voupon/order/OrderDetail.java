@@ -44,6 +44,19 @@ public class OrderDetail {
     private Date sendDate;
 
 
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "id=" + id +
+                ", order='" + order + '\'' +
+                ", voupon='" + voupon + '\'' +
+                ", vouponCode='" + vouponCode + '\'' +
+                ", unitPrice=" + unitPrice + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", sendDate='" + sendDate +
+                '}';
+    }
+
 
 
 }
