@@ -342,7 +342,20 @@ nav .sidenav-trigger:hover{
     border-bottom: 1px solid rgba(0,0,0,0.15);
     margin-bottom: 1em;
 }
+.voupons-container .voupon-item .voupon-details{
+    display: flex;
+    align-items: center;
+}
+.voupons-container .voupon-item .voupon-details strong{
+    flex-grow: 1;
+    flex-wrap: wrap;
+    flex-flow: wrap;
+}
 .voupons-container .voupon-item strong,
-.voupons-container .voupon-item value{
+.voupons-container .voupon-item .value{
     font-weight: 600;
+}
+.voupons-container .voupon-item .value{
+    padding-right: 1em;
+    font-size: 1.5em;
 }

@@ -19,24 +19,29 @@
                 <p th:text="${merchant.companyDescription}"></p>
                 <p>&nbsp;</p>
                 <h5>Contact us</h5>
-                <p th:text="${merchant.street + ' ' + merchant.number}"></p>
-                <p th:text="${merchant.postalCode}"></p>
-                <p th:text="${merchant.city}"></p>
-                <p th:text="${merchant.country}"></p>
-                <p th:text="${merchant.telephone}"></p>
-                <p th:text="${merchant.email}"></p>
+                <p>
+                    <span th:text="${merchant.street + ' ' + merchant.number}"></span><br>
+                    <span th:text="${merchant.postalCode + ' ' + merchant.city}"></span><br>
+                    <span th:text="${merchant.country}"></span>
+                </p>
+                <p>
+                    <span>T. </span><a th:href="@{'tel://' + ${merchant.telephone}}" th:text="${merchant.telephone}"></a><br>
+                    <span>E. </span><a th:href="@{'mailto://' + ${merchant.email}}" th:text="${merchant.email}"></a>
+                </p>
             </div>
         </div>
         <div class="col s12 m6">
             <div class="checkout-container white z-depth-3">
                 <div class="voupons-container" th:if="${!voupons.empty}">
                     <div class="voupon-item" th:each="voupon : ${voupons}">
-                        <strong th:text="${voupon.name}">Voupon Name</strong>
-                        <a href="#" class="btn right">Buy</a>
-                        <p class="description" th:text="${voupon.description}">Voupon description</p>
-                        <div class="value" th:if="${!voupon.vouponValues.empty}">
-                            <span th:text="${voupon.vouponValues[0].value}"></span>
+                        <div class="voupon-details">
+                            <strong class="name" th:text="${voupon.name}">Voupon Name</strong>
+                            <div class="value" th:if="${!voupon.vouponValues.empty}">
+                                <span th:text="'&euro;' + ${voupon.vouponValues[0].value}"></span>
+                            </div>
+                            <a href="#" class="buybtn btn right">Buy</a>
                         </div>
+                        <p class="description" th:text="${voupon.description}">Voupon description</p>
                     </div>
                 </div>
                 <div><p th:text="${merchant.checkoutDescription}"></p></div>
