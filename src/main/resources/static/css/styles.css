@@ -338,3 +338,11 @@ nav .sidenav-trigger:hover{
 .company-info-container h2{
     margin-top: 0;
 }
+.voupons-container .voupon-item{
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    margin-bottom: 1em;
+}
+.voupons-container .voupon-item strong,
+.voupons-container .voupon-item value{
+    font-weight: 600;
+}
