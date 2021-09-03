@@ -1,7 +1,11 @@
 package be.voupon.voupon.customer;
 
+import be.voupon.voupon.merchant.Merchant;
+import be.voupon.voupon.order.Order;
+import be.voupon.voupon.recipient.Recipient;
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.voupon.Voupon;
+import be.voupon.voupon.voupon.VouponValue;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,6 +40,20 @@ public class Customer {
     @Email(message = "{customer.email.format}")
     @Column(name = "email")
     private String email;
+
+    @OneToMany
+    @JoinTable(
+            name = "customer_order",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private Set<Order> orders;
+
+    @OneToMany
+    @JoinTable(
+            name = "customer_recipient",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipient_id"))
+    private Set<Recipient> recipient;
 
 
     @Override

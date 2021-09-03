@@ -1,5 +1,6 @@
 package be.voupon.voupon.recipient;
 
+import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -32,6 +34,13 @@ public class Recipient {
     @Email(message = "{recipient.email.format}")
     @Column(name = "email")
     private String email;
+
+    @OneToMany
+    @JoinTable(
+            name = "recipient_voupons",
+            joinColumns = @JoinColumn(name = "recipient_id"),
+            inverseJoinColumns = @JoinColumn(name = "voupon_id"))
+    private Set<Voupon> voupon;
 
     @Override
     public String toString() {
