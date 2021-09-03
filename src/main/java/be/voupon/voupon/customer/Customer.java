@@ -1,11 +1,7 @@
 package be.voupon.voupon.customer;
 
-import be.voupon.voupon.merchant.Merchant;
 import be.voupon.voupon.order.Order;
 import be.voupon.voupon.recipient.Recipient;
-import be.voupon.voupon.user.User;
-import be.voupon.voupon.voupon.Voupon;
-import be.voupon.voupon.voupon.VouponValue;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Set;
 
 @Entity

@@ -3,7 +3,6 @@ package be.voupon.voupon.recipient;
 import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

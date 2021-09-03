@@ -1,6 +1,5 @@
 package be.voupon.voupon.order;
 
-import be.voupon.voupon.merchant.Merchant;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
