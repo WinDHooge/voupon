@@ -1,5 +1,8 @@
 package be.voupon.voupon.order;
 
+import be.voupon.voupon.customer.Customer;
+import be.voupon.voupon.recipient.Recipient;
+import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,13 +21,17 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "{orderDetail.order}")
-    @Column(name = "order")
-    private int order;
+    @ManyToOne
+    @JoinColumn(name="order_id")
+    private Order order;
 
-    @NotBlank(message = "{orderDetail.voupon}")
-    @Column(name = "voupon")
-    private String voupon;
+    @ManyToOne
+    @JoinColumn(name="voupon_id")
+    private Voupon voupon;
+
+    @ManyToOne
+    @JoinColumn(name="recipient_id")
+    private Recipient recipient;
 
     @NotBlank(message = "{orderDetail.vouponCode}")
     @Column(name = "vouponCode")
@@ -32,7 +39,7 @@ public class OrderDetail {
 
     @NotBlank(message = "{orderDetail.unitPrice}")
     @Column(name = "unitPrice")
-    private Boolean unitPrice;
+    private int unitPrice;
 
     @NotBlank(message = "{orderDetail.quantity}")
     @Column(name = "quantity")
@@ -43,20 +50,14 @@ public class OrderDetail {
     @Column(name = "shipmentDate")
     private Date shipmentDate;
 
-
     @Override
     public String toString() {
         return "OrderDetail{" +
                 "id=" + id +
-                ", order='" + order + '\'' +
-                ", voupon='" + voupon + '\'' +
                 ", vouponCode='" + vouponCode + '\'' +
-                ", unitPrice=" + unitPrice + '\'' +
-                ", quantity='" + quantity + '\'' +
-                ", sendDate='" + shipmentDate +
+                ", unitPrice=" + unitPrice +
+                ", quantity=" + quantity +
+                ", shipmentDate=" + shipmentDate +
                 '}';
     }
-
-
-
 }

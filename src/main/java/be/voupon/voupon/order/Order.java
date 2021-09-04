@@ -35,6 +35,9 @@ public class Order {
     @JoinColumn(name="customer_id")
     private Customer customer;
 
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> orderDetails;
+
     @Override
     public String toString() {
         return "Order{" +
