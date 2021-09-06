@@ -1,6 +1,7 @@
 package be.voupon.voupon.order;
 
 import be.voupon.voupon.customer.Customer;
+import be.voupon.voupon.merchant.Merchant;
 import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +35,10 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="customer_id")
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name="merchant_id")
+    private Merchant merchant;
 
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
