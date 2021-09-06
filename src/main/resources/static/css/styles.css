@@ -359,3 +359,10 @@ nav .sidenav-trigger:hover{
     padding-right: 1em;
     font-size: 1.5em;
 }
+#chosen-voupon{
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    text-align: center;
+}
+#chosen-voupon .voupon-description{
+    font-weight: 600;
+}
