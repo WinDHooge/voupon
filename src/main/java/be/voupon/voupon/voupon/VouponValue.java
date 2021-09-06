@@ -39,7 +39,6 @@ public class VouponValue {
                 ", value=" + value +
                 ", minValue=" + minValue +
                 ", maxValue=" + maxValue +
-                ", voupon=" + voupon +
                 '}';
     }
 }

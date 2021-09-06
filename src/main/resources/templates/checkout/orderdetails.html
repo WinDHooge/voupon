@@ -2,40 +2,41 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title th:text="${merchant.companyName}"></title>
+    <title th:text="${checkoutDto.merchant.companyName}"></title>
     <th:block th:include="~{fragments/head :: body.head}"></th:block>
 </head>
 <body class="grey lighten-4">
 <div class="container">
     <div class="row">
         <div class="col s12">
-            <h1 class="center" th:text="${merchant.companyName}"></h1>
+            <h1 class="center" th:text="${checkoutDto.merchant.companyName}"></h1>
         </div>
     </div>
     <div class="row">
         <div class="col s12 m6">
             <div class="company-info-container white z-depth-3">
                 <h2>Buy a Gift Card</h2>
-                <p th:text="${merchant.companyDescription}"></p>
+                <p th:text="${checkoutDto.merchant.companyDescription}"></p>
                 <p>&nbsp;</p>
                 <h5>Contact us</h5>
                 <p>
-                    <span th:text="${merchant.street + ' ' + merchant.number}"></span><br>
-                    <span th:text="${merchant.postalCode + ' ' + merchant.city}"></span><br>
-                    <span th:text="${merchant.country}"></span>
+                    <span th:text="${checkoutDto.merchant.street + ' ' + checkoutDto.merchant.number}"></span><br>
+                    <span th:text="${checkoutDto.merchant.postalCode + ' ' + checkoutDto.merchant.city}"></span><br>
+                    <span th:text="${checkoutDto.merchant.country}"></span>
                 </p>
                 <p>
-                    <span>T. </span><a th:href="@{'tel://' + ${merchant.telephone}}" th:text="${merchant.telephone}"></a><br>
-                    <span>E. </span><a th:href="@{'mailto://' + ${merchant.email}}" th:text="${merchant.email}"></a>
+                    <span>T. </span><a th:href="@{'tel://' + ${checkoutDto.merchant.telephone}}" th:text="${checkoutDto.merchant.telephone}"></a><br>
+                    <span>E. </span><a th:href="@{'mailto://' + ${checkoutDto.merchant.email}}" th:text="${checkoutDto.merchant.email}"></a>
                 </p>
             </div>
         </div>
         <div class="col s12 m6">
             <div class="checkout-container white z-depth-3">
                 <div class="voupons-container">
-
+                    <p th:text="${checkoutDto.voupon.name}"></p>
+                    <p th:text="${checkoutDto.voupon.vouponValues[0].value}"></p>
                 </div>
-                <div><p th:text="${merchant.checkoutDescription}"></p></div>
+                <div><p th:text="${checkoutDto.merchant.checkoutDescription}"></p></div>
             </div>
         </div>
     </div>

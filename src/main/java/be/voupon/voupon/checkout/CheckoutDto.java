@@ -15,10 +15,6 @@ import org.springframework.web.context.WebApplicationContext;
 @Scope(proxyMode= ScopedProxyMode.TARGET_CLASS, value = WebApplicationContext.SCOPE_SESSION)
 public class CheckoutDto {
 
-    private String slug;
-    private int id;
-    private int vid;
-    private int mid;
     private Merchant merchant;
     private Voupon voupon;
 

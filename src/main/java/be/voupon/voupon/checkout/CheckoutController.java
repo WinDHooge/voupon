@@ -17,6 +17,11 @@ import java.util.List;
 
 @Controller
 public class CheckoutController {
+    private final CheckoutDto checkoutDto;
+
+    public CheckoutController(CheckoutDto checkoutDto) {
+        this.checkoutDto = checkoutDto;
+    }
 
     MerchantService merchantService;
     VouponService vouponService;
@@ -32,18 +37,19 @@ public class CheckoutController {
     }
 
     @PostMapping("/{pageHandle:^(?!merchant$).*}/checkout")
-    public String showCheckoutOrderDetails(@ModelAttribute CheckoutDto checkoutDto, Model model){
+    public String showCheckoutOrderDetails(@ModelAttribute Voupon voupon, Model model){
 
-        model.addAttribute("merchant", merchantService.getById(checkoutDto.getMid()));
-        checkoutDto.setMerchant(merchantService.getById(checkoutDto.getMid()));
+        Voupon chosenVoupon = vouponService.getById(voupon.getId());
 
-        model.addAttribute("voupon", vouponService.getById(checkoutDto.getVid()));
-        checkoutDto.setVoupon(vouponService.getById(checkoutDto.getVid()));
+        checkoutDto.setVoupon(chosenVoupon);
+        checkoutDto.setMerchant(chosenVoupon.getMerchant());
 
-        System.out.println(checkoutDto.getMerchant().getCompanyName());
-        System.out.println(checkoutDto.getVoupon().getName());
-
-        return "checkout/orderdetails";
+        return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/orderdetails";
     }
 
+    @GetMapping("/{pageHandle:^(?!merchant$).*}/checkout/orderdetails")
+    public String showCheckoutOrderDetailsStep(Model model){
+        model.addAttribute(checkoutDto);
+        return "checkout/orderdetails";
+    }
 }
