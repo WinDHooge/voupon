@@ -1,5 +1,7 @@
 package be.voupon.voupon.recipient;
 
+import be.voupon.voupon.order.Order;
+import be.voupon.voupon.order.OrderDetail;
 import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,12 +37,8 @@ public class Recipient {
     @Column(name = "email")
     private String email;
 
-    @OneToMany
-    @JoinTable(
-            name = "recipient_voupons",
-            joinColumns = @JoinColumn(name = "recipient_id"),
-            inverseJoinColumns = @JoinColumn(name = "voupon_id"))
-    private Set<Voupon> voupon;
+    @OneToMany(mappedBy = "recipient")
+    private List<OrderDetail> orderDetails;
 
     @Override
     public String toString() {

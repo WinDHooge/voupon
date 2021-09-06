@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,20 +37,8 @@ public class Customer {
     @Column(name = "email")
     private String email;
 
-    @OneToMany
-    @JoinTable(
-            name = "customer_order",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private Set<Order> orders;
-
-    @OneToMany
-    @JoinTable(
-            name = "customer_recipient",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipient_id"))
-    private Set<Recipient> recipient;
-
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
 
     @Override
     public String toString() {
