@@ -71,6 +71,12 @@
 
                     <div class="input-field col s12">
                         <input id="country" type="text" class="validate" th:field="*{country}">
+                        <!--<select id="country" name="country" class="validate" th:field="*{country}">
+                            <option th:each="country : ${T(be.voupon.voupon.merchant.Merchant.Country).values()}"
+                                    th:value="${country}" th:text="${country.displayName}"
+                                    th:selected="${merchant.country.equals(country)}">
+                            </option>
+                        </select>-->
                         <label for="country">Country</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
                     </div>

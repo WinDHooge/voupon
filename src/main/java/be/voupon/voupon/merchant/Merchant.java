@@ -1,15 +1,13 @@
 package be.voupon.voupon.merchant;
 
+import be.voupon.voupon.order.Order;
 import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
 import be.voupon.voupon.user.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +16,30 @@ import java.util.Set;
 @Setter
 @Table(name = "merchants")
 public class Merchant {
+
+    public enum Country {
+        ALBANIE("Albanië"), ANDORRA("Andorra"), ARMENIE("Armenië"), AZERBEIDZJAN("Azerbeidzjan"), BELGIE("Belgium"),
+        BOSNIE_EN_HERZEGOVINA("Bosnië en Herzegovina"), BULGARIJE("Bulgarije"), CYPRUS("Cyprus"), DENEMARKEN("Denemarken"),
+        DUITSLAND("Duitsland"), ESTLAND("Estland"), FINLAND("Finland"), FRANKRIJK("Frankrijk"), GEORGIE("Georgië"),
+        GRIEKENLAND("Griekenland"), HONGARIJE("Hongarije"), IERLAND("Ierland"), IJSLAND("IJsland"), ITALIE("Italië"),
+        KAZACHSTAN("Kazachstan"), KOSOVO("Kosovo"), KROATIE("Kroatië"), LETLAND("Letland"), LIECHTENSTEIN("Liechtenstein"),
+        LITHOUWEN("Lithouwen"), LUXEMBURG("Luxemburg"), MALTA("Malta"), MOLDAVIE("Moldavië"),
+        MONACO("Monaco"), MONTENEGRO("Montenegro"), NEDERLAND("Nederland"), NOORD_MACEDONIE("Noord-Macedonië"),
+        NOORWEGEN("Noorwegen"), OEKRAINE("Oekraïne"), OOSTENRIJK("Oostenrijk"), POLEN("Polen"), PORTUGAL("Portugal"),
+        ROEMENIE("Roemenië"), RUSLAND("Rusland"), SANMARINO("San Marino"), SERVIE("Servië"), SLOVANIE("Slovanië"),
+        SLOWAKIJE("Slowakije"), SPANJE("Spanje"), TSJECHIÊ("Tsjechië"), TURKIJE("Turkije"), VATICAANSTAD("Vaticaanstad"),
+        VERENIGD_KONINKRIJK("Verenigd Koninkrijk"), WIT_RUSLAND("Wit-Rusland"), ZWEDEN("Zweden"), ZWITSERLAND("Zwitserland");
+
+        private final String displayName;
+
+        Country(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +85,10 @@ public class Merchant {
     @Column(name = "country")
     private String country;
 
+    /*@NotNull(message = "value mismatch")
+    @Column(name = "country")
+    private Country country = Country.BELGIE;*/
+
     @NotBlank(message = "{merchant.VAT.empty}")
     @Size(min = 10, message = "{merchant.VAT.size}")
     @Column(name = "VAT")
@@ -89,6 +115,10 @@ public class Merchant {
             joinColumns = @JoinColumn(name = "merchant_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users;
+
+    @OneToMany(mappedBy = "merchant")
+    private List<Order> orders;
+
 
     @OneToMany(mappedBy = "merchant")
     private List<Voupon> voupons;
