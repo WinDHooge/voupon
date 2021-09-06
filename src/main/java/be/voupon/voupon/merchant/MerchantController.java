@@ -142,7 +142,7 @@ public class MerchantController {
         model.addAttribute("merchant",merchant);
 
         CheckoutDto checkoutDto = new CheckoutDto();
-        //checkoutDto.setMerchant(merchant);
+        checkoutDto.setMerchant(merchant);
         model.addAttribute("checkoutDto", checkoutDto);
 
         return "merchantfrontend";

@@ -41,7 +41,7 @@ public class CheckoutController {
         checkoutDto.setVoupon(vouponService.getById(checkoutDto.getVid()));
 
         System.out.println(checkoutDto.getMerchant().getCompanyName());
-        System.out.println(checkoutDto.getVoupon().getDescription());
+        System.out.println(checkoutDto.getVoupon().getName());
 
         return "checkout/orderdetails";
     }
