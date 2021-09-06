@@ -18,7 +18,7 @@ import java.util.Set;
 public class Merchant {
 
     public enum Country {
-        ALBANIE("Albanië"), ANDORRA("Andorra"), ARMENIE("Armenië"), AZERBEIDZJAN("Azerbeidzjan"), BELGIE("België"),
+        ALBANIE("Albanië"), ANDORRA("Andorra"), ARMENIE("Armenië"), AZERBEIDZJAN("Azerbeidzjan"), BELGIE("Belgium"),
         BOSNIE_EN_HERZEGOVINA("Bosnië en Herzegovina"), BULGARIJE("Bulgarije"), CYPRUS("Cyprus"), DENEMARKEN("Denemarken"),
         DUITSLAND("Duitsland"), ESTLAND("Estland"), FINLAND("Finland"), FRANKRIJK("Frankrijk"), GEORGIE("Georgië"),
         GRIEKENLAND("Griekenland"), HONGARIJE("Hongarije"), IERLAND("Ierland"), IJSLAND("IJsland"), ITALIE("Italië"),
@@ -29,8 +29,6 @@ public class Merchant {
         ROEMENIE("Roemenië"), RUSLAND("Rusland"), SANMARINO("San Marino"), SERVIE("Servië"), SLOVANIE("Slovanië"),
         SLOWAKIJE("Slowakije"), SPANJE("Spanje"), TSJECHIÊ("Tsjechië"), TURKIJE("Turkije"), VATICAANSTAD("Vaticaanstad"),
         VERENIGD_KONINKRIJK("Verenigd Koninkrijk"), WIT_RUSLAND("Wit-Rusland"), ZWEDEN("Zweden"), ZWITSERLAND("Zwitserland");
-
-        public static Country EUROPE;
 
         private final String displayName;
 
@@ -82,14 +80,14 @@ public class Merchant {
     @NotBlank(message = "{merchant.city}")
     @Column(name = "city")
     private String city;
-/*
+
     @NotBlank(message = "{merchant.country}")
     @Column(name = "country")
     private String country;
-*/
-    @NotNull(message = "value mismatch")
+
+    /*@NotNull(message = "value mismatch")
     @Column(name = "country")
-    private Country country = Country.EUROPE;
+    private Country country = Country.BELGIE;*/
 
     @NotBlank(message = "{merchant.VAT.empty}")
     @Size(min = 10, message = "{merchant.VAT.size}")
