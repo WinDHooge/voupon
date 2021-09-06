@@ -1,5 +1,6 @@
 package be.voupon.voupon.merchant;
 
+import be.voupon.voupon.order.Order;
 import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
@@ -87,6 +88,10 @@ public class Merchant {
             joinColumns = @JoinColumn(name = "merchant_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users;
+
+    @OneToMany(mappedBy = "merchant")
+    private List<Order> orders;
+
 
     @OneToMany(mappedBy = "merchant")
     private List<Voupon> voupons;
