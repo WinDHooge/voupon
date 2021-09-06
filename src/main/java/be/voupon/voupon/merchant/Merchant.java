@@ -81,6 +81,8 @@ public class Merchant {
     @Column(name = "paypalEmail")
     private String paypalEmail;
 
+    private boolean active;
+
     @ManyToMany
     @JoinTable(
             name = "user_merchant",

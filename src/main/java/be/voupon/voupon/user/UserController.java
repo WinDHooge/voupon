@@ -105,7 +105,7 @@ public class UserController {
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
 
-        model.addAttribute("merchants",merchantService.getMyMerchants(user.getId()));
+        model.addAttribute("merchants",merchantService.getMyActiveMerchants(user.getId()));
 
         return "account/dashboard";
     }

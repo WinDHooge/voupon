@@ -11,4 +11,6 @@ public interface MerchantRepository extends JpaRepository<Merchant, Integer> {
     Merchant findMerchantById(Integer id);
 
     List<Merchant> findMerchantsByUsers_Id(Integer id);
+
+    List<Merchant> findMerchantsByUsers_IdAndActiveIsTrue(Integer id);
 }
