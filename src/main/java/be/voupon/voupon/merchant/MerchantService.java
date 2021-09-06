@@ -12,6 +12,8 @@ public interface MerchantService {
 
     List<Merchant> getMyMerchants(Integer userId);
 
+    List<Merchant> getMyActiveMerchants(Integer userId);
+
     void save(Merchant merchant);
 
     void delete(int id);
