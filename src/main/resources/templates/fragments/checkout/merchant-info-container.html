@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="merchantinfo" class="company-info-container white z-depth-3">
+  <h2>Buy a Gift Card</h2>
+  <p th:text="${checkoutDto.merchant.companyDescription}"></p>
+  <p>&nbsp;</p>
+  <h5>Contact us</h5>
+  <p>
+    <span th:text="${checkoutDto.merchant.street + ' ' + checkoutDto.merchant.number}"></span><br>
+    <span th:text="${checkoutDto.merchant.postalCode + ' ' + checkoutDto.merchant.city}"></span><br>
+    <span th:text="${checkoutDto.merchant.country}"></span>
+  </p>
+  <p>
+    <span>T. </span><a th:href="@{'tel://' + ${checkoutDto.merchant.telephone}}" th:text="${checkoutDto.merchant.telephone}"></a><br>
+    <span>E. </span><a th:href="@{'mailto://' + ${checkoutDto.merchant.email}}" th:text="${checkoutDto.merchant.email}"></a>
+  </p>
+</div>
+</body>
+</html>
