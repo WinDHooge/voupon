@@ -99,9 +99,13 @@
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('paypalEmail')}" th:errors="*{paypalEmail}"></span>
                     </div>
 
-                    <div class="input-field col s12">
-                        <input id="active" type="checkbox" class="slider round" th:field="*{active}">
-                        <label for="active">Active User</label>
+                    <div class="switch col s12">
+                        <label>
+                            Off
+                            <input type="checkbox" th:field="*{active}">
+                            <span class="lever"></span>
+                            On
+                        </label>
                     </div>
 
                     <div class="input-field col s12">
