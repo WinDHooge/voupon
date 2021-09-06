@@ -73,7 +73,7 @@
                         <input id="country" type="text" class="validate" th:field="*{country}">
                         <label for="country">Country</label>
                         <select name="continent" class="form-control">
-                            <option th:each="country : ${T(voupon.merchant.Merchant.Contry.Europe).values()}"
+                            <option th:each="country : ${T(voupon.merchant.Merchant.Country.Europe).values()}"
                                     th:value="${country}" th:text="${country.displayName}"
                                     th:selected="${merchant.country.equals(country)}">
                             </option>
