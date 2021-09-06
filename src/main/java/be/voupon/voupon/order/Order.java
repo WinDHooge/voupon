@@ -1,5 +1,6 @@
 package be.voupon.voupon.order;
 
+import be.voupon.voupon.merchant.Merchant;
 import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,6 +45,14 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "voupon_id"))
     private Set<Voupon> voupon;
+
+    @ManyToMany
+    @JoinTable(
+            name = "order_voupons",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "merchant_id"))
+    private Set<Merchant> merchant;
+
 
     @Override
     public String toString() {
