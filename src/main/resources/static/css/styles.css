@@ -376,3 +376,36 @@ nav .sidenav-trigger:hover{
     border-bottom: 1px solid rgba(0,0,0,0.15);
     padding-bottom: 1em;
 }
+#checkout-steps-header{
+    margin-top: 1em;
+}
+#checkout-steps-header #steps{
+    text-align: center;
+}
+#checkout-steps-header .checkout-step{
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #fb8c00;
+    background-color: #fff;
+    line-height: 10px;
+    height: 10px;
+    width: 10px;
+    margin: 0 0.25em;
+    vertical-align: middle;
+}
+#checkout-steps-header .checkout-step.active-step,
+#checkout-steps-header .checkout-step.completed-step{
+    border-radius: 50%;
+}
+#checkout-steps-header .checkout-step.completed-step{
+    background-color: #fb8c00;
+}
+#checkout-steps-header .checkout-step.active-step{
+    background-color: #FBAB20;
+    width: 16px;
+    line-height: 16px;
+    height: 16px;
+}
+#checkout-steps-header .checkout-step strong{
+    display: none;
+}
