@@ -18,56 +18,71 @@
         </div>
         <div th:replace="~{fragments/checkout/checkout-steps-header :: checkoutheaderstep2}">Checkout steps header</div>
         <div id="customer-recipient-container">
-            <form action="">
-                <div class="input-field col s12">
-                    <h5>Your details</h5>
+            <form th:action="@{'/' + ${checkoutDto.merchant.pageHandle} + '/checkout/orderdetails'}" method="post">
+                <div th:object="${customer}">
+                    <div class="input-field col s12">
+                        <h5>Your details</h5>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="customerfirstname" type="text" class="validate" th:field="*{firstName}">
+                        <label for="customerfirstname">First Name</label>
+                        <span class="helper-text invalid" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="customerlastname" type="text" class="validate" th:field="*{lastName}">
+                        <label for="customerlastname">Last Name</label>
+                        <span class="helper-text invalid" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="customeremail" type="email" class="validate" th:field="*{email}">
+                        <label for="customeremail">Email</label>
+                        <span class="helper-text invalid" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                    </div>
                 </div>
 
-                <div class="input-field col s12">
-                    <input id="customerfirstname" type="text" class="validate" th:field="*{checkoutDto.customer.firstName}">
-                    <label for="customerfirstname">First Name</label>
-                    <span class="helper-text invalid" th:if="${#fields.hasErrors('checkoutDto.customer.firstName')}" th:errors="*{customer.firstName}"></span>
-                </div>
+                <div th:object="${recipient}">
 
-                <div class="input-field col s12">
-                    <input id="customerlastname" type="text" class="validate" th:field="*{checkoutDto.customer.lastName}">
-                    <label for="customerlastname">Last Name</label>
-                    <span class="helper-text invalid" th:if="${#fields.hasErrors('checkoutDto.customer.lastName')}" th:errors="*{customer.lastName}"></span>
-                </div>
+                    <div class="input-field col s12">
+                        <h5>Recipient details</h5>
+                    </div>
 
-                <div class="input-field col s12">
-                    <input id="customeremail" type="email" class="validate" th:field="*{checkoutDto.customer.email}">
-                    <label for="customeremail">Email</label>
-                    <span class="helper-text invalid" th:if="${#fields.hasErrors('checkoutDto.customer.email')}" th:errors="*{customer.email}"></span>
-                </div>
+                    <div class="input-field col s12">
+                        <input id="recipientfirstname" type="text" class="validate" th:field="*{firstName}">
+                        <label for="recipientfirstname">First Name</label>
+                        <span class="helper-text invalid" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+                    </div>
 
-                <div class="input-field col s12">
-                    <h5>Recipient details</h5>
-                </div>
+                    <div class="input-field col s12">
+                        <input id="recipientlastname" type="text" class="validate" th:field="*{lastName}">
+                        <label for="recipientlastname">Last Name</label>
+                        <span class="helper-text invalid" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                    </div>
 
-                <div class="input-field col s12">
-                    <input id="recipientfirstname" type="text" class="validate" th:field="*{checkoutDto.recipient.firstName}">
-                    <label for="recipientfirstname">First Name</label>
-                    <span class="helper-text invalid" th:if="${#fields.hasErrors('checkoutDto.recipient.firstName')}" th:errors="*{recipient.firstName}"></span>
-                </div>
+                    <div class="input-field col s12">
+                        <input id="recipientemail" type="email" class="validate" th:field="*{email}">
+                        <label for="recipientemail">Email</label>
+                        <span class="helper-text invalid" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                    </div>
 
-                <div class="input-field col s12">
-                    <input id="recipientlastname" type="text" class="validate" th:field="*{checkoutDto.recipient.lastName}">
-                    <label for="recipientlastname">Last Name</label>
-                    <span class="helper-text invalid" th:if="${#fields.hasErrors('checkoutDto.recipient.lastName')}" th:errors="*{recipient.lastName}"></span>
-                </div>
-
-                <div class="input-field col s12">
-                    <input id="recipientemail" type="email" class="validate" th:field="*{checkoutDto.recipient.email}">
-                    <label for="recipientemail">Email</label>
-                    <span class="helper-text invalid" th:if="${#fields.hasErrors('checkoutDto.recipient.email')}" th:errors="*{recipient.email}"></span>
-                </div>
-
-                <div class="input-field col s12 action-buttons">
-                    <button class="left btn btn2 waves-effect waves-light" type="submit" id="previous" name="previous" th:text="Back"></button>
-                    <button class="right btn waves-effect waves-light" type="submit" id="next" name="next" th:text="Next"></button>
+                    <div class="input-field col s12 action-buttons">
+                        <button class="left btn btn2 waves-effect waves-light" type="submit" id="previous" name="previous" th:text="Back"></button>
+                        <button class="right btn waves-effect waves-light" type="submit" id="next" name="next" th:text="Next"></button>
+                    </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div><p th:text="${checkoutDto.merchant.checkoutDescription}"></p></div>
+</div>
+
+<div th:fragment="ordersummary" class="checkout-container white z-depth-3">
+    <div class="voupons-container">
+        <div th:replace="~{fragments/checkout/checkout-steps-header :: checkoutheaderstep3}">Checkout steps header</div>
+        <div class="customer-recipient-container">
+
         </div>
     </div>
     <div><p th:text="${checkoutDto.merchant.checkoutDescription}"></p></div>
