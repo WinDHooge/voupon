@@ -16,6 +16,7 @@
                 <p th:text="'For use in ' + ${checkoutDto.merchant.companyName}"></p>
             </div>
         </div>
+        <div th:replace="~{fragments/checkout/checkout-steps-header :: checkoutheaderstep2}">Checkout steps header</div>
         <div id="customer-recipient-container">
             <form action="">
                 <div class="input-field col s12">
