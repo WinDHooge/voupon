@@ -369,3 +369,10 @@ nav .sidenav-trigger:hover{
 #chosen-voupon .voupon-description{
     font-weight: 600;
 }
+.voupons-container form h5{
+    margin-bottom: 0;
+}
+.voupons-container .action-buttons{
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    padding-bottom: 1em;
+}

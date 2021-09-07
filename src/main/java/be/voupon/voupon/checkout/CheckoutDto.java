@@ -1,6 +1,8 @@
 package be.voupon.voupon.checkout;
 
+import be.voupon.voupon.customer.Customer;
 import be.voupon.voupon.merchant.Merchant;
+import be.voupon.voupon.recipient.Recipient;
 import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +19,7 @@ public class CheckoutDto {
 
     private Merchant merchant;
     private Voupon voupon;
+    private Customer customer;
+    private Recipient recipient;
 
 }
