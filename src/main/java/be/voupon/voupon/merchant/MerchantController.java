@@ -136,7 +136,7 @@ public class MerchantController {
         List<Voupon> voupons = vouponService.getMerchantVoupons(merchant);
         model.addAttribute("voupons",voupons);
 
-        if(merchant == null){
+        if(merchant == null || !(merchant.isActive())){
             return "redirect:/";
         }
         model.addAttribute("merchant",merchant);
