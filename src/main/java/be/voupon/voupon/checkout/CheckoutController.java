@@ -10,6 +10,7 @@ import be.voupon.voupon.voupon.VouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +53,7 @@ public class CheckoutController {
 
     @GetMapping("/{pageHandle:^(?!merchant$).*}/checkout/orderdetails")
     public String showCheckoutOrderDetailsStep(Model model){
-        model.addAttribute(checkoutDto); // @Todo:necessary?
+        model.addAttribute("checkoutDto", checkoutDto); // @Todo:necessary?
 
         // Create new Recipient & add to model
         if(checkoutDto.getRecipient() == null){
@@ -80,13 +81,20 @@ public class CheckoutController {
     }
 
     @PostMapping(value = "/{pageHandle:^(?!merchant$).*}/checkout/orderdetails", params ="next")
-    public String updateOrderDetails(@Valid @ModelAttribute Recipient recipient, @Valid @ModelAttribute Customer cutomer){
+    public String updateOrderDetails(@Valid @ModelAttribute Recipient recipient, BindingResult bindingResultRecipient, @Valid @ModelAttribute Customer customer, BindingResult bindingResultCustomer, Model model){
         //--model.addAttribute("checkoutDto", checkoutDto);
         //--System.out.println(checkoutDto.getVoupon());
 
         // Validate & retrieve the form ModelAttributes
-        // Binding results?
+        if (bindingResultRecipient.hasErrors() || bindingResultCustomer.hasErrors()) {
+            model.addAttribute(checkoutDto);
+            return "/checkout/orderdetails";
+        }
+
         // Add them to the proxy checkoutDto object
+        checkoutDto.setCustomer(customer);
+        checkoutDto.setRecipient(recipient);
+        model.addAttribute(checkoutDto);
 
         return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/ordersummary";
     }
@@ -95,5 +103,16 @@ public class CheckoutController {
     // Add the checkoutDto to the Model
     // Create new Order object & add to model
     // Create new OrderDetail object & add to model
+    @GetMapping("/{pageHandle:^(?!merchant$).*}/checkout/ordersummary")
+    public String showCheckoutOrderSummaryStep(Model model){
+        model.addAttribute("checkoutDto", checkoutDto);
+
+        return "checkout/ordersummary";
+    }
+
+    @PostMapping(value = "/{pageHandle:^(?!merchant$).*}/checkout/ordersummary", params ="previous")
+    public String backToStepTwo(){
+        return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/orderdetails";
+    }
 
 }

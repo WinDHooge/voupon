@@ -23,19 +23,19 @@ public class Recipient {
     private int id;
 
     @Column(name = "firstName")
-    @NotBlank(message = "{recipient.firstName}")
+    @NotBlank(message = "{recipient.firstName.empty}")
     @Size(max = 50, message= "{recipient.firstName.size}")
-    private String firstName;
+    private String recipientFirstName;
 
-    @NotBlank(message= "{recipient.lastName}")
+    @NotBlank(message= "{recipient.lastName.empty}")
     @Size(max = 50, message="{recipient.lastName.size}")
     @Column(name = "lastName")
-    private String lastName;
+    private String recipientLastName;
 
     @NotBlank(message = "{recipient.email.empty}")
     @Email(message = "{recipient.email.format}")
     @Column(name = "email")
-    private String email;
+    private String recipientEmail;
 
     @OneToMany(mappedBy = "recipient")
     private List<OrderDetail> orderDetails;
@@ -44,9 +44,9 @@ public class Recipient {
     public String toString() {
         return "Recipient{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email +
+                ", firstName='" + recipientFirstName + '\'' +
+                ", lastName='" + recipientLastName + '\'' +
+                ", email='" + recipientEmail +
                 '}';
     }
 }

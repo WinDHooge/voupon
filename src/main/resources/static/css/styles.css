@@ -372,10 +372,12 @@ nav .sidenav-trigger:hover{
 .voupons-container form h5{
     margin-bottom: 0;
 }
-.voupons-container .action-buttons{
+.checkout-container .action-buttons{
     border-bottom: 1px solid rgba(0,0,0,0.15);
     padding-bottom: 1em;
 }
+
+
 #checkout-steps-header{
     margin-top: 1em;
 }
@@ -409,3 +411,19 @@ nav .sidenav-trigger:hover{
 #checkout-steps-header .checkout-step strong{
     display: none;
 }
+
+.order-summary-container strong{
+    font-weight: 600;
+}
+.order-summary-container .title-container{
+    margin-bottom: 1.75em;
+}
+.order-summary-container .title-container h4{
+    text-align: center;
+}
+.order-summary-container .order-container{
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
+
