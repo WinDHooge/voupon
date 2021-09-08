@@ -115,4 +115,9 @@ public class CheckoutController {
         return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/orderdetails";
     }
 
+    @PostMapping(value = "/{pageHandle:^(?!merchant$).*}/checkout/ordersummary", params ="next")
+    public String showCheckoutConfirmationStep(){
+        return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/confirmation";
+    }
+
 }
