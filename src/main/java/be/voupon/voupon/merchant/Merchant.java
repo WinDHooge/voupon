@@ -107,6 +107,7 @@ public class Merchant {
     @Column(name = "paypalEmail")
     private String paypalEmail;
 
+    @Column(name= "active")
     private boolean active;
 
     @ManyToMany
