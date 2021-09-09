@@ -1,9 +1,14 @@
 package be.voupon.voupon.checkout;
 
 import be.voupon.voupon.customer.Customer;
+import be.voupon.voupon.customer.CustomerService;
 import be.voupon.voupon.merchant.Merchant;
 import be.voupon.voupon.merchant.MerchantService;
+import be.voupon.voupon.order.Order;
+import be.voupon.voupon.order.OrderDetail;
+import be.voupon.voupon.order.OrderService;
 import be.voupon.voupon.recipient.Recipient;
+import be.voupon.voupon.recipient.RecipientService;
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.voupon.Voupon;
 import be.voupon.voupon.voupon.VouponService;
@@ -17,10 +22,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
-public class CheckoutController {
+public class CheckoutController<OrderDetailService> {
     private final CheckoutDto checkoutDto;
 
     public CheckoutController(CheckoutDto checkoutDto) {
@@ -29,6 +38,9 @@ public class CheckoutController {
 
     MerchantService merchantService;
     VouponService vouponService;
+    CustomerService customerService;
+    RecipientService recipientService;
+    OrderService orderService;
 
     @Autowired
     public void setMerchantService(MerchantService merchantService) {
@@ -38,6 +50,21 @@ public class CheckoutController {
     @Autowired
     public void setVouponService(VouponService vouponService) {
         this.vouponService = vouponService;
+    }
+
+    @Autowired
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    @Autowired
+    public void setRecipientService(RecipientService recipientService) {
+        this.recipientService = recipientService;
+    }
+
+    @Autowired
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @PostMapping("/{pageHandle:^(?!merchant$).*}/checkout")
@@ -53,7 +80,7 @@ public class CheckoutController {
 
     @GetMapping("/{pageHandle:^(?!merchant$).*}/checkout/orderdetails")
     public String showCheckoutOrderDetailsStep(Model model){
-        model.addAttribute("checkoutDto", checkoutDto); // @Todo:necessary?
+        model.addAttribute("checkoutDto", checkoutDto);
 
         // Create new Recipient & add to model
         if(checkoutDto.getRecipient() == null){
@@ -82,8 +109,6 @@ public class CheckoutController {
 
     @PostMapping(value = "/{pageHandle:^(?!merchant$).*}/checkout/orderdetails", params ="next")
     public String updateOrderDetails(@Valid @ModelAttribute Recipient recipient, BindingResult bindingResultRecipient, @Valid @ModelAttribute Customer customer, BindingResult bindingResultCustomer, Model model){
-        //--model.addAttribute("checkoutDto", checkoutDto);
-        //--System.out.println(checkoutDto.getVoupon());
 
         // Validate & retrieve the form ModelAttributes
         if (bindingResultRecipient.hasErrors() || bindingResultCustomer.hasErrors()) {
@@ -99,10 +124,6 @@ public class CheckoutController {
         return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/ordersummary";
     }
 
-    // Create the GetMapping for "/{pageHandle:^(?!merchant$).*}/checkout/ordersummary"
-    // Add the checkoutDto to the Model
-    // Create new Order object & add to model
-    // Create new OrderDetail object & add to model
     @GetMapping("/{pageHandle:^(?!merchant$).*}/checkout/ordersummary")
     public String showCheckoutOrderSummaryStep(Model model){
         model.addAttribute("checkoutDto", checkoutDto);
@@ -117,6 +138,33 @@ public class CheckoutController {
 
     @PostMapping(value = "/{pageHandle:^(?!merchant$).*}/checkout/ordersummary", params ="next")
     public String showCheckoutConfirmationStep(Model model){
+
+        // Create new Order object & add to model
+        checkoutDto.setOrder(new Order());
+        checkoutDto.getOrder().setDate(new Date());
+        checkoutDto.getOrder().setCustomer(checkoutDto.getCustomer());
+        checkoutDto.getOrder().setMerchant(checkoutDto.getMerchant());
+        // Create OrderDetail
+        OrderDetail newOrderDetail = new OrderDetail();
+        newOrderDetail.setOrder(checkoutDto.getOrder());
+        newOrderDetail.setVoupon(checkoutDto.getVoupon());
+        newOrderDetail.setRecipient(checkoutDto.getRecipient());
+        // Temp create a vouponcode
+        newOrderDetail.setVouponCode("blablablaaa");
+        newOrderDetail.setUnitPrice(checkoutDto.getVoupon().getVouponValues().get(0).getValue());
+        newOrderDetail.setQuantity(1);
+        newOrderDetail.setShipmentDate(new Date());
+
+        // Add orderdetail to order
+        List<OrderDetail> newOrderDetailList = new ArrayList<OrderDetail>();
+        newOrderDetailList.add(newOrderDetail);
+        checkoutDto.getOrder().setOrderDetails(newOrderDetailList);
+
+        customerService.save(checkoutDto.getCustomer());
+        recipientService.save(checkoutDto.getRecipient());
+        orderService.save(checkoutDto.getOrder());
+        orderService.save(newOrderDetail);
+
         model.addAttribute(checkoutDto);
         return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/orderconfirmation";
     }

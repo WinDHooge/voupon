@@ -23,11 +23,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "{order.orderNumber}")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "orderNumber")
     private int orderNumber;
 
-    @NotBlank(message = "{order.date}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private Date date;

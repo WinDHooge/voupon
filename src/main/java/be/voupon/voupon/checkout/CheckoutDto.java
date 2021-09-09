@@ -2,6 +2,8 @@ package be.voupon.voupon.checkout;
 
 import be.voupon.voupon.customer.Customer;
 import be.voupon.voupon.merchant.Merchant;
+import be.voupon.voupon.order.Order;
+import be.voupon.voupon.order.OrderDetail;
 import be.voupon.voupon.recipient.Recipient;
 import be.voupon.voupon.voupon.Voupon;
 import lombok.Getter;
@@ -21,5 +23,6 @@ public class CheckoutDto {
     private Voupon voupon;
     private Customer customer;
     private Recipient recipient;
+    private Order order;
 
 }

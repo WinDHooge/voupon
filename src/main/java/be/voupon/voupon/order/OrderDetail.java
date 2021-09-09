@@ -33,19 +33,15 @@ public class OrderDetail {
     @JoinColumn(name="recipient_id")
     private Recipient recipient;
 
-    @NotBlank(message = "{orderDetail.vouponCode}")
     @Column(name = "vouponCode")
     private String vouponCode;
 
-    @NotBlank(message = "{orderDetail.unitPrice}")
     @Column(name = "unitPrice")
     private int unitPrice;
 
-    @NotBlank(message = "{orderDetail.quantity}")
     @Column(name = "quantity")
     private int quantity;
 
-    @NotBlank(message = "{orderDetail.shipmentDate}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "shipmentDate")
     private Date shipmentDate;
