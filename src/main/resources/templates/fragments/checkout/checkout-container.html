@@ -116,14 +116,21 @@
 </div>
 
 <div th:fragment="orderconfirmation" class="checkout-container white z-depth-3">
-    <div class="order-summary-container">
+    <div class="order-confirmation-container">
         <div th:replace="~{fragments/checkout/checkout-steps-header :: checkoutheaderstep4}">Checkout steps header</div>
         <div class="title-container">
             <h4>Order confirmation</h4>
         </div>
-
+        <div class="success-checkmark">
+            <div class="check-icon">
+                <span class="icon-line line-tip"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+            </div>
+        </div>
         <div class="input-field col s12 action-buttons">
-            <form th:action="@{'/' + ${checkoutDto.merchant.pageHandle}}" method="post">
+            <form th:action="@{'/' + ${checkoutDto.merchant.pageHandle} + '/checkout/orderconfirmation'}" method="post">
                 <button class="right btn waves-effect waves-light" type="submit" id="next" name="next" th:text="'Buy another'"></button>
             </form>
         </div>

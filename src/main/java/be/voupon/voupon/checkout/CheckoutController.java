@@ -127,5 +127,9 @@ public class CheckoutController {
 
         return "checkout/orderconfirmation";
     }
+    @PostMapping(value = "/{pageHandle:^(?!merchant$).*}/checkout/orderconfirmation", params ="next")
+    public String backToMerchantDetail(){
+        return "redirect:/" + checkoutDto.getMerchant().getPageHandle();
+    }
 
 }
