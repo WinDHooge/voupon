@@ -116,8 +116,16 @@ public class CheckoutController {
     }
 
     @PostMapping(value = "/{pageHandle:^(?!merchant$).*}/checkout/ordersummary", params ="next")
-    public String showCheckoutConfirmationStep(){
-        return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/confirmation";
+    public String showCheckoutConfirmationStep(Model model){
+        model.addAttribute(checkoutDto);
+        return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/orderconfirmation";
+    }
+
+    @GetMapping("/{pageHandle:^(?!merchant$).*}/checkout/orderconfirmation")
+    public String showCheckoutOrderConfirmationStep(Model model){
+        model.addAttribute("checkoutDto", checkoutDto);
+
+        return "checkout/orderconfirmation";
     }
 
 }
