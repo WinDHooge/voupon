@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,8 +34,9 @@ import java.util.List;
 @Controller
 public class CheckoutController<OrderDetailService> {
     private final CheckoutDto checkoutDto;
+    final MessageDigest digest = MessageDigest.getInstance("SHA3-256");
 
-    public CheckoutController(CheckoutDto checkoutDto) {
+    public CheckoutController(CheckoutDto checkoutDto) throws NoSuchAlgorithmException {
         this.checkoutDto = checkoutDto;
     }
 
@@ -65,6 +69,18 @@ public class CheckoutController<OrderDetailService> {
     @Autowired
     public void setOrderService(OrderService orderService) {
         this.orderService = orderService;
+    }
+
+    private static String bytesToHex(byte[] hash) {
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 
     @PostMapping("/{pageHandle:^(?!merchant$).*}/checkout")
@@ -149,8 +165,7 @@ public class CheckoutController<OrderDetailService> {
         newOrderDetail.setOrder(checkoutDto.getOrder());
         newOrderDetail.setVoupon(checkoutDto.getVoupon());
         newOrderDetail.setRecipient(checkoutDto.getRecipient());
-        // Temp create a vouponcode
-        newOrderDetail.setVouponCode("blablablaaa");
+
         newOrderDetail.setUnitPrice(checkoutDto.getVoupon().getVouponValues().get(0).getValue());
         newOrderDetail.setQuantity(1);
         newOrderDetail.setShipmentDate(new Date());
@@ -164,6 +179,14 @@ public class CheckoutController<OrderDetailService> {
         recipientService.save(checkoutDto.getRecipient());
         orderService.save(checkoutDto.getOrder());
         orderService.save(newOrderDetail);
+
+        // Create unique hashed vouponcode for each coupon
+        for(OrderDetail od : checkoutDto.getOrder().getOrderDetails()){
+            String originalString = od.getId() + "*IAmASaltKeyDinges";
+            byte[] hashbytes = digest.digest(originalString.getBytes(StandardCharsets.UTF_8));
+            od.setVouponCode(bytesToHex(hashbytes));
+            orderService.save(od);
+        }
 
         model.addAttribute(checkoutDto);
         return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/orderconfirmation";
