@@ -23,10 +23,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "orderNumber")
-    private int orderNumber;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private Date date;
@@ -46,7 +42,6 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", orderNumber=" + orderNumber +
                 ", date=" + date +
                 '}';
     }
