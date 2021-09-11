@@ -175,7 +175,12 @@ public class CheckoutController<OrderDetailService> {
         newOrderDetailList.add(newOrderDetail);
         checkoutDto.getOrder().setOrderDetails(newOrderDetailList);
 
-        customerService.save(checkoutDto.getCustomer());
+        if(customerService.getCustomerByAllData(checkoutDto.getCustomer().getCustomerEmail(), checkoutDto.getCustomer().getCustomerFirstName(), checkoutDto.getCustomer().getCustomerLastName()) == null){
+            customerService.save(checkoutDto.getCustomer());
+        }else{
+            //
+        }
+        //customerService.save(checkoutDto.getCustomer());
         recipientService.save(checkoutDto.getRecipient());
         orderService.save(checkoutDto.getOrder());
         orderService.save(newOrderDetail);

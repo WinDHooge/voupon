@@ -17,4 +17,10 @@ public class CustomerServiceImpl implements CustomerService{
     public void save(Customer customer) {
         customerRepository.save(customer);
     }
+
+    @Override
+    public Customer getCustomerByAllData(String email, String firstName, String lastName) {
+        return customerRepository.findCustomerByCustomerEmailAndCustomerFirstNameAndCustomerLastName(email, firstName, lastName);
+    }
+
 }
