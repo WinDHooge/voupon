@@ -39,9 +39,6 @@ public class OrderDetail {
     @Column(name = "unitPrice")
     private int unitPrice;
 
-    @Column(name = "quantity")
-    private int quantity;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "shipmentDate")
     private Date shipmentDate;
