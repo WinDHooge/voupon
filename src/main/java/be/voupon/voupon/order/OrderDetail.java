@@ -43,6 +43,13 @@ public class OrderDetail {
     @Column(name = "shipmentDate")
     private Date shipmentDate;
 
+    @Lob
+    @Column(name = "message")
+    private String message;
+
+    @Column(name = "redeemed")
+    private boolean redeemed;
+
     @Override
     public String toString() {
         return "OrderDetail{" +
