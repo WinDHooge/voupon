@@ -2,6 +2,8 @@ package be.voupon.voupon.checkout;
 
 import be.voupon.voupon.customer.Customer;
 import be.voupon.voupon.customer.CustomerService;
+import be.voupon.voupon.email.EmailService;
+import be.voupon.voupon.email.EmailServiceImpl;
 import be.voupon.voupon.merchant.Merchant;
 import be.voupon.voupon.merchant.MerchantService;
 import be.voupon.voupon.order.Order;
@@ -12,6 +14,7 @@ import be.voupon.voupon.recipient.RecipientService;
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.voupon.Voupon;
 import be.voupon.voupon.voupon.VouponService;
+import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -27,9 +31,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class CheckoutController<OrderDetailService> {
@@ -45,6 +47,7 @@ public class CheckoutController<OrderDetailService> {
     CustomerService customerService;
     RecipientService recipientService;
     OrderService orderService;
+    EmailService emailService;
 
     @Autowired
     public void setMerchantService(MerchantService merchantService) {
@@ -69,6 +72,11 @@ public class CheckoutController<OrderDetailService> {
     @Autowired
     public void setOrderService(OrderService orderService) {
         this.orderService = orderService;
+    }
+
+    @Autowired
+    public void setEmailService(EmailService emailService) {
+        this.emailService = emailService;
     }
 
     private static String bytesToHex(byte[] hash) {
@@ -164,7 +172,7 @@ public class CheckoutController<OrderDetailService> {
     }
 
     @PostMapping(value = "/{pageHandle:^(?!merchant$).*}/checkout/ordersummary", params ="next")
-    public String showCheckoutConfirmationStep(Model model){
+    public String showCheckoutConfirmationStep(Model model) throws MessagingException {
 
         // Create new Order object & add to model
         checkoutDto.setOrder(new Order());
@@ -199,6 +207,21 @@ public class CheckoutController<OrderDetailService> {
         }
 
         model.addAttribute(checkoutDto);
+
+        // Send emails to R & C
+        Map<String, Object> templateModel = new HashMap<>();
+        templateModel.put("customerFirstname", checkoutDto.getCustomer().getCustomerFirstName());
+        templateModel.put("customerLastname", checkoutDto.getCustomer().getCustomerLastName());
+        templateModel.put("customerEmail", checkoutDto.getCustomer().getCustomerEmail());
+        templateModel.put("vouponlogo", "vouponlogo");
+        templateModel.put("emailtemplate", "email/order.html");
+
+        emailService.sendMessageUsingThymeleafTemplate(
+                checkoutDto.getRecipient().getRecipientEmail(),
+                "Welcome to Voupon",
+                templateModel);
+
+
         return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/orderconfirmation";
     }
 
