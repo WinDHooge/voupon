@@ -49,7 +49,6 @@ public class OrderDetail {
                 "id=" + id +
                 ", vouponCode='" + vouponCode + '\'' +
                 ", unitPrice=" + unitPrice +
-                ", quantity=" + quantity +
                 ", shipmentDate=" + shipmentDate +
                 '}';
     }

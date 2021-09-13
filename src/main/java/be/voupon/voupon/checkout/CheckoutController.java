@@ -178,7 +178,6 @@ public class CheckoutController<OrderDetailService> {
         newOrderDetail.setRecipient(checkoutDto.getRecipient());
 
         newOrderDetail.setUnitPrice(checkoutDto.getVoupon().getVouponValues().get(0).getValue());
-        newOrderDetail.setQuantity(1);
         newOrderDetail.setShipmentDate(new Date());
 
         // Add orderdetail to order
