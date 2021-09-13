@@ -14,6 +14,11 @@ public class RecipientServiceImpl implements RecipientService{
     }
 
     @Override
+    public Recipient getRecipientByAllData(String email, String firstName, String lastName) {
+        return recipientRepository.findRecipientByRecipientEmailAndRecipientFirstNameAndRecipientLastName(email, firstName, lastName);
+    }
+
+    @Override
     public void save(Recipient recipient) {
         recipientRepository.save(recipient);
     }

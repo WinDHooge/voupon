@@ -133,8 +133,19 @@ public class CheckoutController<OrderDetailService> {
         }
 
         // Add them to the proxy checkoutDto object
+        Customer existingCustomer = customerService.getCustomerByAllData(customer.getCustomerEmail(), customer.getCustomerFirstName(), customer.getCustomerLastName());
         checkoutDto.setCustomer(customer);
+        if(existingCustomer != null){
+            checkoutDto.getCustomer().setId(existingCustomer.getId());
+        }
+
+        Recipient existingRecipient = recipientService.getRecipientByAllData(recipient.getRecipientEmail(), recipient.getRecipientFirstName(), recipient.getRecipientLastName());
         checkoutDto.setRecipient(recipient);
+        if(existingRecipient != null){
+            checkoutDto.getRecipient().setId(existingRecipient.getId());
+        }
+
+
         model.addAttribute(checkoutDto);
 
         return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/ordersummary";
@@ -175,12 +186,7 @@ public class CheckoutController<OrderDetailService> {
         newOrderDetailList.add(newOrderDetail);
         checkoutDto.getOrder().setOrderDetails(newOrderDetailList);
 
-        if(customerService.getCustomerByAllData(checkoutDto.getCustomer().getCustomerEmail(), checkoutDto.getCustomer().getCustomerFirstName(), checkoutDto.getCustomer().getCustomerLastName()) == null){
-            customerService.save(checkoutDto.getCustomer());
-        }else{
-            //
-        }
-        //customerService.save(checkoutDto.getCustomer());
+        customerService.save(checkoutDto.getCustomer());
         recipientService.save(checkoutDto.getRecipient());
         orderService.save(checkoutDto.getOrder());
         orderService.save(newOrderDetail);
