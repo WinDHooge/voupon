@@ -18,12 +18,14 @@
     <p th:text="${success}"></p>
   </div>
 
+  <h3>My Active Merchants</h3>
   <div th:if="${!merchants.empty}" class="row">
     <div th:each="merchant : ${merchants}" class="col s12 l6">
       <div class="card white z-depth-4">
         <div class="card-content black-text">
           <span th:text="${merchant.companyName}" class="card-title">Merchant company name</span>
           <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${merchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
+          <p th:text="${merchant.active} != true ? 'Inactive' : 'Active'" class="grey-text"></p>
           <p th:text="${merchant.street + ' ' + merchant.number + ', ' + merchant.postalCode + ' ' + merchant.city + ', ' + merchant.country}">Merchant address</p>
           <p>&nbsp;</p>
           <p class="truncate" th:text="${merchant.companyDescription}">Merchant company description</p>
@@ -35,6 +37,7 @@
       </div>
     </div>
   </div>
+
   <div class="row" th:if="${merchants.empty}">
     <h4>None available</h4>
     <a class="waves-effect waves-light btn btn-small" th:href="@{/account/merchant/add}"><i class="material-icons left">business</i>Add merchant</a>
