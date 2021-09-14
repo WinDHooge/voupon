@@ -24,12 +24,12 @@
                     </p>
                     <p>
                         <strong>Status</strong><br>
-                        <span th:text="${orderDetail.redeemed} != true ? 'OPEN' : 'ALREADY REDEEMED'"></span>
+                        <span th:text="${orderDetail.redeemed} != true ? 'OPEN' : 'REDEEMED'"></span>
                     </p>
 
                 </div>
-                <div class="card-action">
-                    <form class="display-inline-block" th:action="@{/}" th:object="${orderDetail}" method="post">
+                <div class="card-action" th:if="${orderDetail.redeemed} != true">
+                    <form class="display-inline-block" th:action="@{'/redeem/' + ${orderDetail.vouponCode}}" th:object="${orderDetail}" method="post">
                         <input type="hidden" th:field="*{id}">
                         <button class="col s12 btn waves-effect waves-light" type="submit" name="action"><i class="material-icons left">redeem</i>Redeem gift card</button>
                     </form>

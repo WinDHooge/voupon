@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
@@ -58,13 +60,42 @@ public class OrderController {
                 }
             }
 
+        }else{
+            return "redirect:/login";
+        }
+
+        return "account/redeem/redeem-voupon";
+    }
+
+    @PostMapping("/redeem/{vouponCode:^(?!orderDetail$).*}")
+    public String redeemVoupon(@ModelAttribute OrderDetail orderDetail, Model model, Principal principal){
+        if(principal != null){
+            User user = userService.getUserByEmail(principal.getName());
+            model.addAttribute("user", user);
+
+            OrderDetail updateOrderDetail = orderService.getOrderDetailByVouponCode(orderDetail.getVouponCode());
+
+            if(updateOrderDetail == null){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+            }else{
+                // Get Merchant & check if user is allowed to act
+                Merchant merchant = updateOrderDetail.getOrder().getMerchant();
+                if(merchant == null || !user.getMerchants().contains(merchant)){
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+                }else{
+
+                    // Change redeemed status
+                    updateOrderDetail.setRedeemed(true);
+                    orderService.save(updateOrderDetail);
+
+                }
+            }
 
         }else{
             return "redirect:/login";
         }
 
-
-
-        return "account/redeem/redeem-voupon";
+        return "redirect:/redeem/" + orderDetail.getVouponCode();
     }
+
 }
