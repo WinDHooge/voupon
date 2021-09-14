@@ -213,12 +213,13 @@ public class CheckoutController<OrderDetailService> {
         templateModel.put("customerFirstname", checkoutDto.getCustomer().getCustomerFirstName());
         templateModel.put("customerLastname", checkoutDto.getCustomer().getCustomerLastName());
         templateModel.put("customerEmail", checkoutDto.getCustomer().getCustomerEmail());
+        templateModel.put("checkoutDto", checkoutDto);
         templateModel.put("vouponlogo", "vouponlogo");
         templateModel.put("emailtemplate", "email/order.html");
 
         emailService.sendMessageUsingThymeleafTemplate(
                 checkoutDto.getRecipient().getRecipientEmail(),
-                "Welcome to Voupon",
+                "Thank you for your order",
                 templateModel);
 
 
