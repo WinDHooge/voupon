@@ -28,4 +28,9 @@ public class OrderServiceImpl implements OrderService {
     public void save(OrderDetail orderDetail) {
         orderDetailRepository.save(orderDetail);
     }
+
+    @Override
+    public OrderDetail getOrderDetailByVouponCode(String vouponCode) {
+        return orderDetailRepository.findOrderDetailByVouponCode(vouponCode);
+    }
 }

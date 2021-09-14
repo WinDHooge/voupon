@@ -6,4 +6,6 @@ public interface OrderService {
 
     void save(OrderDetail orderDetail);
 
+    OrderDetail getOrderDetailByVouponCode(String vouponCode);
+
 }
