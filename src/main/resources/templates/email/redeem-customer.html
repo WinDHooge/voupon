@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" style="background-color:#e9ebee; padding: 25px;">
+  <tr>
+    <td align="center">
+      <table border="0" cellspacing="0" cellpadding="0" style="width:100%; max-width:600px; background-color:#ffffff; border-radius:10px; padding: 25px;">
+        <tr>
+          <td align="center">
+            <img src="sample.png" th:src="|cid:${vouponlogo}|" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h2>Voupon redeem confirmation</h2>
+            <p th:text="${'The voupon you offered to ' + orderDetail.recipient.recipientFirstName + ' ' + orderDetail.recipient.recipientLastName + ', has been redeemed succesfully at ' + orderDetail.voupon.merchant.companyName + '.'}"></p>
+            <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
+              <tr>
+                <td valign="top" style="width:50%">
+                  <h3>Merchant info</h3>
+                  <p>
+                    <span th:text="${orderDetail.getVoupon().getMerchant().getCompanyName()}"></span><br/>
+                  </p>
+                </td>
+                <td valign="top" style="width:50%">
+                  <h3>Order info</h3>
+                  <p>
+                    <span th:text="${'Order number: #' + orderDetail.order.id}"></span><br/>
+                    <span th:text="${orderDetail.order.date}"></span>
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+            <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
+              <tr>
+                <td valign="top">
+                  <h3>Giftcard info</h3>
+                  <p>
+                    <span th:text="${orderDetail.voupon.name}"></span><br/>
+                    <span th:text="${orderDetail.voupon.description}"></span><br/>
+                    <span th:text="${'Value: €' + orderDetail.order.orderDetails[0].unitPrice}"></span>
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

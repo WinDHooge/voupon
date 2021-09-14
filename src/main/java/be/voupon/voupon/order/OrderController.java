@@ -111,14 +111,14 @@ public class OrderController {
                             redeemRecipientTemplateModel);
 
                     // To Customer
-                    /*Map<String, Object> redeemCustomerTemplateModel = new HashMap<>();
+                    Map<String, Object> redeemCustomerTemplateModel = new HashMap<>();
                     redeemCustomerTemplateModel.put("orderDetail", updateOrderDetail);
                     redeemCustomerTemplateModel.put("vouponlogo", "vouponlogo");
                     redeemCustomerTemplateModel.put("emailtemplate", "email/redeem-customer.html");
                     emailService.sendMessageUsingThymeleafTemplate(
                             updateOrderDetail.getOrder().getCustomer().getCustomerEmail(),
                             "A voupon you offered, has been redeemed",
-                            redeemRecipientTemplateModel);*/
+                            redeemRecipientTemplateModel);
 
 
                 }
