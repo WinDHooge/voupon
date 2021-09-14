@@ -48,6 +48,10 @@ h1,h2,h3,h4,h5,h6{
     display: block;
 }
 
+.display-inline-block{
+    display: inline-block;
+}
+
 .text-shadow{
     text-shadow: 2px 4px 3px rgb(0 0 0 / 50%);
 }
@@ -332,6 +336,9 @@ nav .sidenav-trigger:hover{
 .card .card-action a{ margin-right: 0.5em;}
 .card .card-action a:last-child{ margin-right: 0;}
 
+.card.redeem .card-content p{
+    margin-bottom: 1em;
+}
 
 /* Merchant frontend */
 .company-info-container,

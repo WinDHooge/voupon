@@ -53,6 +53,8 @@ public class OrderController {
                 Merchant merchant = orderDetail.getOrder().getMerchant();
                 if(merchant == null || !user.getMerchants().contains(merchant)){
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+                }else{
+                    model.addAttribute("merchant", merchant);
                 }
             }
 

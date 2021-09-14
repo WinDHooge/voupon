@@ -11,9 +11,59 @@
 <div class="admin-body">
 
     <div class="row">
-        <div class="col s12">
-            <p th:text="${orderDetail.vouponCode}"></p>
+
+        <div class="col s12 l4">
+            <div class="card redeem white z-depth-4">
+                <div class="card-content black-text">
+                    <h4>Voupon info</h4>
+                    <p>
+                        <strong th:text="${orderDetail.getVoupon().getName()}"></strong><br>
+                        <span th:text="${orderDetail.getVoupon().getDescription()}"></span><br>
+                        <strong>Value</strong><br>
+                        <span th:text="${'€' + orderDetail.unitPrice}"></span>
+                    </p>
+                    <p>
+                        <strong>Status</strong><br>
+                        <span th:text="${orderDetail.redeemed} != true ? 'OPEN' : 'ALREADY REDEEMED'"></span>
+                    </p>
+
+                </div>
+                <div class="card-action">
+                    <form class="display-inline-block" th:action="@{/}" th:object="${orderDetail}" method="post">
+                        <input type="hidden" th:field="*{id}">
+                        <button class="col s12 btn waves-effect waves-light" type="submit" name="action"><i class="material-icons left">redeem</i>Redeem gift card</button>
+                    </form>
+                </div>
+            </div>
         </div>
+
+        <div class="col s12 l4">
+            <div class="card redeem white z-depth-4">
+                <div class="card-content black-text">
+                    <h4 th:text="${'Order #' + orderDetail.getOrder().getId()}">Order info</h4>
+                    <p>
+                        <strong th:text="${'Order date'}"></strong><br><span th:text="${orderDetail.getOrder().getDate()}"></span>
+                    </p>
+                    <p>
+                        <strong th:text="${'Customer'}"></strong><br><span th:utext="${orderDetail.getOrder().getCustomer().getCustomerFirstName() + ' ' + orderDetail.getOrder().getCustomer().getCustomerLastName() + '<br>' + orderDetail.getOrder().getCustomer().getCustomerEmail()}"></span>
+                    </p>
+                    <p>
+                        <strong th:text="${'Recipient'}"></strong><br><span th:utext="${orderDetail.getRecipient().getRecipientFirstName() + ' ' + orderDetail.getRecipient().getRecipientLastName() + '<br>' + orderDetail.getRecipient().getRecipientEmail()}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 l4">
+            <div class="card redeem white z-depth-4">
+                <div class="card-content black-text">
+                    <h4>Merchant info</h4>
+                    <p th:utext="${merchant.companyName + '<br>' + merchant.street + ' ' + merchant.number + '<br>' + merchant.postalCode + ' ' + merchant.city + '<br>' + merchant.country}"></p>
+                    <p th:utext="${'<strong>T. </strong>' + merchant.telephone + '<br>' + '<strong>e. </strong>' + merchant.email}"></p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>
