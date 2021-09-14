@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class OrderController {
@@ -38,21 +39,28 @@ public class OrderController {
     @GetMapping("/redeem/{vouponCode:^(?!orderDetail$).*}")
     public String showRedeemVoupon(@PathVariable String vouponCode, Model model, Principal principal){
         if(principal != null){
+
             User user = userService.getUserByEmail(principal.getName());
             model.addAttribute("user", user);
+
+            OrderDetail orderDetail = orderService.getOrderDetailByVouponCode(vouponCode);
+            if(orderDetail == null){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+            }else{
+                model.addAttribute("orderDetail", orderDetail);
+
+                // Get Merchant & check if user is allowed to act
+                Merchant merchant = orderDetail.getOrder().getMerchant();
+                if(merchant == null || !user.getMerchants().contains(merchant)){
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+                }
+            }
+
+
         }else{
             return "redirect:/login";
         }
 
-        OrderDetail orderDetail = orderService.getOrderDetailByVouponCode(vouponCode);
-        model.addAttribute("orderDetail", orderDetail);
-
-
-        /*Merchant merchant = merchantService.getById(id);
-
-        if(merchant == null || !user.getMerchants().contains(merchant)){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
-        }*/
 
 
         return "account/redeem/redeem-voupon";
