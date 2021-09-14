@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Digital Voucher service - Voupon</title>
+    <th:block th:include="~{fragments/head :: body.head}"></th:block>
 </head>
-<body>
-<p th:text="${orderDetail.vouponCode}"></p>
+<body class="grey lighten-4">
+<div th:replace="~{fragments/header :: header}">Header</div>
+<div th:replace="~{fragments/admin-menu :: admin-menu}">Admin Menu</div>
+<div class="admin-body">
+
+    <div class="row">
+        <div class="col s12">
+            <p th:text="${orderDetail.vouponCode}"></p>
+        </div>
+    </div>
+
+</div>
+<script src="/js/m.js"></script>
 </body>
 </html>
