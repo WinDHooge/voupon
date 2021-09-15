@@ -24,5 +24,5 @@ public class CheckoutDto {
     private Customer customer;
     private Recipient recipient;
     private Order order;
-
+    private String messageContent;
 }

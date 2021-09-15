@@ -22,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -122,6 +123,14 @@ public class CheckoutController<OrderDetailService> {
             model.addAttribute("customer",checkoutDto.getCustomer());
         }
 
+        // Add message to model
+        if(checkoutDto.getMessageContent() == null){
+            model.addAttribute("messageContent", "");
+        }else{
+            model.addAttribute("messageContent", checkoutDto.getMessageContent());
+        }
+
+
 
         return "checkout/orderdetails";
     }
@@ -132,7 +141,7 @@ public class CheckoutController<OrderDetailService> {
     }
 
     @PostMapping(value = "/{pageHandle:^(?!merchant$).*}/checkout/orderdetails", params ="next")
-    public String updateOrderDetails(@Valid @ModelAttribute Recipient recipient, BindingResult bindingResultRecipient, @Valid @ModelAttribute Customer customer, BindingResult bindingResultCustomer, Model model){
+    public String updateOrderDetails(@Valid @ModelAttribute Recipient recipient, BindingResult bindingResultRecipient, @Valid @ModelAttribute Customer customer, BindingResult bindingResultCustomer, @RequestParam String messageContent, BindingResult bindingResultMessageContent, Model model){
 
         // Validate & retrieve the form ModelAttributes
         if (bindingResultRecipient.hasErrors() || bindingResultCustomer.hasErrors()) {
@@ -152,6 +161,8 @@ public class CheckoutController<OrderDetailService> {
         if(existingRecipient != null){
             checkoutDto.getRecipient().setId(existingRecipient.getId());
         }
+
+        checkoutDto.setMessageContent(messageContent);
 
 
         model.addAttribute(checkoutDto);
@@ -187,6 +198,7 @@ public class CheckoutController<OrderDetailService> {
 
         newOrderDetail.setUnitPrice(checkoutDto.getVoupon().getVouponValues().get(0).getValue());
         newOrderDetail.setShipmentDate(new Date());
+        newOrderDetail.setMessage(checkoutDto.getMessageContent());
 
         // Add orderdetail to order
         List<OrderDetail> newOrderDetailList = new ArrayList<OrderDetail>();

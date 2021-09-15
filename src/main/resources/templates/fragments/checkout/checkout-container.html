@@ -67,6 +67,17 @@
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('recipientEmail')}" th:errors="*{recipientEmail}"></span>
                     </div>
 
+                </div>
+                <div>
+                    <div class="input-field col s12">
+                        <h5>Write a message <small> (optional)</small></h5>
+                    </div>
+                    <div class="input-field col s12">
+                        <textarea class="materialize-textarea" id="messageContent" name="messageContent"></textarea>
+                        <label for="messageContent">Message</label>
+                    </div>
+                </div>
+                <div>
                     <div class="input-field col s12 action-buttons">
                         <button class="left btn btn2 waves-effect waves-light" type="submit" id="previous" name="previous" th:text="Back"></button>
                         <button class="right btn waves-effect waves-light" type="submit" id="next" name="next" th:text="Next"></button>
@@ -103,6 +114,10 @@
                 <strong>Recipient</strong><br>
                 <span th:text="${checkoutDto.recipient.recipientFirstName + ' ' + checkoutDto.recipient.recipientLastName}"></span><br>
                 <span th:text="${checkoutDto.recipient.recipientEmail}"></span>
+            </p>
+            <p th:if="${!#strings.isEmpty(checkoutDto.messageContent)}">
+                <strong>Message</strong><br>
+                <span th:text="${checkoutDto.messageContent}"></span>
             </p>
         </div>
         <div class="input-field col s12 action-buttons">
