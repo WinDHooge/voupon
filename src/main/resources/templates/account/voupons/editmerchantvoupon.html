@@ -12,10 +12,10 @@
   <main>
     <div class="container">
       <div class="row">
-        <form class="col s12 m6 offset-m3" th:action="@{/account/voupons/editmerchantvoupon}" th:object="${voupon}" method="post">
+        <form class="col s12 l8 offset-l2" th:action="@{/account/voupons/editmerchantvoupon}" th:object="${voupon}" method="post">
           <div class="row">
             <div class="input-field col s12">
-              <h1 class="no-margin-bottom">Create voupon</h1>
+              <h1 class="no-margin-bottom" th:text="${voupon.id} != 0 ? 'Edit voupon' : 'Create voupon'"></h1>
             </div>
 
             <input type="hidden" th:field="*{id}">
@@ -53,15 +53,15 @@
 
             <div class="switch col s12">
               <label>
-                Off
+                Inactive
                 <input type="checkbox" th:field="*{active}">
                 <span class="lever"></span>
-                On
+                Active
               </label>
             </div>
 
             <div class="input-field col s12">
-              <button class="col s12 btn waves-effect waves-light" type="submit" name="action">Create voupon</button>
+              <button class="col s12 btn waves-effect waves-light" type="submit" name="action" th:text="${voupon.id} != 0 ? 'Edit voupon' : 'Create voupon'"></button>
             </div>
            </div>
         </form>
