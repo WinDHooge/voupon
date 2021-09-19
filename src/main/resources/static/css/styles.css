@@ -59,6 +59,9 @@ h1,h2,h3,h4,h5,h6{
 .no-margin-bottom{
     margin-bottom: 0;
 }
+.no-margin-top{
+    margin-top: 0;
+}
 .no-padding-bottom{
     margin-bottom: 0;
 }
@@ -322,6 +325,13 @@ nav .sidenav-trigger:hover{
     .admin-body{
         padding: 1em 1em 1em 325px;
     }
+}
+
+a.view{
+    color: #333333;
+}
+a.view:hover{
+    color: #FBAB20;
 }
 
 /* Cards */

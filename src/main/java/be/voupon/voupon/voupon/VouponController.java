@@ -2,6 +2,7 @@ package be.voupon.voupon.voupon;
 
 import be.voupon.voupon.merchant.Merchant;
 import be.voupon.voupon.merchant.MerchantService;
+import be.voupon.voupon.order.OrderService;
 import be.voupon.voupon.user.User;
 import be.voupon.voupon.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class VouponController {
     private UserService userService;
     private MerchantService merchantService;
     private VouponService vouponService;
+    private OrderService orderService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -41,6 +43,11 @@ public class VouponController {
     @Autowired
     public void setMerchantService(MerchantService merchantService) {
         this.merchantService = merchantService;
+    }
+
+    @Autowired
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @GetMapping("/account/voupons/overview")
@@ -170,6 +177,24 @@ public class VouponController {
 
         vouponService.delete(id);
         return "redirect:/account/voupons/merchant/" + mid + "/overview";
+    }
+
+    //
+    @GetMapping("/account/voupons/merchant/{id}/orders/overview")
+    public String showMerchantVouponOrdersOverview(@PathVariable int id, Model model, Principal principal){
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("user",user);
+
+        Merchant merchant = merchantService.getById(id);
+        model.addAttribute("merchant",merchant);
+
+        if(merchant == null || !user.getMerchants().contains(merchant)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found on server");
+        }
+
+        model.addAttribute("orders",orderService.getOrdersByMerchant(merchant));
+
+        return "account/voupons/merchantvouponorders";
     }
 
 }

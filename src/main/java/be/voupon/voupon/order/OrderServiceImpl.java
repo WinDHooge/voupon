@@ -1,7 +1,10 @@
 package be.voupon.voupon.order;
 
+import be.voupon.voupon.merchant.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -32,5 +35,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDetail getOrderDetailByVouponCode(String vouponCode) {
         return orderDetailRepository.findOrderDetailByVouponCode(vouponCode);
+    }
+
+    @Override
+    public List<Order> getOrdersByMerchant(Merchant merchant) {
+        return orderRepository.findAllByMerchantOrderByDateDesc(merchant);
     }
 }

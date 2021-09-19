@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>Merchant Voupon Orders overview - Voupon</title>
+  <th:block th:include="~{fragments/head :: body.head}"></th:block>
+</head>
+<body class="grey lighten-4">
+<div th:replace="~{fragments/header :: header}">Header</div>
+<div th:replace="~{fragments/admin-menu :: admin-menu}">Admin Menu</div>
+<div class="admin-body">
+  <h1 class="no-margin-bottom" th:text="${'Voupon Orders'}">Voupon orders</h1>
+  <h3 class="no-margin-top" th:text="${merchant.companyName}">Merchant name</h3>
+
+  <div th:if="${!orders.empty}" class="row">
+    <table class="striped">
+      <thead>
+        <th>Action</th>
+        <th>N°</th>
+        <th>Status</th>
+        <th>Order date</th>
+        <th>Customer</th>
+        <th>Recipient</th>
+        <th>Value</th>
+      </thead>
+      <tbody>
+        <tr th:each="order : ${orders}">
+          <td><a class="view" th:href="@{'/redeem/' + ${order.orderDetails[0].vouponCode}}"><i class="material-icons left">visibility</i></a></td>
+          <td th:text="${order.id}"></td>
+          <td th:text="${order.orderDetails[0].redeemed} == false ? 'OPEN' : 'REDEEMED'"></td>
+          <td th:text="${#dates.format(order.date, 'dd MMM yyyy')}"></td>
+          <td th:text="${order.customer.getCustomerFirstName() + ' ' + order.customer.getCustomerLastName()}"></td>
+          <td th:text="${order.orderDetails[0].recipient.recipientFirstName + ' ' + order.orderDetails[0].recipient.recipientLastName}"></td>
+          <td th:text="${'€' + order.orderDetails[0].unitPrice}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row" th:if="${orders.empty}">
+    <h4>None available</h4>
+  </div>
+
+</div>
+<script src="/js/m.js"></script>
+</body>
+</html>
