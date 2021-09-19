@@ -51,7 +51,8 @@ public class MerchantController {
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("user", user);
 
-        model.addAttribute("merchants",merchantService.getMyMerchants(user.getId()));
+        model.addAttribute("activemerchants",merchantService.getMyActiveMerchants(user.getId()));
+        model.addAttribute("inactivemerchants",merchantService.getMyInactiveMerchants(user.getId()));
 
         return "/account/merchant/overview";
     }

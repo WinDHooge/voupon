@@ -37,6 +37,11 @@ public class MerchantServiceImpl implements MerchantService {
         return merchantRepository.findMerchantsByUsers_IdAndActiveIsTrue(userId);
     }
 
+    @Override
+    public List<Merchant> getMyInactiveMerchants(Integer userId) {
+        return merchantRepository.findMerchantsByUsers_IdAndActiveIsFalse(userId);
+    }
+
     public Merchant getMerchantByPageHandle(String pageHandle) {
         return merchantRepository.findMerchantByPageHandle(pageHandle);
     }

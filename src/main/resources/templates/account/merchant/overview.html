@@ -18,30 +18,55 @@
     <p th:text="${success}"></p>
   </div>
 
-  <h3>My Active Merchants</h3>
-  <div th:if="${!merchants.empty}" class="row">
-    <div th:each="merchant : ${merchants}" class="col s12 l6">
+  <h3>Active Merchants</h3>
+  <div th:if="${!activemerchants.empty}" class="row">
+    <div th:each="activemerchant : ${activemerchants}" class="col s12 l6">
       <div class="card white z-depth-4">
         <div class="card-content black-text">
-          <span th:text="${merchant.companyName}" class="card-title">Merchant company name</span>
-          <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${merchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
-          <p th:text="${merchant.active} != true ? 'Inactive' : 'Active'" class="grey-text"></p>
-          <p th:text="${merchant.street + ' ' + merchant.number + ', ' + merchant.postalCode + ' ' + merchant.city + ', ' + merchant.country}">Merchant address</p>
+          <span th:text="${activemerchant.companyName}" class="card-title">Merchant company name</span>
+          <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${activemerchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
+          <p th:text="${activemerchant.active} != true ? 'Inactive' : 'Active'" class="grey-text"></p>
+          <p th:text="${activemerchant.street + ' ' + activemerchant.number + ', ' + activemerchant.postalCode + ' ' + activemerchant.city + ', ' + activemerchant.country}">Merchant address</p>
           <p>&nbsp;</p>
-          <p class="truncate" th:text="${merchant.companyDescription}">Merchant company description</p>
+          <p class="truncate" th:text="${activemerchant.companyDescription}">Merchant company description</p>
         </div>
         <div class="card-action">
-          <a class="waves-effect waves-light btn btn-small" th:href="@{/account/merchant/edit/} + ${merchant.id}"><i class="material-icons left">edit</i>Edit</a>
-          <a class="waves-effect waves-light btn btn2 btn-small btn-delete" th:href="@{/account/merchant/delete/} + ${merchant.id}"><i class="material-icons left">delete</i>Delete</a>
+          <a class="waves-effect waves-light btn btn-small" th:href="@{/account/merchant/edit/} + ${activemerchant.id}"><i class="material-icons left">edit</i>Edit</a>
+          <a class="waves-effect waves-light btn btn2 btn-small btn-delete" th:href="@{/account/merchant/delete/} + ${activemerchant.id}"><i class="material-icons left">delete</i>Delete</a>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="row" th:if="${merchants.empty}">
-    <h4>None available</h4>
+  <div class="row" th:if="${activemerchants.empty}">
+    <h4>No active merchants available</h4>
     <a class="waves-effect waves-light btn btn-small" th:href="@{/account/merchant/add}"><i class="material-icons left">business</i>Add merchant</a>
   </div>
+
+
+  <div th:if="${!inactivemerchants.empty}">
+
+    <h3>Inactive Merchants</h3>
+    <div class="row">
+      <div th:each="inactivemerchant : ${inactivemerchants}" class="col s12 l6">
+        <div class="card white z-depth-4">
+          <div class="card-content black-text">
+            <span th:text="${inactivemerchant.companyName}" class="card-title">Merchant company name</span>
+            <a class="website" alt="Visit website on Voupon" th:href="@{'http://localhost:8080/' + ${inactivemerchant.pageHandle}}" target="_blank"><i class="material-icons">public</i></a>
+            <p th:text="${inactivemerchant.active} != true ? 'Inactive' : 'Active'" class="grey-text"></p>
+            <p th:text="${inactivemerchant.street + ' ' + inactivemerchant.number + ', ' + inactivemerchant.postalCode + ' ' + inactivemerchant.city + ', ' + inactivemerchant.country}">Merchant address</p>
+            <p>&nbsp;</p>
+            <p class="truncate" th:text="${inactivemerchant.companyDescription}">Merchant company description</p>
+          </div>
+          <div class="card-action">
+            <a class="waves-effect waves-light btn btn-small" th:href="@{/account/merchant/edit/} + ${inactivemerchant.id}"><i class="material-icons left">edit</i>Edit</a>
+            <a class="waves-effect waves-light btn btn2 btn-small btn-delete" th:href="@{/account/merchant/delete/} + ${inactivemerchant.id}"><i class="material-icons left">delete</i>Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 
 </div>
 <script src="/js/m.js"></script>
