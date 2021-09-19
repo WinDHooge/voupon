@@ -19,6 +19,7 @@
       <div class="card white z-depth-4">
         <div class="card-content black-text">
           <span th:text="${voupon.name}" class="card-title">Voupon name</span>
+          <p class="grey-text" th:text="${voupon.active} == true ? 'Active' : 'Inactive'"></p>
           <p th:text="${voupon.description}">Voupon description</p>
           <p>&nbsp;</p>
           <p><strong>Expire date:</strong><span th:text="${' ' + voupon.expireDate}"></span></p>
