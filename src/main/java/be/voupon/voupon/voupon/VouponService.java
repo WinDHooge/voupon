@@ -10,6 +10,8 @@ public interface VouponService {
 
     List<Voupon> getMerchantVoupons(Merchant merchant);
 
+    List<Voupon> getMerchantActiveVoupons(Merchant merchant);
+
     Voupon getById(Integer id);
 
     void save(Voupon voupon);

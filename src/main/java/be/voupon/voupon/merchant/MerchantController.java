@@ -134,7 +134,7 @@ public class MerchantController {
     @GetMapping("/{pageHandle:^(?!merchant$).*}")
     public String showMerchantFrontend(@PathVariable String pageHandle, Model model){
         Merchant merchant = merchantService.getMerchantByPageHandle(pageHandle);
-        List<Voupon> voupons = vouponService.getMerchantVoupons(merchant);
+        List<Voupon> voupons = vouponService.getMerchantActiveVoupons(merchant);
         model.addAttribute("voupons",voupons);
 
         if(merchant == null || !(merchant.isActive())){

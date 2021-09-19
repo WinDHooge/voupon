@@ -13,6 +13,7 @@ public interface VouponRepository extends JpaRepository<Voupon, Integer> {
 
     List<Voupon> findVouponsByMerchant(Merchant merchant);
 
+    List<Voupon> findVouponsByMerchantAndActiveIsTrue(Merchant merchant);
 
 }
 

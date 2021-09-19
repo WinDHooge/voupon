@@ -34,6 +34,11 @@ public class VouponServiceImpl implements VouponService{
     }
 
     @Override
+    public List<Voupon> getMerchantActiveVoupons(Merchant merchant) {
+        return vouponRepository.findVouponsByMerchantAndActiveIsTrue(merchant);
+    }
+
+    @Override
     public Voupon getById(Integer id) {
         return vouponRepository.findVouponById(id);
     }
