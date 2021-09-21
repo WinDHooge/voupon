@@ -15,7 +15,9 @@
         </tr>
         <tr>
           <td>
-            <h2>Order confirmation</h2>
+            <h2>You received a Gift voucher!</h2>
+            <p th:text="${checkoutDto.order.orderDetails[0].message}"></p>
+            <p></p>
             <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
               <tr>
                 <td valign="top" style="width:50%">
@@ -42,14 +44,14 @@
             <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
               <tr>
                 <td valign="top" style="width:50%">
-                  <h3>Customer info</h3>
+                  <h3>Customer</h3>
                   <p>
                     <span th:text="${checkoutDto.customer.customerFirstName + ' ' + checkoutDto.customer.customerLastName}"></span><br/>
                     <span th:text="${checkoutDto.customer.customerEmail}"></span>
                   </p>
                 </td>
                 <td valign="top" style="width:50%">
-                  <h3>Recipient info</h3>
+                  <h3>Recipient</h3>
                   <p>
                     <span th:text="${checkoutDto.recipient.recipientFirstName + ' ' + checkoutDto.recipient.recipientLastName}"></span><br/>
                     <span th:text="${checkoutDto.recipient.recipientEmail}"></span>
@@ -67,8 +69,6 @@
                     <span th:text="${checkoutDto.voupon.description}"></span><br/>
                     <span th:text="${'Value: €' + checkoutDto.order.orderDetails[0].unitPrice}"></span><br/>
                     <span th:text="${'Code: ' + checkoutDto.order.orderDetails[0].vouponCode}"></span><br/><br/>
-                    <strong>Message</strong><br/>
-                    <span th:text="${checkoutDto.order.orderDetails[0].message}"></span><br/><br/>
                   </p>
                 </td>
               </tr>
