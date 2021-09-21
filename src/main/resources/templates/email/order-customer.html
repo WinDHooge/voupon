@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" style="background-color:#e9ebee; padding: 25px;">
+  <tr>
+    <td align="center">
+      <table border="0" cellspacing="0" cellpadding="0" style="width:100%; max-width:600px; background-color:#ffffff; border-radius:10px; padding: 25px;">
+        <tr>
+          <td align="center">
+            <img src="sample.png" th:src="|cid:${vouponlogo}|" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h2>Order confirmation</h2>
+            <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
+              <tr>
+                <td valign="top" style="width:50%">
+                  <h3>Merchant info</h3>
+                  <p>
+                    <span th:text="${checkoutDto.merchant.companyName}"></span><br/>
+                    <span th:text="${checkoutDto.merchant.street + ' ' + checkoutDto.merchant.number}"></span><br/>
+                    <span th:text="${checkoutDto.merchant.postalCode + ' ' + checkoutDto.merchant.city}"></span><br />
+                    <span th:text="${checkoutDto.merchant.country}"></span><br/><br/>
+                    <span th:text="${'T. ' + checkoutDto.merchant.telephone}"></span><br/>
+                    <span th:text="${'e. ' + checkoutDto.merchant.email}"></span>
+                  </p>
+                </td>
+                <td valign="top" style="width:50%">
+                  <h3>Order info</h3>
+                  <p>
+                    <span th:text="${'Order number: #' + checkoutDto.order.id}"></span><br/>
+                    <span th:text="${checkoutDto.order.date}"></span>
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+            <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
+              <tr>
+                <td valign="top" style="width:50%">
+                  <h3>Customer info</h3>
+                  <p>
+                    <span th:text="${checkoutDto.customer.customerFirstName + ' ' + checkoutDto.customer.customerLastName}"></span><br/>
+                    <span th:text="${checkoutDto.customer.customerEmail}"></span>
+                  </p>
+                </td>
+                <td valign="top" style="width:50%">
+                  <h3>Recipient info</h3>
+                  <p>
+                    <span th:text="${checkoutDto.recipient.recipientFirstName + ' ' + checkoutDto.recipient.recipientLastName}"></span><br/>
+                    <span th:text="${checkoutDto.recipient.recipientEmail}"></span>
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+            <table border="0" cellspacing="0" cellpadding="0" style="width:100%">
+              <tr>
+                <td valign="top">
+                  <h3>Giftcard info</h3>
+                  <p>
+                    <span th:text="${checkoutDto.voupon.name}"></span><br/>
+                    <span th:text="${checkoutDto.voupon.description}"></span><br/>
+                    <span th:text="${'Value: €' + checkoutDto.order.orderDetails[0].unitPrice}"></span><br/>
+                    <span th:text="${'Code: ' + checkoutDto.order.orderDetails[0].vouponCode}"></span><br/><br/>
+                    <strong>Message</strong><br/>
+                    <span th:text="${checkoutDto.order.orderDetails[0].message}"></span><br/><br/>
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

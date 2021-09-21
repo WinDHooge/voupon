@@ -220,19 +220,33 @@ public class CheckoutController<OrderDetailService> {
 
         model.addAttribute(checkoutDto);
 
-        // Send emails to R & C
+        // Send email to Customer
         Map<String, Object> templateModel = new HashMap<>();
         templateModel.put("customerFirstname", checkoutDto.getCustomer().getCustomerFirstName());
         templateModel.put("customerLastname", checkoutDto.getCustomer().getCustomerLastName());
         templateModel.put("customerEmail", checkoutDto.getCustomer().getCustomerEmail());
         templateModel.put("checkoutDto", checkoutDto);
         templateModel.put("vouponlogo", "vouponlogo");
-        templateModel.put("emailtemplate", "email/order.html");
+        templateModel.put("emailtemplate", "email/order-customer.html");
+
+        emailService.sendMessageUsingThymeleafTemplate(
+                checkoutDto.getCustomer().getCustomerEmail(),
+                "Thank you for your order",
+                templateModel);
+
+        // Send email to Recipient
+        Map<String, Object> templateModelRecipient = new HashMap<>();
+        templateModelRecipient.put("customerFirstname", checkoutDto.getCustomer().getCustomerFirstName());
+        templateModelRecipient.put("customerLastname", checkoutDto.getCustomer().getCustomerLastName());
+        templateModelRecipient.put("customerEmail", checkoutDto.getCustomer().getCustomerEmail());
+        templateModelRecipient.put("checkoutDto", checkoutDto);
+        templateModelRecipient.put("vouponlogo", "vouponlogo");
+        templateModelRecipient.put("emailtemplate", "email/order-recipient.html");
 
         emailService.sendMessageUsingThymeleafTemplate(
                 checkoutDto.getRecipient().getRecipientEmail(),
-                "Thank you for your order",
-                templateModel);
+                "You received a Gift voucher",
+                templateModelRecipient);
 
 
         return "redirect:/" + checkoutDto.getMerchant().getPageHandle() + "/checkout/orderconfirmation";
