@@ -28,7 +28,7 @@
 
                     <div class="input-field col s12">
                         <input id="pagehandle" type="text" class="validate" th:field="*{pageHandle}">
-                        <label for="pagehandle">Page Handle</label>
+                        <label for="pagehandle">Page Handle (acces attribute)</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('pageHandle')}" th:errors="*{pageHandle}"></span>
                     </div>
 
@@ -95,7 +95,7 @@
 
                     <div class="input-field col s12">
                         <textarea class="materialize-textarea validate" id="checkoutdescription" th:field="*{checkoutDescription}"></textarea>
-                        <label for="checkoutdescription">Checkout Description</label>
+                        <label for="checkoutdescription">Checkout Description (extra information)</label>
                         <span class="helper-text invalid" th:if="${#fields.hasErrors('checkoutDescription')}" th:errors="*{checkoutDescription}"></span>
                     </div>
 
